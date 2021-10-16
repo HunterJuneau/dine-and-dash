@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\bclja\\source\\repos\\dine-and-dash\\API\\DineNDash\\DineNDash\\DineNDash.csproj": {}
+    "C:\\Users\\cmeff\\Source\\Repos\\dine-and-dash\\API\\DineNDash\\DineNDash\\DineNDash.csproj": {}
   },
   "projects": {
-    "C:\\Users\\bclja\\source\\repos\\dine-and-dash\\API\\DineNDash\\DineNDash\\DineNDash.csproj": {
+    "C:\\Users\\cmeff\\Source\\Repos\\dine-and-dash\\API\\DineNDash\\DineNDash\\DineNDash.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\bclja\\source\\repos\\dine-and-dash\\API\\DineNDash\\DineNDash\\DineNDash.csproj",
+        "projectUniqueName": "C:\\Users\\cmeff\\Source\\Repos\\dine-and-dash\\API\\DineNDash\\DineNDash\\DineNDash.csproj",
         "projectName": "DineNDash",
-        "projectPath": "C:\\Users\\bclja\\source\\repos\\dine-and-dash\\API\\DineNDash\\DineNDash\\DineNDash.csproj",
-        "packagesPath": "C:\\Users\\bclja\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\bclja\\source\\repos\\dine-and-dash\\API\\DineNDash\\DineNDash\\obj\\",
+        "projectPath": "C:\\Users\\cmeff\\Source\\Repos\\dine-and-dash\\API\\DineNDash\\DineNDash\\DineNDash.csproj",
+        "packagesPath": "C:\\Users\\cmeff\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\cmeff\\Source\\Repos\\dine-and-dash\\API\\DineNDash\\DineNDash\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\bclja\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\cmeff\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,6 +40,14 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.0.90, )"
+            },
+            "Microsoft.Data.SqlClient": {
+              "target": "Package",
+              "version": "[3.0.1, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[5.6.3, )"
@@ -63,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.303\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }
