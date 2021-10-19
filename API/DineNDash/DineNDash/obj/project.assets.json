@@ -1779,19 +1779,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\cmeff\\.nuget\\packages\\": {}
+    "C:\\Users\\saram\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\cmeff\\Source\\Repos\\dine-and-dash\\API\\DineNDash\\DineNDash\\DineNDash.csproj",
+      "projectUniqueName": "C:\\Users\\saram\\Source\\Repos\\dine-and-dash\\API\\DineNDash\\DineNDash\\DineNDash.csproj",
       "projectName": "DineNDash",
-      "projectPath": "C:\\Users\\cmeff\\Source\\Repos\\dine-and-dash\\API\\DineNDash\\DineNDash\\DineNDash.csproj",
-      "packagesPath": "C:\\Users\\cmeff\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\cmeff\\Source\\Repos\\dine-and-dash\\API\\DineNDash\\DineNDash\\obj\\",
+      "projectPath": "C:\\Users\\saram\\Source\\Repos\\dine-and-dash\\API\\DineNDash\\DineNDash\\DineNDash.csproj",
+      "packagesPath": "C:\\Users\\saram\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\saram\\Source\\Repos\\dine-and-dash\\API\\DineNDash\\DineNDash\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\cmeff\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\saram\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1848,7 +1848,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.303\\RuntimeIdentifierGraph.json"
       }
     }
   }
