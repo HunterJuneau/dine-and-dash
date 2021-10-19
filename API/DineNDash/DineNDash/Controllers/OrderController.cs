@@ -12,6 +12,23 @@ namespace DineNDash.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
-        OrderRepository _repo = new OrderRepository();
+        OrderRepository _repo;
+
+         public OrderController(OrderRepository repo)
+        {
+            _repo = repo;
+        }
+
+        [HttpGet]
+        public IActionResult GetAllOrders()
+        {
+            return Ok(_repo.GetAll());
+        }
+
+        //[HttpGet("{id}")]
+        //public IActionResult GetSingleOrder(Guid id)
+        //{
+        //    return Ok(_repo.GetById(id));
+        //}
     }
 }
