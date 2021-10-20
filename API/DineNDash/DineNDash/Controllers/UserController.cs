@@ -31,6 +31,22 @@ namespace DineNDash.Controllers
         }
 
 
+        // Get User by Id // 
+        [HttpGet("{id}")]
+        public IActionResult GetUserById(Guid id)
+        {
+            var user = _repo.GetById(id);
+
+            if (user == null)
+            {
+                return NotFound($"No User with the Id of {id} was found.");
+            }
+
+
+            return Ok(user);
+        }
+
+
         // Add User //
         [HttpPost]
 
@@ -45,5 +61,7 @@ namespace DineNDash.Controllers
 
             return Created($"/api/users/{newUser.Id}", newUser);
         }
+
+        
     }
 }

@@ -45,5 +45,19 @@ namespace DineNDash.DataAccess
             //newUser.CustomerCreated = date;
 
         }
+
+        internal User GetById(Guid userId)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            var sql = @"Select *
+                        From Users
+                        where id = @id";
+
+
+            var user = db.QueryFirst<User>(sql, new { id = userId });
+
+            return user;
+        }
     }
 }
