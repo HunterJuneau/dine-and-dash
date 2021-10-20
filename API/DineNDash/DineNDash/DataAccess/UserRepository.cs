@@ -59,5 +59,16 @@ namespace DineNDash.DataAccess
 
             return user;
         }
+
+        internal void DeleteUserById(Guid userId)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            var sql = @"Delete 
+                         From Users
+                         Where Id = @userID";
+
+            db.Execute(sql, new { userId = userId });
+        }
     }
 }

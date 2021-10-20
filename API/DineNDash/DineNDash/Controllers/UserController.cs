@@ -62,6 +62,16 @@ namespace DineNDash.Controllers
             return Created($"/api/users/{newUser.Id}", newUser);
         }
 
+
+        // Delete User by Id //
+        
+        [HttpDelete("{id}")]
+        public IActionResult DeleteUser(Guid userId)
+        {
+            _repo.DeleteUserById(userId);
+
+            return Ok("You have successfully deleted this User from the Database.");
+        }
         
     }
 }
