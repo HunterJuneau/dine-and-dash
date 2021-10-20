@@ -43,6 +43,7 @@ namespace DineNDash.DataAccess
 
             newUser.Id = id;
             //newUser.CustomerCreated = date;
+
         }
     }
 }

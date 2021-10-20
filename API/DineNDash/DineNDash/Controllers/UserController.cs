@@ -36,6 +36,11 @@ namespace DineNDash.Controllers
 
         public IActionResult AddUser(User newUser)
         {
+            if (string.IsNullOrEmpty(newUser.FirstName) || string.IsNullOrEmpty(newUser.LastName) || string.IsNullOrEmpty(newUser.ContactEmail))
+            {
+                return BadRequest("First Name, Last Name and Contact Email are required fields");
+            }
+
             _repo.Add(newUser);
 
             return Created($"/api/users/{newUser.Id}", newUser);
