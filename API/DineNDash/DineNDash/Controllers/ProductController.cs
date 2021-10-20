@@ -1,4 +1,5 @@
 ﻿using DineNDash.DataAccess;
+using DineNDash.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,6 +13,59 @@ namespace DineNDash.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        ProductRepository _repo = new ProductRepository();
+        private ProductRepository _repo;
+
+        public ProductController(ProductRepository repo)
+        {
+            _repo = repo;
+        }
+
+        [HttpGet]
+        public IActionResult GetAllProducts()
+        {
+            return Ok(_repo.GetAll());
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetProductById(Guid id)
+        {
+            var product = _repo.GetById(id);
+
+            if (product == null) return NotFound($"No Product with the {id} exists");
+
+            return Ok(product);
+        }
+
+        [HttpGet("types/{type}")]
+        public IEnumerable<Product> GetProductByType(ProductType type)
+        {
+            return _repo.GetByType(type);
+        }
+
+        [HttpPost]
+        public IActionResult AddProduct(Product product)
+        {
+            _repo.Add(product);
+
+            return Created($"api/products/{product.Id}", product);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateProduct(Guid id, Product product)
+        {
+            var productToUpdate = _repo.GetById(id);
+            if (productToUpdate == null) NotFound($"Could Not find Product with the id {id} to update");
+
+            var updateProduct = _repo.Update(id, product);
+            return Ok(updateProduct);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteProduct(Guid id)
+        {
+            _repo.Remove(id);
+            return Ok();
+        }
+
     }
 }
