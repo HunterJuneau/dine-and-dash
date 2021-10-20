@@ -26,5 +26,23 @@ namespace DineNDash.DataAccess
             return users;
         }
 
+        // Add new User //
+        internal void Add(User newUser)
+        {
+
+            using var db = new SqlConnection(_connectionString);
+
+            var sql = @"insert into users(FirstName, LastName, CustomerCreated, ContactEmail)
+                        output inserted.Id
+                        values (@FirstName, @LastName, @CustomerCreated, @ContactEmail)";
+
+            var id = db.ExecuteScalar<Guid>(sql, newUser);
+
+            //var date = db.ExecuteScalar<DateTime>(sql, newUser);
+
+
+            newUser.Id = id;
+            //newUser.CustomerCreated = date;
+        }
     }
 }
