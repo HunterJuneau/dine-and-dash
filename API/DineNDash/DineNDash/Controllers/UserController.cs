@@ -12,6 +12,6 @@ namespace DineNDash.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        UserRepository _repo = new UserRepository();
+        //UserRepository _repo = new UserRepository();
     }
 }
