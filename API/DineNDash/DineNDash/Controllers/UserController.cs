@@ -1,13 +1,7 @@
 ﻿using DineNDash.DataAccess;
 using DineNDash.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Data.SqlClient;
-using Dapper;
 
 
 namespace DineNDash.Controllers
@@ -18,9 +12,9 @@ namespace DineNDash.Controllers
     {
         UserRepository _repo;
 
-        public UserController()
+        public UserController(UserRepository repo)
         {
-            _repo = new UserRepository();
+            _repo = repo;
         }
 
         // Get all Users // 
@@ -65,13 +59,34 @@ namespace DineNDash.Controllers
 
         // Delete User by Id //
         
-        [HttpDelete("{id}")]
+        [HttpDelete]
         public IActionResult DeleteUser(Guid userId)
         {
             _repo.DeleteUserById(userId);
 
             return Ok("You have successfully deleted this User from the Database.");
         }
+
+        // Update User //
+        
+        //[HttpPut("{id}")]
+        
+        //public IActionResult UpdateUser(Guid userId, User user)
+        //{
+
+        //    var userToUpdate = _repo.GetById(userId);
+
+        //    if (userToUpdate == null)
+        //    {
+        //        return NotFound($"The User associated with the Id of {userId} could not be located ");
+        //    }
+
+        //    var updatedUser = _repo.UpdateUser(userId, user);
+
+        //    return Ok(updatedUser);
+
+
+        //}
         
     }
 }

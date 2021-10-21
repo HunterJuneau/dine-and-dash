@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
+using Microsoft.Extensions.Configuration;
 
 namespace DineNDash.DataAccess
 {
@@ -12,9 +13,12 @@ namespace DineNDash.DataAccess
     {
 
 
-        const string _connectionString = "Server=localhost;Database=DineAndDash;Trusted_Connection=True;";
+        readonly string _connectionString;
 
-
+        public UserRepository(IConfiguration config)
+        {
+            _connectionString = config.GetConnectionString("DineAndDash");
+        }
         // Get All Users //
         internal IEnumerable<User> GetAll()
         {
@@ -38,14 +42,12 @@ namespace DineNDash.DataAccess
 
             var id = db.ExecuteScalar<Guid>(sql, newUser);
 
-            //var date = db.ExecuteScalar<DateTime>(sql, newUser);
-
 
             newUser.Id = id;
-            //newUser.CustomerCreated = date;
 
         }
 
+        // Get User by Id //
         internal User GetById(Guid userId)
         {
             using var db = new SqlConnection(_connectionString);
@@ -60,15 +62,36 @@ namespace DineNDash.DataAccess
             return user;
         }
 
-        internal void DeleteUserById(Guid userId)
+        // Delete user by Id //
+        internal void DeleteUserById(Guid id)
         {
             using var db = new SqlConnection(_connectionString);
 
             var sql = @"Delete 
                          From Users
-                         Where Id = @userID";
+                         Where id = @id";
 
-            db.Execute(sql, new { userId = userId });
+            db.Execute(sql, new { id = id });
         }
+
+        //// Update User by Id //
+        //internal User UpdateUser(Guid userId, User user)
+        //{
+        //    using var db = new SqlConnection(_connectionString);
+
+        //    var sql = @"update Users
+        //                Set FirstName = @FirstName,
+	       //             LastName = @LastName,
+	       //             ContactEmail = @ContactEmail
+        //                output inserted.*
+        //             Where id = @userId";
+
+
+        //    user.Id = userId;
+
+        //    var updatedUser = db.QuerySingleOrDefault<User>(sql, userId);
+
+        //    return updatedUser;
+        //}
     }
 }
