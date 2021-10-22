@@ -55,7 +55,7 @@ namespace DineNDash.DataAccess
                         where id = @id";
 
 
-            var user = db.QueryFirst<User>(sql, new { id = userId });
+            var user = db.QueryFirstOrDefault<User>(sql, new { id = userId });
 
             return user;
         }
