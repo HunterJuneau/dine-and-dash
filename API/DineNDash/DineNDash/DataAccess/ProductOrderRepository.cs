@@ -4,8 +4,6 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using Dapper;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DineNDash.DataAccess
 {
@@ -42,6 +40,24 @@ namespace DineNDash.DataAccess
             var productOrder = db.QueryFirstOrDefault<ProductOrder>(sql, new { id = id });
 
             return productOrder;
+        }
+
+        // Update User by Id //
+        internal ProductOrder UpdateProductOrder(Guid id, ProductOrder productOrder)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            var sql = @"update ProductOrders
+                        Set ProductQuantity = @productQuantity
+                        output inserted.*
+                     Where id = @id";
+
+
+            productOrder.Id = id;
+
+            var updatedProductOrder = db.QuerySingleOrDefault<ProductOrder>(sql, productOrder);
+
+            return updatedProductOrder;
         }
     }
 }
