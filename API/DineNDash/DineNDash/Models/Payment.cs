@@ -10,7 +10,7 @@ namespace DineNDash.Models
         public Guid Id { get; set; }
         public string Type { get; set; }
         public Guid UserId { get; set; }
-        public int AccountNumber { get; set; }
+        public string AccountNumber { get; set; }
 
     }
 }
