@@ -2,8 +2,6 @@
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Dapper;
 using Microsoft.Extensions.Configuration;
 
@@ -74,24 +72,24 @@ namespace DineNDash.DataAccess
             db.Execute(sql, new { id = id });
         }
 
-        //// Update User by Id //
-        //internal User UpdateUser(Guid userId, User user)
-        //{
-        //    using var db = new SqlConnection(_connectionString);
+        // Update User by Id //
+        internal User UpdateUser(Guid id, User user)
+        {
+            using var db = new SqlConnection(_connectionString);
 
-        //    var sql = @"update Users
-        //                Set FirstName = @FirstName,
-	       //             LastName = @LastName,
-	       //             ContactEmail = @ContactEmail
-        //                output inserted.*
-        //             Where id = @userId";
+            var sql = @"update Users
+                        Set FirstName = @firstName,
+	                    LastName = @lastName,
+	                    ContactEmail = @contactEmail
+                        output inserted.*
+                     Where id = @id";
 
 
-        //    user.Id = userId;
+            user.Id = id;
 
-        //    var updatedUser = db.QuerySingleOrDefault<User>(sql, userId);
+            var updatedUser = db.QuerySingleOrDefault<User>(sql, user);
 
-        //    return updatedUser;
-        //}
+            return updatedUser;
+        }
     }
 }

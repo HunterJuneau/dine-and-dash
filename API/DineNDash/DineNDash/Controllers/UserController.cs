@@ -67,26 +67,27 @@ namespace DineNDash.Controllers
             return Ok("You have successfully deleted this User from the Database.");
         }
 
-        // Update User //
-        
-        //[HttpPut("{id}")]
-        
-        //public IActionResult UpdateUser(Guid userId, User user)
-        //{
+        //Update User //
 
-        //    var userToUpdate = _repo.GetById(userId);
-
-        //    if (userToUpdate == null)
-        //    {
-        //        return NotFound($"The User associated with the Id of {userId} could not be located ");
-        //    }
-
-        //    var updatedUser = _repo.UpdateUser(userId, user);
-
-        //    return Ok(updatedUser);
+       [HttpPut("{id}")]
 
 
-        //}
-        
+        public IActionResult UpdateUser(Guid userId, User user)
+        {
+
+            var userToUpdate = _repo.GetById(userId);
+
+            if (userToUpdate == null)
+            {
+                return NotFound($"The User associated with the Id of {userId} could not be located ");
+            }
+
+            var updatedUser = _repo.UpdateUser(userId, user);
+
+            return Ok(updatedUser);
+
+
+        }
+
     }
 }
