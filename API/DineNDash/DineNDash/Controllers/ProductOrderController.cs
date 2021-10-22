@@ -26,6 +26,20 @@ namespace DineNDash.Controllers
             return Ok(_repo.GetAll());
         }
 
+        // Get Single Product Order by Id //
+        [HttpGet("{id}")]
+        public IActionResult GetProductOrderById(Guid id)
+        {
+            var prdouctOrder = _repo.GetById(id);
+
+            if (prdouctOrder == null)
+            {
+                return NotFound($"No Product Order with the Id of {id} was found.");
+            }
+
+
+            return Ok(prdouctOrder);
+        }
 
     }
 }

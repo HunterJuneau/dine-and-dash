@@ -18,6 +18,7 @@ namespace DineNDash.DataAccess
             _connectionString = config.GetConnectionString("DineAndDash");
         }
 
+        // Get all Product Orders //
         internal IEnumerable<ProductOrder> GetAll()
         {
             using var db = new SqlConnection(_connectionString);
@@ -26,6 +27,21 @@ namespace DineNDash.DataAccess
                                         From productOrders");
 
             return productOrders;
+        }
+
+        // Get ProductOrder by Id //
+        internal ProductOrder GetById(Guid id)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            var sql = @"Select *
+                        From ProductOrders
+                        where id = @id";
+
+
+            var productOrder = db.QueryFirstOrDefault<ProductOrder>(sql, new { id = id });
+
+            return productOrder;
         }
     }
 }
