@@ -72,17 +72,17 @@ namespace DineNDash.Controllers
        [HttpPut("{id}")]
 
 
-        public IActionResult UpdateUser(Guid userId, User user)
+        public IActionResult UpdateUser(Guid id, User user)
         {
 
-            var userToUpdate = _repo.GetById(userId);
+            var userToUpdate = _repo.GetById(id);
 
             if (userToUpdate == null)
             {
-                return NotFound($"The User associated with the Id of {userId} could not be located ");
+                return NotFound($"The User associated with the Id of {id} could not be located ");
             }
 
-            var updatedUser = _repo.UpdateUser(userId, user);
+            var updatedUser = _repo.UpdateUser(id, user);
 
             return Ok(updatedUser);
 
