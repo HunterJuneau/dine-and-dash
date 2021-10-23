@@ -59,5 +59,45 @@ namespace DineNDash.DataAccess
 
             return updatedProductOrder;
         }
+
+        internal void Remove(Guid id)
+        {
+            using var db = new SqlConnection(_connectionString);
+            var sql = @"Delete 
+                        From productOrders 
+                        Where Id = @id";
+
+            db.Execute(sql, new { id });
+        }
+
+        //internal void Add(ProductOrder newProductOrder)
+        //{
+        //    using var db = new SqlConnection(_connectionString);
+
+        //    var sql = @"INSERT INTO [dbo].[ProductOrders]
+        //                               (
+        //                                 [orderId]
+        //                                ,[productId]
+        //                                ,[productQuantity]
+        //                     output inserted.Id
+        //                         VALUES
+        //                      (@orderId, @productId, @productId)";
+
+        //    var parameters = new
+        //    {
+        //        //TotalCost = newOrder.TotalCost,
+        //        // Completed = newOrder.Completed,
+        //        OrderId = newProductOrder.OrderId,
+        //        ProductId = newProductOrder.ProductId,
+        //        ProductQuantity = newProductOrder.ProductQuantity
+
+        //    };
+
+        //    var id = db.ExecuteScalar<Guid>(sql, parameters);
+        //    newProductOrder.Id = id;
+        //}
+
+
+
     }
 }
