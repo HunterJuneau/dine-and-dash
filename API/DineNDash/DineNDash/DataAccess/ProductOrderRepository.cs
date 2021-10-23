@@ -81,13 +81,13 @@ namespace DineNDash.DataAccess
         //                                ,[productQuantity]
         //                     output inserted.Id
         //                         VALUES
-        //                      (@orderId, @productId, @productId)";
+        //                      (@orderId, @productId, @productQuantity)";
 
         //    var parameters = new
         //    {
         //        //TotalCost = newOrder.TotalCost,
         //        // Completed = newOrder.Completed,
-        //        OrderId = newProductOrder.OrderId,
+        //        OrderId = newProductOrder.Order.Id,
         //        ProductId = newProductOrder.ProductId,
         //        ProductQuantity = newProductOrder.ProductQuantity
 
