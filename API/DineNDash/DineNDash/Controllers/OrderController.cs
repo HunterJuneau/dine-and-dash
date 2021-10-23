@@ -61,6 +61,8 @@ namespace DineNDash.Controllers
             {
                 User = user,
                 Payment = payment,
+                Completed = command.Completed,
+                TotalCost = command.TotalCost
                 //Price = command.Price
             };
 
