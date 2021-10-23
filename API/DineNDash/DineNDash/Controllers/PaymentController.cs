@@ -12,6 +12,6 @@ namespace DineNDash.Controllers
     [ApiController]
     public class PaymentController : ControllerBase
     {
-       // PaymentRepository _repo = new PaymentRepository();
+        PaymentRepository _repo = new PaymentRepository();
     }
 }
