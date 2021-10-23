@@ -28,20 +28,20 @@ namespace DineNDash.DataAccess
             return orders;
         }
 
-        //internal Order GetById(Guid id)
-        //{
-        //    using var db = new SqlConnection(_connectionString);
+        internal Order GetById(Guid id)
+        {
+            using var db = new SqlConnection(_connectionString);
 
-        //    var orderSql = @"SELECT * 
-        //                     FROM Orders 
-        //                     WHERE Id = @id";
+            var orderSql = @"SELECT * 
+                             FROM Orders 
+                             WHERE Id = @id";
 
-        //    var order = db.QueryFirstOrDefault<Order>(orderSql, new { id = id });
+            var order = db.QueryFirstOrDefault<Order>(orderSql, new { id = id });
 
-        //    if (order == null) return null;
+            if (order == null) return null;
 
-        //    return order;
-        //}
+            return order;
+        }
 
     }
 }
