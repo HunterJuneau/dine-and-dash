@@ -119,6 +119,20 @@ namespace DineNDash.DataAccess
         {
             order.User = user;
             order.Payment = payment;
+          
+        internal Order GetById(Guid id)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            var orderSql = @"SELECT * 
+                             FROM Orders 
+                             WHERE Id = @id";
+
+            var order = db.QueryFirstOrDefault<Order>(orderSql, new { id = id });
+
+            if (order == null) return null;
+
+
             return order;
         }
 
