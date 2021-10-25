@@ -42,6 +42,12 @@ namespace DineNDash.Controllers
             return _repo.GetByType(type);
         }
 
+        [HttpGet("forSale")]
+        public IEnumerable<Product> GetForSaleProducts(string sale)
+        {
+            return _repo.GetForSale(sale);
+        }
+
         [HttpPost]
         public IActionResult AddProduct(Product product)
         {

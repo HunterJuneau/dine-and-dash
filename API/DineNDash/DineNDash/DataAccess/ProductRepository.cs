@@ -44,6 +44,20 @@ namespace DineNDash.DataAccess
 
         }
 
+        internal IEnumerable<Product> GetForSale(string sale)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            var sql = @"Select *
+                        From Products
+                        Where forSale = @sale";
+
+            var productsForSale = db.Query<Product>(sql, new { sale });
+
+            return productsForSale;
+
+        }
+
         internal void Add(Product product)
         {
             using var db = new SqlConnection(_connectionString);
