@@ -1,4 +1,5 @@
 ﻿using DineNDash.DataAccess;
+using DineNDash.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
@@ -35,6 +36,15 @@ namespace DineNDash.Controllers
 
 
             return Ok(payment);
+        }
+
+        // Add Payment //
+        [HttpPost]
+        public IActionResult AddPayment(Payment payment)
+        {
+            _repo.AddPayment(payment);
+
+            return Created($"api/payments/{payment.Id}", payment);
         }
     }
 }

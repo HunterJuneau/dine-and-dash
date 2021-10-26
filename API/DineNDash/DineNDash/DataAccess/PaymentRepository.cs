@@ -42,5 +42,22 @@ namespace DineNDash.DataAccess
 
             return payment;
         }
+
+        internal void AddPayment(Payment payment)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            var sql = @"INSERT INTO [dbo].[Payments]
+                                       (
+                                        [type]
+                                       ,[userId]
+                                       ,[accountNumber])
+	                            output inserted.Id
+                                 VALUES
+		                            (@type, @userId, @accountNumber)";
+
+            var id = db.ExecuteScalar<Guid>(sql, payment);
+            payment.Id = id;
+        }
     }
 }
