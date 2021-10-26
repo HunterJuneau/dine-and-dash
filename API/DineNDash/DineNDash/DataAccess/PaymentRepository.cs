@@ -16,7 +16,7 @@ namespace DineNDash.DataAccess
             _connectionString = config.GetConnectionString("DineAndDash");
         }
 
-        internal IEnumerable<Payment> GetPayments(Guid userId)
+        internal IEnumerable<Payment> GetUserPayments(Guid userId)
         {
             using var db = new SqlConnection(_connectionString);
 
@@ -27,6 +27,20 @@ namespace DineNDash.DataAccess
             var payments = db.Query<Payment>(sql, new { id = userId });
 
             return payments;
+        }
+
+        internal Payment GetPayment(Guid id)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            var sql = @"Select *
+                        From Payments
+                        where id = @id";
+
+
+            var payment = db.QueryFirstOrDefault<Payment>(sql, new { id });
+
+            return payment;
         }
     }
 }

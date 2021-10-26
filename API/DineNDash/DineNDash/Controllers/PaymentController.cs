@@ -16,10 +16,25 @@ namespace DineNDash.Controllers
         }
 
         // Get User's Payments //
-        [HttpGet("{userId}")]
+        [HttpGet("users/{userId}")]
         public IActionResult GetUserPayments(Guid userId)
         {
-            return Ok(_repo.GetPayments(userId));
+            return Ok(_repo.GetUserPayments(userId));
+        }
+
+        // Get A Payment //
+        [HttpGet("{id}")]
+        public IActionResult GetPayment(Guid id)
+        {
+            var payment = _repo.GetPayment(id);
+
+            if (payment == null)
+            {
+                return NotFound($"No Payment with the Id of {id} was found.");
+            }
+
+
+            return Ok(payment);
         }
     }
 }
