@@ -1,10 +1,6 @@
 ﻿using DineNDash.DataAccess;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DineNDash.Controllers
 {
@@ -12,6 +8,18 @@ namespace DineNDash.Controllers
     [ApiController]
     public class PaymentController : ControllerBase
     {
-        PaymentRepository _repo = new PaymentRepository();
+        PaymentRepository _repo;
+
+        public PaymentController(PaymentRepository repo)
+        {
+            _repo = repo;
+        }
+
+        // Get User's Payments //
+        [HttpGet("{userId}")]
+        public IActionResult GetUserPayments(Guid userId)
+        {
+            return Ok(_repo.GetPayments(userId));
+        }
     }
 }
