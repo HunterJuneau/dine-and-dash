@@ -42,7 +42,7 @@ namespace DineNDash.DataAccess
             return productOrder;
         }
 
-        // Update User by Id //
+        // Update Product Order by Id //
         internal ProductOrder UpdateProductOrder(Guid id, ProductOrder productOrder)
         {
             using var db = new SqlConnection(_connectionString);
@@ -60,6 +60,7 @@ namespace DineNDash.DataAccess
             return updatedProductOrder;
         }
 
+        // Delete Product Order by Id //
         internal void Remove(Guid id)
         {
             using var db = new SqlConnection(_connectionString);
