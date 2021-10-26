@@ -58,9 +58,16 @@ namespace DineNDash.DataAccess
 
         }
 
-        internal object GetAvailable()
+        internal IEnumerable<Product> GetAvailable()
         {
-            throw new NotImplementedException();
+            using var db = new SqlConnection(_connectionString);
+
+            var sql = @" Select *
+                         From Products
+                         Where quantity > 0";
+
+            var availableProducts = db.Query<Product>(sql);
+            return availableProducts;
         }
 
         internal void Add(Product product)
@@ -74,10 +81,11 @@ namespace DineNDash.DataAccess
                                        ,[productDescription]
                                        ,[price]
                                        ,[quantity]
-                                       ,[forSale])
+                                       ,[forSale]
+                                       ,[image])
 	                            output inserted.Id
                                  VALUES
-		                            (@type, @productName, @productDescription, @price, @quantity, @forSale)";
+		                            (@type, @productName, @productDescription, @price, @quantity, @forSale, @image)";
 
             var id = db.ExecuteScalar<Guid>(sql, product);
             product.Id = id;
@@ -93,7 +101,8 @@ namespace DineNDash.DataAccess
                                ProductDescription = @productDescription,
                                Price = @price,
                                Quantity = @quantity,
-                               ForSale = @forSale
+                               ForSale = @forSale,
+                               Image = @image
                            Output inserted.*
                            WHERE Id = @id";
             product.Id = id;

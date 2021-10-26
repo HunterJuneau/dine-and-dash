@@ -14,6 +14,7 @@ namespace DineNDash.Models
         public decimal Price { get; set; }
         public int Quantity { get; set; }
         public bool ForSale { get; set; }
+        public string Image { get; set; }
     }
 
     public enum ProductType
