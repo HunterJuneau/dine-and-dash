@@ -58,6 +58,11 @@ namespace DineNDash.DataAccess
 
         }
 
+        internal object GetAvailable()
+        {
+            throw new NotImplementedException();
+        }
+
         internal void Add(Product product)
         {
             using var db = new SqlConnection(_connectionString);
