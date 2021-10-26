@@ -24,6 +24,12 @@ namespace DineNDash.Controllers
             return Ok(_repo.GetAll());
         }
 
+        // Get All Active Users //
+        [HttpGet("status/{status}")]
+        public IActionResult GetAllActiveUsers(string status)
+        {
+            return Ok(_repo.GetAllActive(status));
+        }
 
         // Get User by Id // 
         [HttpGet("{id}")]
@@ -88,6 +94,8 @@ namespace DineNDash.Controllers
 
 
         }
+
+
 
     }
 }

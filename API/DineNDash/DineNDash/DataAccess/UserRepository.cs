@@ -23,8 +23,21 @@ namespace DineNDash.DataAccess
             using var db = new SqlConnection(_connectionString);
 
             var users = db.Query<User>(@"Select *
-                                        From Users");
+                                        From Users
+                                        Order By status, lastName");
 
+            return users;
+        }
+
+        // Get by Active or Inactive Users //
+        internal IEnumerable<User> GetAllActive(string status)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            var sql = @"Select *
+                        From Users
+                        Where Status = @status";
+            var users = db.Query<User>(sql, new { status });
             return users;
         }
 
@@ -34,9 +47,9 @@ namespace DineNDash.DataAccess
 
             using var db = new SqlConnection(_connectionString);
 
-            var sql = @"insert into users(FirstName, LastName, CustomerCreated, ContactEmail)
+            var sql = @"insert into users(FirstName, LastName, CustomerCreated, ContactEmail, Status)
                         output inserted.Id
-                        values (@FirstName, @LastName, @CustomerCreated, @ContactEmail)";
+                        values (@FirstName, @LastName, @CustomerCreated, @ContactEmail, @Status)";
 
             var id = db.ExecuteScalar<Guid>(sql, newUser);
 
@@ -80,7 +93,8 @@ namespace DineNDash.DataAccess
             var sql = @"update Users
                         Set FirstName = @firstName,
 	                    LastName = @lastName,
-	                    ContactEmail = @contactEmail
+	                    ContactEmail = @contactEmail,
+                        Status = @status
                         output inserted.*
                      Where id = @id";
 
