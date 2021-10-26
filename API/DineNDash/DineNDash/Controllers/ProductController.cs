@@ -37,9 +37,22 @@ namespace DineNDash.Controllers
         }
 
         [HttpGet("types/{type}")]
-        public IEnumerable<Product> GetProductByType(ProductType type)
+        public IActionResult GetProductByType(ProductType type)
         {
-            return _repo.GetByType(type);
+            return Ok(_repo.GetByType(type));
+        }
+
+        [HttpGet("forSale")]
+        public IActionResult GetForSaleProducts(string sale)
+        {
+            return Ok(_repo.GetForSale(sale));
+        
+        }
+
+        [HttpGet("available")]
+        public IActionResult GetAllAvailableProducts()
+        {
+            return Ok(_repo.GetAvailable());
         }
 
         [HttpPost]
