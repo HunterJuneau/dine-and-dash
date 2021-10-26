@@ -12,6 +12,7 @@ namespace DineNDash.Models
         public string LastName { get; set; }
         public DateTime CustomerCreated { get; set; }
         public string ContactEmail { get; set; }
+        public bool Status { get; set; } = true;
 
     }
 }
