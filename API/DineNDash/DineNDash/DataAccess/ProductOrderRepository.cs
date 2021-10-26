@@ -22,7 +22,8 @@ namespace DineNDash.DataAccess
             using var db = new SqlConnection(_connectionString);
 
             var productOrders = db.Query<ProductOrder>(@"Select *
-                                        From productOrders");
+                                        From productOrders
+                                        Order By orderId");
 
             return productOrders;
         }
