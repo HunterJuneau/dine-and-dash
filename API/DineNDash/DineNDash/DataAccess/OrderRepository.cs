@@ -28,6 +28,7 @@ namespace DineNDash.DataAccess
             return orders;
         }
 
+
         internal Order GetById(Guid id)
         {
             using var db = new SqlConnection(_connectionString);
