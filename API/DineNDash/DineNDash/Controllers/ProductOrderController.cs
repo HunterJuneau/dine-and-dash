@@ -110,7 +110,7 @@ namespace DineNDash.Controllers
             // Will return if the user tries to order a larger quantity of a product than what is available in stock //
             if (subtractProductOrder.Quantity < 0)
             {
-                return NotFound($"There are only {currentProductQauntity} {productToOrder.ProductName} Trucks in stock. You added {newProductOrder.ProductQuantity} to your cart. Please add {currentProductQauntity} or less to you order.");
+                return NotFound($"There are only {currentProductQauntity} {productToOrder.ProductName} in stock. You added {newProductOrder.ProductQuantity} to your cart. Please add {currentProductQauntity} or less to you order.");
             }
 
 
