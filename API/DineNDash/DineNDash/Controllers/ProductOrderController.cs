@@ -86,12 +86,15 @@ namespace DineNDash.Controllers
             };
 
             _productOrderRepository.Add(newProductOrder);
-           // use productToOrder
-           // differenceVariable: subtract productToOrder.quantity - command productOrderQuantity
-
+            // use productToOrder
+            // differenceVariable: subtract productToOrder.quantity - command productOrderQuantity
+            var difference = productToOrder.Quantity - command.ProductOrderQuantity;
             //make call to update that product with new differenceVariable
 
+            _productRepository.Update(command.ProductId, productToOrder);
+
             return Created($"/api/orders/{newProductOrder.Id}", newProductOrder);
+
         }
 
 
