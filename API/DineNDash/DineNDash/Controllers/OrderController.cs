@@ -16,12 +16,14 @@ namespace DineNDash.Controllers
         OrderRepository _orderRepository;
         PaymentRepository _paymentRepository;
         UserRepository _userRepository;
+        ProductOrderRepository _productOrderRepository;
 
-        public OrderController(PaymentRepository paymentRepo, UserRepository userRepo, OrderRepository orderRepo)
+        public OrderController(PaymentRepository paymentRepo, UserRepository userRepo, OrderRepository orderRepo, ProductOrderRepository productOrderRepo)
         {
             _userRepository = userRepo;
             _paymentRepository = paymentRepo;
             _orderRepository = orderRepo;
+            _productOrderRepository = productOrderRepo;
 
         }
 
@@ -89,6 +91,7 @@ namespace DineNDash.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteOrder(Guid id)
         {
+            _productOrderRepository.Remove(id);
             _orderRepository.Remove(id);
 
             return Ok();

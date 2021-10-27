@@ -95,18 +95,28 @@ namespace DineNDash.DataAccess
                                        
                                      
                                      output inserted.Id
-                                     Where id = @id";
+                                     Where Id = @id";
 
             order.Id = id;
-            var updatedOrder = db.QuerySingleOrDefault<Order>(sql, order);
+
+            var parameters = new
+            {
+                Id = order.Id,
+                UserId = order.User.Id,
+                TotalCost = order.TotalCost,
+                PaymentId = order.Payment.Id,
+                Completed = order.Completed
+            };
+
+            var updatedOrder = db.QueryFirstOrDefault<Order>(sql, parameters);
             return updatedOrder;
-            //db.Execute(sql, order);
 
         }
 
         internal void Remove(Guid id)
         {
             using var db = new SqlConnection(_connectionString);
+
             var sql = @"Delete 
                         From Orders 
                         Where Id = @id";
@@ -121,6 +131,8 @@ namespace DineNDash.DataAccess
             order.Payment = payment;
             return order;
         }
+
+       
 
     }
 }
