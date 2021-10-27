@@ -20,7 +20,7 @@ namespace DineNDash.DataAccess
             return products;
         }
 
-        internal object GetById(Guid id)
+        internal Product GetById(Guid id)
         {
             using var db = new SqlConnection(_connectionString);
 

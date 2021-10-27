@@ -64,30 +64,35 @@ namespace DineNDash.Controllers
             return Ok(updatedProductOrder);
 
         }
+        [HttpPost]
+        //Create(Add) Product Order //
+        public IActionResult CreateProductOrder(CreateProductOrderCommand command)
+        {
+            var productToOrder = _productRepository.GetById(command.ProductId);
+            var orderToCreate = _orderRepository.GetById(command.OrderId);
 
-        ////Create(Add) Product Order //
-        //public IActionResult CreateProductOrder(CreateProductOrderCommand command)
-        //{
-        //    var productToOrder = _productRepository.GetById(command.ProductId);
-        //    var orderToCreate = _orderRepository.GetById(command.OrderId);
+            
+            if (productToOrder == null) // Change to check if we have a product order in order to create //
+                return NotFound("There was no matching Product in the database.");
 
-        //    if (productToOrder == null)
-        //        return NotFound("There was no matching Product in the database.");
+            if (orderToCreate == null)
+                return NotFound("There was no matching Order in the database");
 
-        //    if (orderToCreate == null)
-        //        return NotFound("There was no matching Order in the database");
+            var newProductOrder = new ProductOrder
+            {
+                ProductId = productToOrder.Id,
+                OrderId = orderToCreate.Id,
+                ProductQuantity = command.ProductOrderQuantity
+            };
 
-        //    var newProductOrder = new ProductOrder
-        //    {
-        //        Product = productToOrder,
-        //        OrderId = orderToCreate,
-        //        ProductQuantity = command.ProductOrderQuantity
-        //    };
+            _productOrderRepository.Add(newProductOrder);
+           // use productToOrder
+           // differenceVariable: subtract productToOrder.quantity - command productOrderQuantity
 
-        //    _productOrderRepository.Add(newProductOrder);
+            //make call to update that product with new differenceVariable
 
-        //    return Created($"/api/orders/{newProductOrder.Id}", newProductOrder);
-        //}
+            return Created($"/api/orders/{newProductOrder.Id}", newProductOrder);
+        }
 
 
         // Delete Product Order //

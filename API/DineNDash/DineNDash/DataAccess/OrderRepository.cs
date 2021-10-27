@@ -39,7 +39,7 @@ namespace DineNDash.DataAccess
             var order = db.QueryFirstOrDefault<Order>(orderSql, new { id = id });
 
             if (order == null) return null;
-
+            
             return order;
         }
 

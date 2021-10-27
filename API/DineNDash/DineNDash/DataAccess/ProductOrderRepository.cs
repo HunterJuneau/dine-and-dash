@@ -72,32 +72,29 @@ namespace DineNDash.DataAccess
             db.Execute(sql, new { id });
         }
 
-        //internal void Add(ProductOrder newProductOrder)
-        //{
-        //    using var db = new SqlConnection(_connectionString);
+        internal void Add(ProductOrder newProductOrder)
+        {
+            using var db = new SqlConnection(_connectionString);
 
-        //    var sql = @"INSERT INTO [dbo].[ProductOrders]
-        //                               (
-        //                                 [orderId]
-        //                                ,[productId]
-        //                                ,[productQuantity]
-        //                     output inserted.Id
-        //                         VALUES
-        //                      (@orderId, @productId, @productQuantity)";
+            var sql = @"INSERT INTO [dbo].[ProductOrders]
+                                       ( [orderId]
+                                        ,[productId]
+                                        ,[productQuantity])
+                             output inserted.Id
+                                 VALUES
+                              (@orderId, @productId, @productQuantity)";
 
-        //    var parameters = new
-        //    {
-        //        //TotalCost = newOrder.TotalCost,
-        //        // Completed = newOrder.Completed,
-        //        OrderId = newProductOrder.Order.Id,
-        //        ProductId = newProductOrder.ProductId,
-        //        ProductQuantity = newProductOrder.ProductQuantity
+            var parameters = new
+            {
+                OrderId = newProductOrder.OrderId,
+                ProductId = newProductOrder.ProductId,
+                ProductQuantity = newProductOrder.ProductQuantity
 
-        //    };
+            };
 
-        //    var id = db.ExecuteScalar<Guid>(sql, parameters);
-        //    newProductOrder.Id = id;
-        //}
+            var id = db.ExecuteScalar<Guid>(sql, parameters);
+            newProductOrder.Id = id;
+        }
 
 
 
