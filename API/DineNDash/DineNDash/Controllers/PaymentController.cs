@@ -46,5 +46,21 @@ namespace DineNDash.Controllers
 
             return Created($"api/payments/{payment.Id}", payment);
         }
+
+        // Update Payment //
+        [HttpPut("{id}")]
+        public IActionResult UpdateUser(Guid id, Payment payment)
+        {
+            var paymentToUpdate = _repo.GetPayment(id);
+
+            if (paymentToUpdate == null)
+            {
+                return NotFound($"The Payment associated with the Id of {id} was not found.");
+            }
+
+            var updatedPayment = _repo.UpdatePayment(id, payment);
+
+            return Ok(updatedPayment);
+        }
     }
 }
