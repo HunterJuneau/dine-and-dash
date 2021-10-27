@@ -8,6 +8,7 @@ import {
   NavItem,
   // Button
 } from 'reactstrap';
+import redLogo from '../assets/DineNDashRedLogo.png';
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,6 +25,7 @@ const NavBar = () => {
             </NavItem>
           </Nav>
         </Collapse>
+        <img id='navbar-logo' src={redLogo} alt='Dine and Dash Red Logo'/>
       </Navbar>
     </div>
   );
