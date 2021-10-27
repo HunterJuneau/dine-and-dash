@@ -67,7 +67,7 @@ namespace DineNDash.DataAccess
             using var db = new SqlConnection(_connectionString);
             var sql = @"Delete 
                         From productOrders 
-                        Where Id = @id";
+                        Where orderId = @id";
 
             db.Execute(sql, new { id });
         }

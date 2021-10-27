@@ -72,7 +72,7 @@ namespace DineNDash.Controllers
             var orderToCreate = _orderRepository.GetById(command.OrderId);
 
             
-            if (productToOrder == null) // Change to check if we have a product order in order to create //
+            if (productToOrder == null) 
                 return NotFound("There was no matching Product in the database.");
 
             if (orderToCreate == null)
@@ -86,12 +86,37 @@ namespace DineNDash.Controllers
             };
 
             _productOrderRepository.Add(newProductOrder);
-            // use productToOrder
-            // differenceVariable: subtract productToOrder.quantity - command productOrderQuantity
-            var difference = productToOrder.Quantity - command.ProductOrderQuantity;
-            //make call to update that product with new differenceVariable
 
-            _productRepository.Update(command.ProductId, productToOrder);
+            var currentProductQauntity = productToOrder.Quantity;
+
+            var difference = productToOrder.Quantity - command.ProductOrderQuantity;
+
+            var subtractProductOrder = new Product
+            {
+                ProductName = productToOrder.ProductName,
+                Id = productToOrder.Id,
+                Quantity = difference,
+                ProductDescription = productToOrder.ProductDescription,
+                Price = productToOrder.Price,
+            };
+
+
+            // Will return if item is not in stock //
+            if (currentProductQauntity <= 0)
+            {
+                return NotFound($"{subtractProductOrder.ProductName} is not in stock. Please choose another product.");
+            }
+
+            // Will return if the user tries to order a larger quantity of a product than what is available in stock //
+            if (subtractProductOrder.Quantity < 0)
+            {
+                return NotFound($"There are only {currentProductQauntity} {productToOrder.ProductName} Trucks in stock. You added {newProductOrder.ProductQuantity} to your cart. Please add {currentProductQauntity} or less to you order.");
+            }
+
+
+            // Subtracts the quantity chosen for the productOrder from the product quantity //
+            _productRepository.Update(command.ProductId, subtractProductOrder);
+
 
             return Created($"/api/orders/{newProductOrder.Id}", newProductOrder);
 

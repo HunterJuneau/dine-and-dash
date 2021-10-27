@@ -16,6 +16,20 @@ namespace DineNDash.DataAccess
             _connectionString = config.GetConnectionString("DineAndDash");
         }
 
+        internal Payment GetById(Guid userId)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            var sql = @"Select *
+                        From Payments
+                        where id = @id";
+
+
+            var user = db.QueryFirstOrDefault<Payment>(sql, new { id = userId });
+
+            return user;
+        }
+
         internal IEnumerable<Payment> GetUserPayments(Guid userId)
         {
             using var db = new SqlConnection(_connectionString);
@@ -58,6 +72,27 @@ namespace DineNDash.DataAccess
 
             var id = db.ExecuteScalar<Guid>(sql, payment);
             payment.Id = id;
+        }
+
+        // Update Payment //
+        internal Payment UpdatePayment(Guid id, Payment payment)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            var sql = @"update Payments
+                        Set Type = @type,
+                            UserId = @userId,
+	                        AccountNumber = @accountNumber,
+	                        Active = @active
+                        output inserted.*
+                     Where id = @id";
+
+
+            payment.Id = id;
+
+            var updatedPayment = db.QuerySingleOrDefault<Payment>(sql, payment);
+
+            return updatedPayment;
         }
     }
 }
