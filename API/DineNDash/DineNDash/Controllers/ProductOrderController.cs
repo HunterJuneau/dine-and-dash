@@ -64,30 +64,63 @@ namespace DineNDash.Controllers
             return Ok(updatedProductOrder);
 
         }
+        [HttpPost]
+        //Create(Add) Product Order //
+        public IActionResult CreateProductOrder(CreateProductOrderCommand command)
+        {
+            var productToOrder = _productRepository.GetById(command.ProductId);
+            var orderToCreate = _orderRepository.GetById(command.OrderId);
 
-        ////Create(Add) Product Order //
-        //public IActionResult CreateProductOrder(CreateProductOrderCommand command)
-        //{
-        //    var productToOrder = _productRepository.GetById(command.ProductId);
-        //    var orderToCreate = _orderRepository.GetById(command.OrderId);
+            
+            if (productToOrder == null) 
+                return NotFound("There was no matching Product in the database.");
 
-        //    if (productToOrder == null)
-        //        return NotFound("There was no matching Product in the database.");
+            if (orderToCreate == null)
+                return NotFound("There was no matching Order in the database");
 
-        //    if (orderToCreate == null)
-        //        return NotFound("There was no matching Order in the database");
+            var newProductOrder = new ProductOrder
+            {
+                ProductId = productToOrder.Id,
+                OrderId = orderToCreate.Id,
+                ProductQuantity = command.ProductOrderQuantity
+            };
 
-        //    var newProductOrder = new ProductOrder
-        //    {
-        //        Product = productToOrder,
-        //        OrderId = orderToCreate,
-        //        ProductQuantity = command.ProductOrderQuantity
-        //    };
+            _productOrderRepository.Add(newProductOrder);
 
-        //    _productOrderRepository.Add(newProductOrder);
+            var currentProductQauntity = productToOrder.Quantity;
 
-        //    return Created($"/api/orders/{newProductOrder.Id}", newProductOrder);
-        //}
+            var difference = productToOrder.Quantity - command.ProductOrderQuantity;
+
+            var subtractProductOrder = new Product
+            {
+                ProductName = productToOrder.ProductName,
+                Id = productToOrder.Id,
+                Quantity = difference,
+                ProductDescription = productToOrder.ProductDescription,
+                Price = productToOrder.Price,
+            };
+
+
+            // Will return if item is not in stock //
+            if (currentProductQauntity <= 0)
+            {
+                return NotFound($"{subtractProductOrder.ProductName} is not in stock. Please choose another product.");
+            }
+
+            // Will return if the user tries to order a larger quantity of a product than what is available in stock //
+            if (subtractProductOrder.Quantity < 0)
+            {
+                return NotFound($"There are only {currentProductQauntity} {productToOrder.ProductName} in stock. You added {newProductOrder.ProductQuantity} to your cart. Please add {currentProductQauntity} or less to you order.");
+            }
+
+
+            // Subtracts the quantity chosen for the productOrder from the product quantity //
+            _productRepository.Update(command.ProductId, subtractProductOrder);
+
+
+            return Created($"/api/orders/{newProductOrder.Id}", newProductOrder);
+
+        }
 
 
         // Delete Product Order //
