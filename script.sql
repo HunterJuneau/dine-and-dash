@@ -55,6 +55,17 @@ CREATE TABLE dbo.ProductOrders
 			REFERENCES Products (id),
 	productQuantity numeric NOT NULL,
 )
+
+ ALTER TABLE Users ADD status bit
+
+ ALTER TABLE Payments ADD active bit
+
+  ALTER TABLE Products
+ ADD Image varchar(2083)
+
+ Alter TABLE Products
+ ADD status bit
+
  USE [DineAndDash]
 GO
 INSERT [dbo].[Users] ([id], [firstName], [lastName], [customerCreated], [contactEmail]) VALUES (N'df59a175-f95c-40f4-9efb-035bc30acc9c', N'Sheldon', N'Cooper', CAST(N'2020-05-28T00:00:00.000' AS DateTime), N'bazinga@email.com')
