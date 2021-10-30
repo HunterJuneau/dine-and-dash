@@ -23,6 +23,9 @@ const NavBar = () => {
             <NavItem>
               <Link className="navbar-brand" to="/">Home</Link>
             </NavItem>
+            <NavItem>
+              <Link className="navbar-brand" to="/products">Products</Link>
+            </NavItem>
           </Nav>
         </Collapse>
         <img id='navbar-logo' src={redLogo} alt='Dine and Dash Red Logo'/>
