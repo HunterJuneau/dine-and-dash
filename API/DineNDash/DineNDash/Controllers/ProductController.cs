@@ -50,9 +50,9 @@ namespace DineNDash.Controllers
         }
 
         [HttpGet("available")]
-        public IActionResult GetAllAvailableProducts()
+        public IActionResult GetAllAvailableProducts(string status)
         {
-            return Ok(_repo.GetAvailable());
+            return Ok(_repo.GetAvailable(status));
         }
 
         [HttpPost]
