@@ -6,6 +6,7 @@ import {
   NavbarToggler,
   Nav,
   NavItem,
+  NavbarBrand,
   // Button
 } from 'reactstrap';
 import redLogo from '../assets/DineNDashRedLogo.png';
@@ -17,11 +18,12 @@ const NavBar = () => {
   return (
     <div>
       <Navbar color="light" light expand="md">
+      <NavbarBrand href="/">Home</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <Link className="navbar-brand" to="/">Home</Link>
+              <Link className="nav-link" to="/products">Products</Link>
             </NavItem>
           </Nav>
         </Collapse>
