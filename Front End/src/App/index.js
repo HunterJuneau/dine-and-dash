@@ -9,7 +9,6 @@ function App() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => getAllProducts().then(setProducts), []);
-  console.warn(products);
   return (
     <>
       <Router>
