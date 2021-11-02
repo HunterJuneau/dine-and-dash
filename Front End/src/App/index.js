@@ -13,9 +13,8 @@ function App() {
     <>
       <Router>
         <div className='App'>
-          <NavBar/>
-          <Routes
-            products={products}/>
+          <NavBar />
+          <Routes products={products} />
         </div>
       </Router>
     </>
