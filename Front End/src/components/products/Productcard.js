@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   Card,
-  // CardText,
+  CardText,
   // CardImg,
-  // CardBody,
+  CardBody,
   CardTitle,
   // Button
 } from 'reactstrap';
@@ -14,6 +14,13 @@ function Productcard({ ...productInfo }) {
     <div>
       <Card>
         <CardTitle tag='h5'>{productInfo.productName}</CardTitle>
+          <CardBody>
+            {productInfo.type}
+            <CardText>{productInfo.productDescription}</CardText>
+            <CardText>Price: ${productInfo.price}</CardText>
+            <CardText>Quantity: {productInfo.quantity}</CardText>
+            <CardText>{(productInfo.forSale === true) ? "For Sale" : "For Rent Only"}</CardText>
+          </CardBody>
       </Card>
     </div>
   );
