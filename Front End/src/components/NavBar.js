@@ -10,7 +10,7 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem
+  DropdownItem,
 } from 'reactstrap';
 import redLogo from '../assets/DineNDashRedLogo.png';
 
@@ -36,7 +36,9 @@ const NavBar = () => {
                 Admin Menu
               </DropdownToggle>
               <DropdownMenu right>
-                <DropdownItem><Link to='/admin/inventory'>Inventory</Link></DropdownItem>
+                <DropdownItem>
+                  <Link className='nav-link' to='/admin/inventory'>Inventory</Link>
+                </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>
