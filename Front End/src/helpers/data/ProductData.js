@@ -9,4 +9,10 @@ const getAllProducts = () => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-export default getAllProducts;
+const getSingleProduct = (id) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/api/products/${id}`)
+    .then((response) => resolve(response))
+    .catch((error) => reject(error));
+});
+
+export { getAllProducts, getSingleProduct };

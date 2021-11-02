@@ -6,17 +6,14 @@ function InventoryView({ products }) {
   return (
     <div>
       {products.map((productInfo) => (
-        <Productcard
-          key={productInfo.id}
-          {...productInfo}
-        />
+        <Productcard key={productInfo.id} {...productInfo} />
       ))}
     </div>
   );
 }
 
 InventoryView.propTypes = {
-  products: PropTypes.array
+  products: PropTypes.array,
 };
 
 export default InventoryView;
