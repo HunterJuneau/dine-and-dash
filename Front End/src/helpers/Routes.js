@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import LandingPage from '../views/LandingPages';
 import ProductsView from '../views/ProductsView';
+import CartView from '../views/CartView';
 
 export default function Routes({ products }) {
   return (
@@ -15,6 +16,10 @@ export default function Routes({ products }) {
         <Route
           exact path='/products'
           component={() => <ProductsView products={products}/>}
+        />
+         <Route
+          exact path='/cart'
+          component={() => <CartView/>}
         />
       </Switch>
     </div>
