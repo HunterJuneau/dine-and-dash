@@ -5,7 +5,7 @@ import 'firebase/auth';
 import './App.scss';
 import NavBar from '../components/NavBar';
 import Routes from '../helpers/Routes';
-import getAllProducts from '../helpers/data/ProductData';
+import { getAllProducts } from '../helpers/data/ProductData';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -28,9 +28,8 @@ function App() {
     <>
       <Router>
         <div className='App'>
-          <NavBar/>
-          <Routes
-            products={products}/>
+          <NavBar />
+          <Routes products={products} />
         </div>
       </Router>
     </>

@@ -7,7 +7,10 @@ import {
   Nav,
   NavItem,
   NavbarBrand,
-  // Button
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
 } from 'reactstrap';
 import redLogo from '../assets/DineNDashRedLogo.png';
 
@@ -17,17 +20,30 @@ const NavBar = () => {
   const toggle = () => setIsOpen(!isOpen);
   return (
     <div>
-      <Navbar color="light" light expand="md">
-      <NavbarBrand href="/">Home</NavbarBrand>
+      <Navbar color='light' light expand='md'>
+        <NavbarBrand href='/'>Home</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
+          <Nav className='mr-auto' navbar>
             <NavItem>
-              <Link className="nav-link" to="/products">Products</Link>
+              <Link className='nav-link' to='/products'>
+                Products
+              </Link>
             </NavItem>
+
+            <UncontrolledDropdown inNavbar nav>
+              <DropdownToggle caret nav>
+                Admin Menu
+              </DropdownToggle>
+              <DropdownMenu right>
+                <DropdownItem>
+                  <Link className='nav-link' to='/admin/inventory'>Inventory</Link>
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
           </Nav>
         </Collapse>
-        <img id='navbar-logo' src={redLogo} alt='Dine and Dash Red Logo'/>
+        <img id='navbar-logo' src={redLogo} alt='Dine and Dash Red Logo' />
       </Navbar>
     </div>
   );
