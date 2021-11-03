@@ -10,21 +10,22 @@ function App() {
   const [user, setUser] = useState(null);
   const [products, setProducts] = useState([]);
 
-  firebase.auth().onAuthStateChanged((authed) => {
-    if (authed.additionalUserInfo?.isNewUser) {
-      const userInfo = {
-        userName: authed.authed?.displayName,
-        profileImage: authed.authed?.photoURL,
-        uid: authed.authed?.uid,
-        email: authed.authed?.email
-      };
-      window.location.href = '/';
-      setUser(userInfo);
-    } else if (user || user === null) {
-      setUser(false);
-    }
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((authed) => {
+      if (authed) {
+        const userInfo = {
+          userName: authed.authed?.displayName,
+          profileImage: authed.authed?.photoURL,
+          uid: authed.authed?.uid,
+          email: authed.authed?.email
+        };
+        window.location.href = '/';
+        setUser(userInfo);
+      } else if (user || user === null) {
+        setUser(false);
+      }
+    });
   }, []);
-
   useEffect(() => getAllProducts().then(setProducts), []);
   return (
     <>

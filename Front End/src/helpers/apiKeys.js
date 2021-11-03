@@ -1,4 +1,4 @@
-const config = {
+const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
   databaseURL: process.env.REACT_APP_DATABASE_URL,
@@ -13,4 +13,4 @@ const sqlConfig = {
   sqlDatabaseURL: process.env.REACT_APP_SQL_DATABASE_URL
 };
 
-export { config, sqlConfig };
+export { firebaseConfig, sqlConfig };
