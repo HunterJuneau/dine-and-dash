@@ -11,8 +11,10 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
+  Button
 } from 'reactstrap';
 import redLogo from '../assets/DineNDashRedLogo.png';
+import { signInUser, signOutUser } from '../helpers/auth';
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,6 +45,8 @@ const NavBar = () => {
             </UncontrolledDropdown>
           </Nav>
         </Collapse>
+        <Button onClick={signInUser}>Sign In</Button>
+        <Button onClick={signOutUser}>Sign Out</Button>
         <img id='navbar-logo' src={redLogo} alt='Dine and Dash Red Logo' />
       </Navbar>
     </div>

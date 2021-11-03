@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import firebase from 'firebase/app';
-import 'firebase/auth';
+import firebase from 'firebase';
 import './App.scss';
 import NavBar from '../components/NavBar';
 import Routes from '../helpers/Routes';
@@ -12,11 +11,14 @@ function App() {
   const [products, setProducts] = useState([]);
 
   firebase.auth().onAuthStateChanged((authed) => {
-    if (authed) {
+    if (authed.additionalUserInfo?.isNewUser) {
       const userInfo = {
-        userName: authed.displayName,
-        uid: authed.uid
+        userName: authed.authed?.displayName,
+        profileImage: authed.authed?.photoURL,
+        uid: authed.authed?.uid,
+        email: authed.authed?.email
       };
+      window.location.href = '/';
       setUser(userInfo);
     } else if (user || user === null) {
       setUser(false);
