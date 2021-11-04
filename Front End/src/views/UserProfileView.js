@@ -26,11 +26,14 @@ function SingleUser() {
     <div>
       <Card>
         <CardTitle tag='h3'>{oneSingleUser.firstName}</CardTitle>
+        <CardTitle tag='h3'>{oneSingleUser.lastName}</CardTitle>
+
           <CardBody>
-            <CardTitle tag='h6'>{oneSingleUser.lastName}</CardTitle>
-            <CardText>{oneSingleUser.customerCreated}</CardText>
+            <div>
+            <CardText> Member Since: {oneSingleUser.customerCreated}</CardText>
+            </div>
             <CardText>Email: {oneSingleUser.contactEmail}</CardText>
-            <CardText>Satus: {oneSingleUser.status}</CardText>
+            <CardText>Status: {oneSingleUser.status}</CardText>
           </CardBody>
           <Button onClick={() => history.push('/user')}>Back</Button>
       </Card>

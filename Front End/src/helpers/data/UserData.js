@@ -15,10 +15,10 @@ const getSingleUser = (id) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-// const getOrders = () => new Promise((resolve, reject) => {
-//   axios.get(`${dbUrl}/api/order/`)
-//     .then((response) => resolve(Object.keys(response.data)))
-//     .catch((error) => reject(error));
-// });
+const getUserOrders = () => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/api/order/`)
+    .then((response) => resolve(response.data))
+    .catch((error) => reject(error));
+});
 
-export { getAllUsers, getSingleUser };
+export { getAllUsers, getSingleUser, getUserOrders };
