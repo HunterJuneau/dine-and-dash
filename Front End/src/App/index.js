@@ -9,6 +9,7 @@ function App() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => getAllProducts().then(setProducts), []);
+
   return (
     <>
       <Router>
