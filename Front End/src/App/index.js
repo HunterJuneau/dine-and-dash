@@ -4,18 +4,18 @@ import './App.scss';
 import NavBar from '../components/NavBar';
 import Routes from '../helpers/Routes';
 import { getAllProducts } from '../helpers/data/ProductData';
-import { getAllUsers, getUserOrders } from '../helpers/data/UserData';
+import { getAllUsers } from '../helpers/data/UserData';
 
 function App() {
   const [products, setProducts] = useState([]);
   const [users, setUsers] = useState([]);
-  const [userOrders, setUserOrders] = useState([]);
+  // const [userOrders, setUserOrders] = useState([]);
 
   useEffect(() => getAllProducts().then(setProducts), []);
   useEffect(() => getAllUsers().then(setUsers), []);
-  useEffect(() => getUserOrders().then(setUserOrders), []);
+  // useEffect(() => getUserOrders().then(setUserOrders), []);
 
-  console.warn(userOrders);
+  // console.warn(userOrders);
   return (
     <>
       <Router>
