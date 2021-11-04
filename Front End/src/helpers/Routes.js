@@ -30,12 +30,6 @@ export default function Routes({ products, users }) {
         />
 
         <Route
-          exact
-          path='/user/:id'
-          component={<ProductsView products={products}/>}
-        />
-
-        <Route
           path='/admin'
           component={() => <InventoryView products={products} />}
         />
