@@ -20,7 +20,7 @@ function Productcard({ ...productInfo }) {
           <CardBody>
             <CardTitle tag='h6'>{productInfo.type}</CardTitle>
             <CardText>{productInfo.productDescription}</CardText>
-            <CardText>Price: ${productInfo.price}</CardText>
+            <CardText>Price: {productInfo.price}</CardText>
             <CardText>Quantity: {productInfo.quantity}</CardText>
             <CardText>{productInfo.forSale ? 'For Sale or Rent' : 'For Rent Only'}</CardText>
           </CardBody>
