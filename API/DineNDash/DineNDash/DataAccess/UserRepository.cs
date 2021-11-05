@@ -59,7 +59,7 @@ namespace DineNDash.DataAccess
         }
 
         // Get User by Id //
-        internal User GetById(Guid userId)
+        internal User GetById(Guid id)
         {
             using var db = new SqlConnection(_connectionString);
 
@@ -68,7 +68,7 @@ namespace DineNDash.DataAccess
                         where id = @id";
 
 
-            var user = db.QueryFirstOrDefault<User>(sql, new { id = userId });
+            var user = db.QueryFirstOrDefault<User>(sql, new { id });
 
             return user;
         }
