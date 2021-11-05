@@ -8,23 +8,16 @@ import { getAllProducts } from '../helpers/data/ProductData';
 import { getAllUsers } from '../helpers/data/UserData';
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [fbUser, setFbUser] = useState(null);
   const [products, setProducts] = useState([]);
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((authed) => {
       if (authed) {
-        const userInfo = {
-          userName: authed.authed?.displayName,
-          profileImage: authed.authed?.photoURL,
-          uid: authed.authed?.uid,
-          email: authed.authed?.email
-        };
-        window.location.href = '/';
-        setUser(userInfo);
-      } else if (user || user === null) {
-        setUser(false);
+        authed.getIdToken().then((token) => window.sessionStorage.setItem('token', token));
+      } else if (fbUser || fbUser === null) {
+        setFbUser(false);
       }
     });
   }, []);
