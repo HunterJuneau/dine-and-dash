@@ -16,6 +16,11 @@ function UserCard({ ...userInfo }) {
     history.push(`/user/${userInfo.id}`);
   };
 
+  const handleClickUserOrders = () => {
+    history.push(`/user/order/${userInfo.id}`);
+  };
+
+  // console.warn(userOrders);
   return (
     <div>
       <Card>
@@ -27,6 +32,8 @@ function UserCard({ ...userInfo }) {
             <CardText>status {userInfo.status}</CardText>
           </CardBody>
           <Button onClick={() => handleClick()}>See Details</Button>
+          <Button onClick={() => handleClickUserOrders()}>See Orders</Button>
+
       </Card>
     </div>
   );

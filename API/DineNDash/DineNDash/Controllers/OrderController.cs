@@ -39,12 +39,12 @@ namespace DineNDash.Controllers
             return Ok(_orderRepository.GetById(id));
         }
 
-        //[HttpPost]
-        //public IActionResult AddAnOrder(Order newOrder)
-        //{
-        //    _orderRepository.Add(newOrder);
-        //    return Created($"/api/orders/{newOrder.Id}", newOrder);
-        //}
+        // Get User's Payments //
+        [HttpGet("user/{userId}")]
+        public IActionResult GetAllUserOrders(Guid userId)
+        {
+            return Ok(_orderRepository.GetUserOrders(userId));
+        }
 
         [HttpPost]
         public IActionResult CreateOrder(CreateOrderCommand command)

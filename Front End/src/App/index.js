@@ -13,9 +13,8 @@ function App() {
 
   useEffect(() => getAllProducts().then(setProducts), []);
   useEffect(() => getAllUsers().then(setUsers), []);
-  // useEffect(() => getUserOrders().then(setUserOrders), []);
 
-  // console.warn(userOrders);
+  // console.warn(users);
   return (
     <>
       <Router>

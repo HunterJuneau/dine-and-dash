@@ -7,6 +7,7 @@ import InventoryView from '../views/InventoryView';
 import SingleProduct from '../views/SingleProduct';
 import AllUsersView from '../views/AllUsersView';
 import UserProfileView from '../views/UserProfileView';
+import UserOrdersView from '../views/UserOrdersView';
 
 export default function Routes({ products, users }) {
   return (
@@ -34,6 +35,12 @@ export default function Routes({ products, users }) {
           exact
           path='/user/:id'
           component={() => <UserProfileView />}
+        />
+
+        <Route
+          exact
+          path='/user/order/:id'
+          component={() => <UserOrdersView />}
         />
 
         <Route
