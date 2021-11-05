@@ -5,8 +5,10 @@ import LandingPage from '../views/LandingPages';
 import ProductsView from '../views/ProductsView';
 import InventoryView from '../views/InventoryView';
 import SingleProduct from '../views/SingleProduct';
+import AllUsersView from '../views/AllUsersView';
+import UserProfileView from '../views/UserProfileView';
 
-export default function Routes({ products }) {
+export default function Routes({ products, users }) {
   return (
     <div>
       <Switch>
@@ -21,6 +23,19 @@ export default function Routes({ products }) {
           path='/products/:productId'
           component={() => <SingleProduct />}
         />
+
+        <Route
+          exact
+          path='/user'
+          component={() => <AllUsersView users={users} />}
+        />
+
+        <Route
+          exact
+          path='/user/:id'
+          component={() => <UserProfileView />}
+        />
+
         <Route
           path='/admin'
           component={() => <InventoryView products={products} />}
@@ -32,4 +47,5 @@ export default function Routes({ products }) {
 
 Routes.propTypes = {
   products: PropTypes.array,
+  users: PropTypes.any
 };

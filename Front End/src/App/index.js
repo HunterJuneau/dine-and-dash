@@ -5,10 +5,12 @@ import './App.scss';
 import NavBar from '../components/NavBar';
 import Routes from '../helpers/Routes';
 import { getAllProducts } from '../helpers/data/ProductData';
+import { getAllUsers } from '../helpers/data/UserData';
 
 function App() {
   const [user, setUser] = useState(null);
   const [products, setProducts] = useState([]);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((authed) => {
@@ -27,12 +29,14 @@ function App() {
     });
   }, []);
   useEffect(() => getAllProducts().then(setProducts), []);
+  useEffect(() => getAllUsers().then(setUsers), []);
+
   return (
     <>
       <Router>
         <div className='App'>
           <NavBar />
-          <Routes products={products} />
+          <Routes products={products} users={users}/>
         </div>
       </Router>
     </>

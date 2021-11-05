@@ -33,6 +33,12 @@ const NavBar = () => {
               </Link>
             </NavItem>
 
+            <NavItem>
+              <Link className='nav-link' to='/user'>
+                Users
+              </Link>
+            </NavItem>
+
             <UncontrolledDropdown inNavbar nav>
               <DropdownToggle caret nav>
                 Admin Menu
