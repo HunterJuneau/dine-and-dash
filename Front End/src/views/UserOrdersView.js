@@ -24,9 +24,11 @@ function UserOrdersView() {
   console.warn(userOrders);
   return (
     <div>
-      <h1>werk bitch ass</h1>
-      {userOrders.map((orderInfo) => (
+      <h1>Your Orders</h1>
+      <br />
+      {userOrders.filter((orderInfo) => orderInfo.completed).map((orderInfo) => (
         <Card key={orderInfo.id}>
+          <br />
         <CardTitle tag='h3'> Total: {orderInfo.totalCost}</CardTitle>
           <CardBody>
           <CardText>{orderInfo.completed ? 'Completed' : ''}</CardText>

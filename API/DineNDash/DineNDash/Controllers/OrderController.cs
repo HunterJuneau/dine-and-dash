@@ -39,7 +39,7 @@ namespace DineNDash.Controllers
             return Ok(_orderRepository.GetById(id));
         }
 
-        // Get User's Payments //
+        // Get User's Orders //
         [HttpGet("user/{userId}")]
         public IActionResult GetAllUserOrders(Guid userId)
         {
