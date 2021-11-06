@@ -16,18 +16,17 @@ const signInUser = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
 
   firebase.auth().signInWithPopup(provider).then((fbUser) => {
+    const user = fbUser.additionalUserInfo.profile;
     if (fbUser.additionalUserInfo?.isNewUser) {
       const userInfo = {
-        firstName: fbUser.fbUser?.displayName.split(' ')[0],
-        lastName: fbUser.fbUser?.displayName.split(' ')[1],
-        imageUrl: fbUser.fbUser?.photoURL,
-        uid: fbUser.fbUser?.uid,
-        contactEmail: fbUser.fbUser?.email,
-        status: true,
-        customerCreated: '',
+        firstName: user?.given_name,
+        lastName: user?.family_name,
+        imageUrl: user?.picture,
+        uid: user?.id,
+        contactEmail: user?.email,
+        status: true
       };
       createUser(userInfo);
-      window.location.href = '/';
     }
   });
 };

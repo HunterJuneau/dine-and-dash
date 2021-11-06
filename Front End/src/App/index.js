@@ -16,6 +16,7 @@ function App() {
     firebase.auth().onAuthStateChanged((authed) => {
       if (authed) {
         authed.getIdToken().then((token) => window.sessionStorage.setItem('token', token));
+        setFbUser(authed);
       } else if (fbUser || fbUser === null) {
         setFbUser(false);
       }
@@ -28,8 +29,14 @@ function App() {
     <>
       <Router>
         <div className='App'>
-          <NavBar />
-          <Routes products={products} users={users}/>
+          <NavBar
+            fbUser={fbUser}
+          />
+          <Routes
+            fbUser={fbUser}
+            products={products}
+            users={users}
+          />
         </div>
       </Router>
     </>

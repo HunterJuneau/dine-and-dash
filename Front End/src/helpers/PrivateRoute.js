@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { Redirect, Route } from 'react-router-dom';
 
 const PrivateRoute = ({ component: Component, user, ...rest }) => {
-  const routeChecker = (taco) => (user
-    ? (<Component {...taco} user={user} />)
-    : (<Redirect to={{ pathname: '/', state: { from: taco.location } }} />));
+  const routeChecker = (attributes) => (user
+    ? (<Component {...attributes} user={user} />)
+    : (<Redirect to={{ pathname: '/', state: { from: attributes.location } }} />));
   return <Route {...rest} render={(props) => routeChecker(props)} />;
 };
 
