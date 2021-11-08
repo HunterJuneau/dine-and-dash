@@ -8,7 +8,7 @@ import SingleProduct from '../views/SingleProduct';
 import AllUsersView from '../views/AllUsersView';
 import UserProfileView from '../views/UserProfileView';
 
-export default function Routes({ products, users }) {
+export default function Routes({ products, users, setProducts }) {
   return (
     <div>
       <Switch>
@@ -16,7 +16,7 @@ export default function Routes({ products, users }) {
         <Route
           exact
           path='/products'
-          component={() => <ProductsView products={products} />}
+          component={() => <ProductsView products={products} setProducts={setProducts}/>}
         />
         <Route
           exact
@@ -47,5 +47,6 @@ export default function Routes({ products, users }) {
 
 Routes.propTypes = {
   products: PropTypes.array,
-  users: PropTypes.any
+  users: PropTypes.any,
+  setProducts: PropTypes.func
 };

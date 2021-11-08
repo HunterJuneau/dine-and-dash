@@ -18,7 +18,7 @@ function App() {
       <Router>
         <div className='App'>
           <NavBar />
-          <Routes products={products} users={users}/>
+          <Routes products={products} setProducts={setProducts} users={users}/>
         </div>
       </Router>
     </>
