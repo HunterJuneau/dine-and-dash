@@ -21,7 +21,6 @@ function UserOrdersView() {
     }
   }, []);
 
-  console.warn(userOrders);
   return (
     <div>
       <h1>Your Orders</h1>

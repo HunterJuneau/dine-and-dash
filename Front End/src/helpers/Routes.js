@@ -34,7 +34,7 @@ export default function Routes({ products, users }) {
         <Route
           exact
           path='/user/:id'
-          component={() => <UserProfileView />}
+          component={() => <UserProfileView users={users} />}
         />
 
         <Route

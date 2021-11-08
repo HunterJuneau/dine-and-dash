@@ -12,14 +12,12 @@ import {
 
 function UserCard({ ...userInfo }) {
   const history = useHistory();
+
   const handleClick = () => {
     history.push(`/user/${userInfo.id}`);
   };
 
-  const handleClickUserOrders = () => {
-    history.push(`/user/order/${userInfo.id}`);
-  };
-
+  // console.warn(userInfo.id);
   // console.warn(userOrders);
   return (
     <div>
@@ -32,7 +30,6 @@ function UserCard({ ...userInfo }) {
             <CardText>status {userInfo.status}</CardText>
           </CardBody>
           <Button onClick={() => handleClick()}>See Details</Button>
-          <Button onClick={() => handleClickUserOrders()}>See Orders</Button>
 
       </Card>
     </div>
