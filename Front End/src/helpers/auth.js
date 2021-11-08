@@ -22,7 +22,7 @@ const signInUser = () => {
         firstName: user?.given_name,
         lastName: user?.family_name,
         imageUrl: user?.picture,
-        uid: user?.id,
+        id: user?.uid,
         contactEmail: user?.email,
         status: true
       };
@@ -30,6 +30,11 @@ const signInUser = () => {
     }
   });
 };
+
+// const signInUser = () => {
+//   const provider = new firebase.auth.GoogleAuthProvider();
+//   firebase.auth().signInWithPopup(provider);
+// };
 
 const signOutUser = () => new Promise((resolve, reject) => {
   firebase.auth().signOut().then(resolve).catch(reject);

@@ -20,6 +20,7 @@ import { signInUser, signOutUser } from '../helpers/auth';
 const NavBar = ({ fbUser }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
+
   return (
     <div>
       <Navbar color='light' light expand='md'>

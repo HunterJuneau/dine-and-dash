@@ -16,14 +16,19 @@ function App() {
     firebase.auth().onAuthStateChanged((authed) => {
       if (authed) {
         authed.getIdToken().then((token) => window.sessionStorage.setItem('token', token));
-        setFbUser(authed);
+        setFbUser(true);
+        // getAllProducts().then(setProducts);
+        // getAllUsers().then(setUsers);
       } else if (fbUser || fbUser === null) {
         setFbUser(false);
       }
     });
   }, []);
-  useEffect(() => getAllProducts().then(setProducts), []);
-  useEffect(() => getAllUsers().then(setUsers), []);
+
+  useEffect(() => {
+    getAllProducts().then(setProducts);
+    getAllUsers().then(setUsers);
+  }, []);
 
   return (
     <>
