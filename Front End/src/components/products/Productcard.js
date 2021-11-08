@@ -10,7 +10,7 @@ import {
   Button
 } from 'reactstrap';
 
-function Productcard({ ...productInfo }) {
+function Productcard({ admin, ...productInfo }) {
   const history = useHistory();
 
   return (
@@ -24,13 +24,14 @@ function Productcard({ ...productInfo }) {
             <CardText>Quantity: {productInfo.quantity}</CardText>
             <CardText>{productInfo.forSale ? 'For Sale or Rent' : 'For Rent Only'}</CardText>
           </CardBody>
-          <Button onClick={() => history.push(`/products/${productInfo.id}`)}>See Details</Button>
+          <Button onClick={() => history.push(admin ? `/admin/inventory/${productInfo.id}` : `/products/${productInfo.id}`)}>See Details</Button>
       </Card>
     </div>
   );
 }
 
 Productcard.propTypes = {
+  admin: PropTypes.bool,
   productInfo: PropTypes.object
 };
 
