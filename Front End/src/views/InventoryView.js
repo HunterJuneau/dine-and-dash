@@ -6,7 +6,7 @@ function InventoryView({ products }) {
   return (
     <div>
       {products.map((productInfo) => (
-        <Productcard key={productInfo.id} {...productInfo} />
+        <Productcard key={productInfo.id} admin={true} {...productInfo} />
       ))}
     </div>
   );

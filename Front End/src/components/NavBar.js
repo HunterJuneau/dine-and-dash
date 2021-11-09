@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import {
   Collapse,
   Navbar,
@@ -11,13 +12,15 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
+  Button
 } from 'reactstrap';
 import redLogo from '../assets/DineNDashRedLogo.png';
+import { signInUser, signOutUser } from '../helpers/auth';
 
-const NavBar = () => {
+const NavBar = ({ fbUser }) => {
   const [isOpen, setIsOpen] = useState(false);
-
   const toggle = () => setIsOpen(!isOpen);
+
   return (
     <div>
       <Navbar color='light' light expand='md'>
@@ -28,6 +31,12 @@ const NavBar = () => {
             <NavItem>
               <Link className='nav-link' to='/products'>
                 Products
+              </Link>
+            </NavItem>
+
+            <NavItem>
+              <Link className='nav-link' to='/user'>
+                Users
               </Link>
             </NavItem>
 
@@ -43,10 +52,22 @@ const NavBar = () => {
             </UncontrolledDropdown>
           </Nav>
         </Collapse>
+        { fbUser !== null
+          && <>
+          {
+            fbUser ? <Button color='warning' onClick={signOutUser}>Sign Out</Button>
+              : <Button color='primary' onClick={signInUser}>Sign In</Button>
+          }
+            </>
+        }
         <img id='navbar-logo' src={redLogo} alt='Dine and Dash Red Logo' />
       </Navbar>
     </div>
   );
+};
+
+NavBar.propTypes = {
+  fbUser: PropTypes.any
 };
 
 export default NavBar;

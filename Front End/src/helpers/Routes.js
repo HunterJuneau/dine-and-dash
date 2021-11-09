@@ -6,9 +6,10 @@ import ProductsView from '../views/ProductsView';
 import InventoryView from '../views/InventoryView';
 import SingleProduct from '../views/SingleProduct';
 import AllUsersView from '../views/AllUsersView';
-// import UserProfileView from '../views/UserProfileView';
+import UserProfileView from '../views/UserProfileView';
+import UserOrdersView from '../views/UserOrdersView';
 
-export default function Routes({ products, users }) {
+export default function Routes({ products, users, fbUsers }) {
   return (
     <div>
       <Switch>
@@ -25,13 +26,33 @@ export default function Routes({ products, users }) {
         />
 
         <Route
+          exact
           path='/user'
-          component={() => <AllUsersView users={users} />}
+          component={() => <AllUsersView users={users} fbUsers={fbUsers} />}
         />
 
         <Route
-          path='/admin'
+          exact
+          path='/user/:id'
+          component={() => <UserProfileView users={users} />}
+        />
+
+        <Route
+          exact
+          path='/user/order/:id'
+          component={() => <UserOrdersView />}
+        />
+
+        <Route
+        exact
+          path='/admin/inventory'
           component={() => <InventoryView products={products} />}
+        />
+
+        <Route
+          exact
+          path='/admin/inventory/:productId'
+          component={() => <SingleProduct admin={true} />}
         />
       </Switch>
     </div>
@@ -40,5 +61,6 @@ export default function Routes({ products, users }) {
 
 Routes.propTypes = {
   products: PropTypes.array,
-  users: PropTypes.any
+  users: PropTypes.any,
+  fbUsers: PropTypes.any
 };

@@ -55,6 +55,18 @@ namespace DineNDash.DataAccess
             return order.FirstOrDefault();
         }
 
+        internal IEnumerable<Order> GetUserOrders(Guid userId)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            var sql = @"Select * 
+                From Orders 
+                WHERE userId = @id";
+
+            var orders = db.Query<Order>(sql, new { id = userId });
+
+            return orders;
+        }
         // ADD AN ORDER
         internal void Add(Order newOrder)
         {
