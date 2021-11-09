@@ -9,10 +9,12 @@ import { getAllUsers } from '../helpers/data/UserData';
 function App() {
   const [products, setProducts] = useState([]);
   const [users, setUsers] = useState([]);
+  // const [userOrders, setUserOrders] = useState([]);
 
   useEffect(() => getAllProducts().then(setProducts), []);
   useEffect(() => getAllUsers().then(setUsers), []);
 
+  // console.warn(users);
   return (
     <>
       <Router>

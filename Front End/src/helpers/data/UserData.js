@@ -15,4 +15,10 @@ const getSingleUser = (id) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-export { getAllUsers, getSingleUser };
+const getUserOrders = (userId) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/api/order/user/${userId}`)
+    .then((response) => resolve(response.data))
+    .catch((error) => reject(error));
+});
+
+export { getAllUsers, getSingleUser, getUserOrders };
