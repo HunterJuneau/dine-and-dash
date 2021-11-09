@@ -23,7 +23,8 @@ function UserOrdersView() {
   }, []);
 
   if (totalNumberOfOrders <= 0) {
-    return noOrders;
+    return noOrders
+    && <Button onClick={() => history.push(`/user/${id}`)}>Back To User Profile</Button>;
   }
 
   return (
