@@ -22,7 +22,7 @@ const getProductByType = (type) => new Promise((resolve, reject) => {
 });
 
 const getProductByForSaleOrRent = (value) => new Promise((resolve, reject) => {
-  axios.get(`${dbUrl}/api/products/forSale`, value)
+  axios.get(`${dbUrl}/api/products/forSale?sale=${value}`)
     .then((response) => resolve(response))
     .catch((error) => reject(error));
 });
