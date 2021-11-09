@@ -39,7 +39,7 @@ namespace DineNDash
             options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "DineAndDash", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "DineNDash", Version = "v1" });
             });
         }
 
@@ -50,7 +50,7 @@ namespace DineNDash
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "DineAndDash v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "DineNDash v1"));
             }
 
             app.UseCors(cfg => cfg.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());

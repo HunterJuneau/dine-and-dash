@@ -55,6 +55,7 @@ namespace DineNDash.DataAccess
             return order.FirstOrDefault();
         }
 
+
         internal IEnumerable<Order> GetUserOrders(Guid userId)
         {
             using var db = new SqlConnection(_connectionString);
@@ -136,12 +137,14 @@ namespace DineNDash.DataAccess
             db.Execute(sql, new { id });
         }
 
+
         Order Map(Order order, User user, Payment payment)
         {
             order.User = user;
             order.Payment = payment;
             return order;
         }
+
 
 
 
