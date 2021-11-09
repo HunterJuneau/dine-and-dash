@@ -44,8 +44,15 @@ export default function Routes({ products, users }) {
         />
 
         <Route
-          path='/admin'
+        exact
+          path='/admin/inventory'
           component={() => <InventoryView products={products} />}
+        />
+
+        <Route
+          exact
+          path='/admin/inventory/:productId'
+          component={() => <SingleProduct admin={true} />}
         />
       </Switch>
     </div>

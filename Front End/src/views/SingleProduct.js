@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import {
   Card,
   CardText,
@@ -10,7 +11,7 @@ import {
 } from 'reactstrap';
 import { getSingleProduct } from '../helpers/data/ProductData';
 
-function SingleProduct() {
+function SingleProduct({ admin = false }) {
   const [singleProduct, setSingleProduct] = useState({});
   const { productId } = useParams();
   const history = useHistory();
@@ -33,10 +34,14 @@ function SingleProduct() {
             <CardText>Quantity: {singleProduct.quantity}</CardText>
             <CardText>{singleProduct.forSale ? 'For Sale or Rent' : 'For Rent Only'}</CardText>
           </CardBody>
-          <Button onClick={() => history.push('/products')}>Back</Button>
+          <Button onClick={() => history.push(admin ? '/admin/inventory' : '/products')}>Back</Button>
       </Card>
     </div>
   );
 }
+
+SingleProduct.propTypes = {
+  admin: PropTypes.bool
+};
 
 export default SingleProduct;
