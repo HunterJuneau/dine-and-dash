@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import {
   Card,
-  CardText,
   // CardImg,
   CardBody,
   CardTitle,
@@ -34,10 +33,11 @@ function UserOrdersView() {
           <br />
         <CardTitle tag='h3'> Total Price: {orderInfo.totalCost}</CardTitle>
           <CardBody>
-          <CardText>{orderInfo.completed ? 'Completed' : ''}</CardText>
           </CardBody>
           <Button onClick={() => history.push(`/user/${id}`)}>Back</Button>
-          <Button onClick={() => history.push(`/productOrder/order/${orderInfo.id}`)}>Order Details</Button>
+          <br />
+          <Button onClick={() => history.push(`/productOrder/order/${orderInfo.id}`)}>Order Details</Button >
+          <br />
           <br />
       </Card>
       ))}
