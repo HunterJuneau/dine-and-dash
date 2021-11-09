@@ -24,7 +24,7 @@ namespace DineNDash.DataAccess
 
             var users = db.Query<User>(@"Select *
                                         From Users
-                                        Order By status, lastName");
+                                        Order By lastName");
 
             return users;
         }
