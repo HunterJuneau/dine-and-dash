@@ -38,9 +38,9 @@ function UserOrdersView() {
         <CardTitle tag='h3'> Total Price: {orderInfo.totalCost}</CardTitle>
           <CardBody>
           </CardBody>
-          <Button onClick={() => history.push(`/user/${id}`)}>Back To User Profile</Button>
-          <br />
           <Button onClick={() => history.push(`/productOrder/order/${orderInfo.id}`)}>Order Details</Button >
+          <br />
+          <Button onClick={() => history.push(`/user/${id}`)}>Back To User Profile</Button>
           <br />
           <br />
       </Card>
