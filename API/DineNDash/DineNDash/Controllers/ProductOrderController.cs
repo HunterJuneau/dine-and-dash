@@ -92,11 +92,13 @@ namespace DineNDash.Controllers
             if (orderToCreate == null)
                 return NotFound("There was no matching Order in the database");
 
+
             var newProductOrder = new ProductOrder
             {
                 ProductId = productToOrder.Id,
                 OrderId = orderToCreate.Id,
-                ProductQuantity = command.ProductOrderQuantity
+                ProductQuantity = command.ProductOrderQuantity,
+                TotalCost = productToOrder.Price * command.ProductOrderQuantity
             };
 
             _productOrderRepository.Add(newProductOrder);
