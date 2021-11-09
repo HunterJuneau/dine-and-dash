@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-
+import { useParams, useHistory } from 'react-router-dom';
 import {
   Card,
   CardText,
@@ -14,6 +13,7 @@ import { getUserOrders } from '../helpers/data/UserData';
 function UserOrdersView() {
   const [userOrders, setUserOrders] = useState([]);
   const { id } = useParams();
+  const history = useHistory();
 
   useEffect(() => {
     const isMounted = true;
@@ -33,10 +33,12 @@ function UserOrdersView() {
           <CardBody>
           <CardText>{orderInfo.completed ? 'Completed' : ''}</CardText>
           </CardBody>
-          <Button> Order Details </Button>
+          <Button onClick={() => history.push(`/user/${id}`)}>Back</Button>
+          <Button onClick={() => history.push(`/productOrder/order/${orderInfo.id}`)}>Order Details</Button>
       </Card>
       ))}
     </div>
   );
 }
+
 export default UserOrdersView;

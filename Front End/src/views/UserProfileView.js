@@ -27,7 +27,6 @@ function UserProfileView() {
     history.push(`/user/order/${id}`);
   };
 
-  // console.warn(id);
   return (
     <div>
       <Card>

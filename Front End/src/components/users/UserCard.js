@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import {
   Card,
-  CardText,
   // CardImg,
   CardBody,
   CardTitle,
@@ -21,13 +20,10 @@ function UserCard({ ...userInfo }) {
   // console.warn(userOrders);
   return (
     <div>
-      <Card>
+      <Card bottom>
         <CardTitle tag='h3'>{userInfo.firstName}</CardTitle>
         <CardTitle tag='h3'>{userInfo.lastName}</CardTitle>
           <CardBody>
-            <CardTitle tag='h6'> Current Email Address {userInfo.contactEmail}</CardTitle>
-            <CardText>Member Since {userInfo.customerCreated}</CardText>
-            <CardText>status {userInfo.status}</CardText>
           </CardBody>
           <Button onClick={() => handleClick()}>See Details</Button>
 
