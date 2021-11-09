@@ -9,7 +9,7 @@ import AllUsersView from '../views/AllUsersView';
 import UserProfileView from '../views/UserProfileView';
 import UserOrdersView from '../views/UserOrdersView';
 
-export default function Routes({ products, users }) {
+export default function Routes({ products, users, fbUsers }) {
   return (
     <div>
       <Switch>
@@ -28,7 +28,7 @@ export default function Routes({ products, users }) {
         <Route
           exact
           path='/user'
-          component={() => <AllUsersView users={users} />}
+          component={() => <AllUsersView users={users} fbUsers={fbUsers} />}
         />
 
         <Route
@@ -61,5 +61,6 @@ export default function Routes({ products, users }) {
 
 Routes.propTypes = {
   products: PropTypes.array,
-  users: PropTypes.any
+  users: PropTypes.any,
+  fbUsers: PropTypes.any
 };

@@ -1,7 +1,7 @@
 import axios from 'axios';
-import config from '../apiKeys';
+import { sqlConfig } from '../apiKeys';
 
-const dbUrl = config.databaseURL;
+const dbUrl = sqlConfig.sqlDatabaseURL;
 
 const getAllUsers = () => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/api/user`)
@@ -15,10 +15,21 @@ const getSingleUser = (id) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
+const createUser = (userInfo) => new Promise((resolve, reject) => {
+  axios.post(`${dbUrl}/api/user`, userInfo)
+    .then((response) => resolve(response.data))
+    .catch((error) => reject(error));
+});
+
 const getUserOrders = (userId) => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/api/order/user/${userId}`)
     .then((response) => resolve(response.data))
     .catch((error) => reject(error));
 });
 
-export { getAllUsers, getSingleUser, getUserOrders };
+export {
+  getAllUsers,
+  getSingleUser,
+  createUser,
+  getUserOrders
+};
