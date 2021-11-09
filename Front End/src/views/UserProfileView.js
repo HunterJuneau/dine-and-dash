@@ -30,6 +30,7 @@ function UserProfileView() {
   return (
     <div>
       <Card>
+        <br />
         <CardTitle tag='h3'>{oneSingleUser.firstName}</CardTitle>
         <CardTitle tag='h3'>{oneSingleUser.lastName}</CardTitle>
           <CardBody>
@@ -37,10 +38,10 @@ function UserProfileView() {
             <CardText> Member Since: {oneSingleUser.customerCreated}</CardText>
             </div>
             <CardText>Email: {oneSingleUser.contactEmail}</CardText>
-            <CardText>Status: {oneSingleUser.status}</CardText>
           </CardBody>
-          <Button onClick={() => handleClickUserOrders()}>See Orders</Button>
-          <Button onClick={() => history.push('/user')}>Back</Button>
+          <Button onClick={() => handleClickUserOrders()}>View Your Orders</Button>
+          <br />
+          <Button onClick={() => history.push('/user')}>Back to Users</Button>
       </Card>
     </div>
   );
