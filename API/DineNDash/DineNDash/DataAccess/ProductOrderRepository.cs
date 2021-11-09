@@ -68,17 +68,12 @@ namespace DineNDash.DataAccess
 
             var productOrderSql = @"select *
                         from ProductOrders po
-
                             join Orders o
-
                                 on o.id = po.orderId
-
                             join Products pr
-
                                 on pr.id = po.productId
                             join Payments p
                                 on p.id = o.paymentId
-
                                 where po.orderId = @id";
 
             //var productOrder = db.Query<Order, Product, Order, Payment,  ProductOrder>(productOrderSql, Map, new { id = orderId }, splitOn: "id");
