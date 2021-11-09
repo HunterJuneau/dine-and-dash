@@ -3,18 +3,18 @@ import PropTypes from 'prop-types';
 import {
   Button,
   Form,
-  Input,
+  // Input,
 } from 'reactstrap';
 import Productcard from '../components/products/Productcard';
 // import { getProductByType } from '../helpers/data/ProductData';
 
 function ProductsView({ products, setProducts }) {
-  const handleInputChange = (e) => {
-    setProducts((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value
-    }));
-  };
+  // const handleInputChange = (e) => {
+  //   setProducts((prevState) => ({
+  //     ...prevState,
+  //     [e.target.name]: e.target.value
+  //   }));
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,12 +28,12 @@ function ProductsView({ products, setProducts }) {
         autoComplete='off'
         onSubmit={handleSubmit}
       >
-        <Input
+        {/* <Input
           name='products'
           type='select'
-          defaultValue={products}
+          // defaultValue={products}
           onChange={handleInputChange}
-        >
+        > */}
           <select>
             <option hidden value=''>Find Products By:</option>
             <option value='Truck'>Truck</option>
@@ -41,7 +41,7 @@ function ProductsView({ products, setProducts }) {
             <option value='true'>For Sale</option>
             <option value='false'>For Rent</option>
           </select>
-        </Input>
+        {/* </Input> */}
         <Button type='submit'>Find Products</Button>
       </Form>
       {products.map((productInfo) => (

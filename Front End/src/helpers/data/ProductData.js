@@ -21,8 +21,8 @@ const getProductByType = (type) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-const getProductByForSaleOrRent = () => new Promise((resolve, reject) => {
-  axios.get(`${dbUrl}/api/products/forSale`)
+const getProductByForSaleOrRent = (value) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/api/products/forSale`, value)
     .then((response) => resolve(response))
     .catch((error) => reject(error));
 });
