@@ -62,25 +62,21 @@ namespace DineNDash.DataAccess
         }
 
         // Get All ProductOrders with associated OrderId //
-        internal IEnumerable<ProductOrder> GetAssociatedProductOrders(Guid orderId)
+        internal IEnumerable<DetailedOrderView> GetAssociatedProductOrders(Guid orderId)
         {
             using var db = new SqlConnection(_connectionString);
 
-            var productOrderSql = @"select *
+            var productOrderSql = @"select po.id as ProductOrderId, po.productQuantity, pr.productName, pr.price as                                 IndividualProductPrice,pr.productDescription,pr.image,pr.type as ProductType, p.type PaymentType, p.accountNumber
                         from ProductOrders po
-                            join Orders o
-                                on o.id = po.orderId
-                            join Products pr
-                                on pr.id = po.productId
-                            join Payments p
-                                on p.id = o.paymentId
-                                where po.orderId = @id";
+							join Orders o
+		                        on o.id = po.orderId
+							join Payments p
+								on p.id = o.paymentId
+	                        join Products pr
+		                        on pr.id = po.productId
+								where po.orderId = @id";
 
-            //var productOrder = db.Query<Order, Product, Order, Payment,  ProductOrder>(productOrderSql, Map, new { id = orderId }, splitOn: "id");
-
-            //return productOrder;
-
-            var results = db.Query<ProductOrder>(productOrderSql, new { id = orderId });
+            var results = db.Query<DetailedOrderView>(productOrderSql, new { id = orderId });
 
             return results;
         }
@@ -120,13 +116,6 @@ namespace DineNDash.DataAccess
             newProductOrder.Id = id;
         }
 
-        //ProductOrder Map(ProductOrder productOrder, Product product, Order order, Payment payment)
-        //{
-        //    order.Id = productOrder.OrderId;
-        //    product.Id = productOrder.ProductId;
-        //    product.Quantity = productOrder.ProductQuantity;
-        //    return productOrder;
-        //}
 
     }
 }
