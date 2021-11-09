@@ -27,19 +27,24 @@ function UserSingleOrderDetailsView() {
       <Button onClick={() => history.goBack()}>Back To Orders</Button>
       { productOrders.map((productOrderInfo) => (
         <Card key={productOrderInfo.productOrderId}>
+          <br />
         <CardTitle tag='h3'>{productOrderInfo.productName}</CardTitle>
           <CardBody>
             <div>
-            <CardText> Member Since: {productOrderInfo.productDescription}</CardText>
+            <CardText> Propduct Description: {productOrderInfo.productDescription}</CardText>
+            <br />
             </div>
+            <div>
             <img src={productOrderInfo.image} />
+            </div>
+            <br />
             <CardText>Product Type: {productOrderInfo.productType}</CardText>
             <CardText>Product Quantity: {productOrderInfo.productQuantity}</CardText>
             <CardText>Individual Product Price: {productOrderInfo.individualProductPrice}</CardText>
             <CardText>Total Cost of Product: {productOrderInfo.totalCost}</CardText>
-            <CardText>Status: {productOrderInfo.paymentType}</CardText>
-            <CardText>Status: {productOrderInfo.accountNumber}</CardText>
-
+            <CardText>Payment Type: {productOrderInfo.paymentType}</CardText>
+            <CardText>Account Number: {productOrderInfo.accountNumber}</CardText>
+            <br />
           </CardBody>
       </Card>))}
     </div>

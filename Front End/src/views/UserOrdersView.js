@@ -14,6 +14,7 @@ function UserOrdersView() {
   const [userOrders, setUserOrders] = useState([]);
   const { id } = useParams();
   const history = useHistory();
+  const totalNumberOfOrders = userOrders.length;
 
   useEffect(() => {
     const isMounted = true;
@@ -24,17 +25,20 @@ function UserOrdersView() {
 
   return (
     <div>
-      <h1>Your Orders</h1>
+      <h1>Order History</h1>
+      <br />
+      <CardTitle tag='h3'> Past Orders: {totalNumberOfOrders}</CardTitle>
       <br />
       {userOrders.filter((orderInfo) => orderInfo.completed).map((orderInfo) => (
         <Card key={orderInfo.id}>
           <br />
-        <CardTitle tag='h3'> Total: {orderInfo.totalCost}</CardTitle>
+        <CardTitle tag='h3'> Total Price: {orderInfo.totalCost}</CardTitle>
           <CardBody>
           <CardText>{orderInfo.completed ? 'Completed' : ''}</CardText>
           </CardBody>
           <Button onClick={() => history.push(`/user/${id}`)}>Back</Button>
           <Button onClick={() => history.push(`/productOrder/order/${orderInfo.id}`)}>Order Details</Button>
+          <br />
       </Card>
       ))}
     </div>
