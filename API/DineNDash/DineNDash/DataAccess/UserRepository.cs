@@ -47,9 +47,9 @@ namespace DineNDash.DataAccess
 
             using var db = new SqlConnection(_connectionString);
 
-            var sql = @"insert into users(FirstName, LastName, CustomerCreated, ContactEmail, Status)
+            var sql = @"insert into users(FirstName, LastName, ContactEmail, Status)
                         output inserted.Id
-                        values (@FirstName, @LastName, @CustomerCreated, @ContactEmail, @Status)";
+                        values (@FirstName, @LastName, @ContactEmail, @Status)";
 
             var id = db.ExecuteScalar<Guid>(sql, newUser);
 

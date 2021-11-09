@@ -55,7 +55,6 @@ namespace DineNDash.DataAccess
             return order.FirstOrDefault();
         }
 
-
         internal IEnumerable<Order> GetUserOrders(Guid userId)
         {
             using var db = new SqlConnection(_connectionString);
