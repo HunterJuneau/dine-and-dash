@@ -11,6 +11,7 @@ function App() {
   const [fbUser, setFbUser] = useState(null);
   const [products, setProducts] = useState([]);
   const [users, setUsers] = useState([]);
+  // const [userOrders, setUserOrders] = useState([]);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((authed) => {
@@ -30,6 +31,7 @@ function App() {
     getAllUsers().then(setUsers);
   }, []);
 
+  // console.warn(users);
   return (
     <>
       <Router>
