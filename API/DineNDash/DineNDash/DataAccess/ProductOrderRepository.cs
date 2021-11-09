@@ -99,16 +99,18 @@ namespace DineNDash.DataAccess
             var sql = @"INSERT INTO [dbo].[ProductOrders]
                                        ( [orderId]
                                         ,[productId]
-                                        ,[productQuantity])
+                                        ,[productQuantity]
+                                         ,[totalCost])
                              output inserted.Id
                                  VALUES
-                              (@orderId, @productId, @productQuantity)";
+                              (@orderId, @productId, @productQuantity, @totalCost)";
 
             var parameters = new
             {
                 OrderId = newProductOrder.OrderId,
                 ProductId = newProductOrder.ProductId,
-                ProductQuantity = newProductOrder.ProductQuantity
+                ProductQuantity = newProductOrder.ProductQuantity,
+                TotalCost = newProductOrder.TotalCost
 
             };
 
