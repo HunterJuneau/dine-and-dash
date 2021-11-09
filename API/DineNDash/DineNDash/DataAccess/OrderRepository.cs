@@ -136,7 +136,6 @@ namespace DineNDash.DataAccess
             db.Execute(sql, new { id });
         }
 
-
         Order Map(Order order, User user, Payment payment)
         {
             order.User = user;
@@ -144,7 +143,8 @@ namespace DineNDash.DataAccess
             return order;
         }
 
-       
+
+
 
     }
 }

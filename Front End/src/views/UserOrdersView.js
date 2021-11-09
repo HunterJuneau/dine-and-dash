@@ -7,6 +7,7 @@ import {
   // CardImg,
   CardBody,
   CardTitle,
+  Button
 } from 'reactstrap';
 import { getUserOrders } from '../helpers/data/UserData';
 
@@ -32,7 +33,7 @@ function UserOrdersView() {
           <CardBody>
           <CardText>{orderInfo.completed ? 'Completed' : ''}</CardText>
           </CardBody>
-          {/* <Button onClick={() => history.push('/user')}>Back</Button> */}
+          <Button> Order Details </Button>
       </Card>
       ))}
     </div>
