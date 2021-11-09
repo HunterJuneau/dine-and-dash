@@ -65,6 +65,9 @@ CREATE TABLE dbo.ProductOrders
 
  Alter TABLE Products
  ADD status bit
+ 
+ Alter Table Users
+Alter column customerCreated datetime NULL
 
  USE [DineAndDash]
 GO
