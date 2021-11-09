@@ -26,7 +26,7 @@ function UserOrdersView() {
     <div>
       <h1>Order History</h1>
       <br />
-      <CardTitle tag='h3'> Past Orders: {totalNumberOfOrders}</CardTitle>
+      {totalNumberOfOrders.length > 0 ? <CardTitle tag='h3'> Past Orders: {totalNumberOfOrders}</CardTitle> : 'You Have No Orders!'}
       <br />
       {userOrders.filter((orderInfo) => orderInfo.completed).map((orderInfo) => (
         <Card key={orderInfo.id}>
