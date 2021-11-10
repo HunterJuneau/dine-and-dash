@@ -27,6 +27,10 @@ function UserProfileView() {
     history.push(`/user/order/${id}`);
   };
 
+  const handleClickUserPayments = () => {
+    history.push(`/payments/users/${id}`);
+  };
+
   return (
     <div>
       <Card>
@@ -39,6 +43,8 @@ function UserProfileView() {
             </div>
             <CardText>Email: {oneSingleUser.contactEmail}</CardText>
           </CardBody>
+          <Button onClick={() => handleClickUserPayments()}>View Your Payments</Button>
+          <br />
           <Button onClick={() => handleClickUserOrders()}>View Your Orders</Button>
           <br />
           <Button onClick={() => history.push('/user')}>Back to Users</Button>

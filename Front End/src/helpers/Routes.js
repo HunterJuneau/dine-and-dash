@@ -9,6 +9,7 @@ import AllUsersView from '../views/AllUsersView';
 import UserProfileView from '../views/UserProfileView';
 import UserOrdersView from '../views/UserOrdersView';
 import UserSingleOrderDetailsView from '../views/UserSingleOrderDetailsView';
+import UserPaymentsView from '../views/UserPaymentsView';
 
 export default function Routes({ products, users, fbUsers }) {
   return (
@@ -48,6 +49,11 @@ export default function Routes({ products, users, fbUsers }) {
           exact
           path='/productOrder/order/:orderId'
           component={() => <UserSingleOrderDetailsView />}
+        />
+        <Route
+          exact
+          path='/payment/users/:userId'
+          component={() => <UserPaymentsView />}
         />
 
         <Route
