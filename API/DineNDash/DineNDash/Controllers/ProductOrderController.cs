@@ -31,7 +31,7 @@ namespace DineNDash.Controllers
             return Ok(_productOrderRepository.GetAll());
         }
 
-        // Get Single Product Order by Id //
+        // Get Single Produc Order by Id //
         [HttpGet("{id}")]
         public IActionResult GetProductOrderById(Guid id)
         {
@@ -44,6 +44,20 @@ namespace DineNDash.Controllers
 
 
             return Ok(prdouctOrder);
+        }
+
+        // Get Orders's ProductOrders by Order Id //
+        [HttpGet("order/{orderId}")]
+        public IActionResult GetProductOdersByOrderId(Guid orderId)
+        {
+            return Ok(_productOrderRepository.GetAssociatedProductOrders(orderId));
+        }
+
+        // Get User's Orders //
+        [HttpGet("user/{userId}")]
+        public IActionResult GetAllUserOrders(Guid userId)
+        {
+            return Ok(_orderRepository.GetUserOrders(userId));
         }
 
         // Update ProductOrder by Id //
@@ -78,11 +92,13 @@ namespace DineNDash.Controllers
             if (orderToCreate == null)
                 return NotFound("There was no matching Order in the database");
 
+
             var newProductOrder = new ProductOrder
             {
                 ProductId = productToOrder.Id,
                 OrderId = orderToCreate.Id,
-                ProductQuantity = command.ProductOrderQuantity
+                ProductQuantity = command.ProductOrderQuantity,
+                TotalCost = productToOrder.Price * command.ProductOrderQuantity
             };
 
             _productOrderRepository.Add(newProductOrder);

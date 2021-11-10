@@ -8,6 +8,7 @@ namespace DineNDash.Models
         public Guid OrderId { get; set; }
         public Guid ProductId { get; set; }
         public int ProductQuantity { get; set; }
+        public decimal TotalCost { get; set; }
 
     }
 }
