@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import LandingPage from '../views/LandingPages';
 import ProductsView from '../views/ProductsView';
+import CartView from '../views/CartView';
 import InventoryView from '../views/InventoryView';
 import SingleProduct from '../views/SingleProduct';
 import AllUsersView from '../views/AllUsersView';
@@ -66,6 +67,10 @@ export default function Routes({ products, users, setProducts }) {
           exact
           path='/admin/inventory/:productId'
           component={() => <SingleProduct admin={true} />}
+        />
+         <Route
+          exact path='/cart'
+          component={() => <CartView/>}
         />
       </Switch>
     </div>
