@@ -8,16 +8,13 @@ function ProductsView({ products, setProducts }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (selectValue === 'Truck') {
+    if (selectValue === 'Truck' || selectValue === 'Accessory') {
       getProductByType(selectValue).then((response) => setProducts((response.data)));
-    } else if (selectValue === 'Accessory') {
-      getProductByType(selectValue).then((response) => setProducts((response.data)));
-    } else if (selectValue === 'true') {
-      getProductByForSaleOrRent(selectValue).then((response) => setProducts((response.data)));
-    } else if (selectValue === 'false') {
+    } else if (selectValue === 'true' || selectValue === 'false') {
       getProductByForSaleOrRent(selectValue).then((response) => setProducts((response.data)));
     }
   };
+
   return (
     <div>
       <h1>Products</h1>
