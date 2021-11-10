@@ -1,7 +1,7 @@
 import axios from 'axios';
-import config from '../apiKeys';
+import { sqlConfig } from '../apiKeys';
 
-const dbUrl = config.databaseURL;
+const dbUrl = sqlConfig.sqlDatabaseURL;
 
 const getAllProducts = () => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/api/products`)
@@ -9,4 +9,27 @@ const getAllProducts = () => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-export default getAllProducts;
+const getSingleProduct = (id) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/api/products/${id}`)
+    .then((response) => resolve(response))
+    .catch((error) => reject(error));
+});
+
+const getProductByType = (type) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/api/products/types/${type}`)
+    .then((response) => resolve(response))
+    .catch((error) => reject(error));
+});
+
+const getProductByForSaleOrRent = (value) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/api/products/forSale?sale=${value}`)
+    .then((response) => resolve(response))
+    .catch((error) => reject(error));
+});
+
+export {
+  getAllProducts,
+  getSingleProduct,
+  getProductByType,
+  getProductByForSaleOrRent
+};

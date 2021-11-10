@@ -1,7 +1,8 @@
 import axios from 'axios';
-import config from '../apiKeys';
+import { sqlConfig } from '../apiKeys';
 
-const dbUrl = config.databaseURL;
+const dbUrl = sqlConfig.sqlDatabaseURL;
+
 // order data
 const getAllOrders = () => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/api/order`)

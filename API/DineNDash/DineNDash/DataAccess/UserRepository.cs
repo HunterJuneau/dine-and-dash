@@ -24,7 +24,7 @@ namespace DineNDash.DataAccess
 
             var users = db.Query<User>(@"Select *
                                         From Users
-                                        Order By status, lastName");
+                                        Order By lastName");
 
             return users;
         }
@@ -47,9 +47,9 @@ namespace DineNDash.DataAccess
 
             using var db = new SqlConnection(_connectionString);
 
-            var sql = @"insert into users(FirstName, LastName, CustomerCreated, ContactEmail, Status)
+            var sql = @"insert into users(FirstName, LastName, ContactEmail, Status)
                         output inserted.Id
-                        values (@FirstName, @LastName, @CustomerCreated, @ContactEmail, @Status)";
+                        values (@FirstName, @LastName, @ContactEmail, @Status)";
 
             var id = db.ExecuteScalar<Guid>(sql, newUser);
 
@@ -59,7 +59,7 @@ namespace DineNDash.DataAccess
         }
 
         // Get User by Id //
-        internal User GetById(Guid userId)
+        internal User GetById(Guid id)
         {
             using var db = new SqlConnection(_connectionString);
 
@@ -68,7 +68,7 @@ namespace DineNDash.DataAccess
                         where id = @id";
 
 
-            var user = db.QueryFirstOrDefault<User>(sql, new { id = userId });
+            var user = db.QueryFirstOrDefault<User>(sql, new { id });
 
             return user;
         }

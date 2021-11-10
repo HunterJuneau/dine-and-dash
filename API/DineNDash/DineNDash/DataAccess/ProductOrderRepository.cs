@@ -61,13 +61,34 @@ namespace DineNDash.DataAccess
             return updatedProductOrder;
         }
 
-        // Delete Product Order by Id //
+        // Get All ProductOrders with associated OrderId //
+        internal IEnumerable<DetailedOrderView> GetAssociatedProductOrders(Guid orderId)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            var productOrderSql = @"select pr.productName, pr.image, po.id as productOrderId, po.productQuantity, po.totalCost as TotalCost, pr.price as                                             IndividualProductPrice,pr.productDescription,pr.type as ProductType, p.type PaymentType, p.accountNumber
+                        from ProductOrders po
+							join Orders o
+		                        on o.id = po.orderId
+							join Payments p
+								on p.id = o.paymentId
+	                        join Products pr
+		                        on pr.id = po.productId
+								where po.orderId = @id
+                                order by productName";
+
+            var results = db.Query<DetailedOrderView>(productOrderSql, new { id = orderId });
+
+            return results;
+        }
+
+         //Delete Product Order by Id //
         internal void Remove(Guid id)
         {
             using var db = new SqlConnection(_connectionString);
             var sql = @"Delete 
                         From productOrders 
-                        Where orderId = @id";
+                        Where id = @id";
 
             db.Execute(sql, new { id });
         }
@@ -79,23 +100,24 @@ namespace DineNDash.DataAccess
             var sql = @"INSERT INTO [dbo].[ProductOrders]
                                        ( [orderId]
                                         ,[productId]
-                                        ,[productQuantity])
+                                        ,[productQuantity]
+                                        ,[totalCost])
                              output inserted.Id
                                  VALUES
-                              (@orderId, @productId, @productQuantity)";
+                              (@orderId, @productId, @productQuantity, @totalCost)";
 
             var parameters = new
             {
                 OrderId = newProductOrder.OrderId,
                 ProductId = newProductOrder.ProductId,
-                ProductQuantity = newProductOrder.ProductQuantity
+                ProductQuantity = newProductOrder.ProductQuantity,
+                TotalCost = newProductOrder.TotalCost
 
             };
 
             var id = db.ExecuteScalar<Guid>(sql, parameters);
             newProductOrder.Id = id;
         }
-
 
 
     }
