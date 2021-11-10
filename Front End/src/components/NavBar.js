@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
@@ -16,22 +16,22 @@ import {
 } from 'reactstrap';
 import redLogo from '../assets/DineNDashRedLogo.png';
 import Logo from '../assets/DNDCARTRED.jpg';
-import { createOrder } from '../helpers/data/OrderData';
+// import { createOrder } from '../helpers/data/OrderData';
 import { signInUser, signOutUser } from '../helpers/auth';
 
 const NavBar = ({ fbUser }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const [orders, setOrders] = useState({
-    totalCost: '',
-    paymentId: null,
-    completed: false,
-  });
+  // const [orders, setOrders] = useState({
+  //   totalCost: '',
+  //   paymentId: null,
+  //   completed: false,
+  // });
 
-  useEffect(() => {
-    createOrder(orders).then((response) => setOrders(response));
-  }, []);
-  console.warn(orders);
+  // useEffect(() => {
+  //   createOrder(orders).then((response) => setOrders(response));
+  // }, []);
+  // console.warn(orders);
   const toggle = () => setIsOpen(!isOpen);
 
   return (
@@ -65,7 +65,7 @@ const NavBar = ({ fbUser }) => {
             </UncontrolledDropdown>
           </Nav>
         </Collapse>
-        <Button className="nav-link" onClick={() => createOrder(orders)} to="/cart"><img id='navbar-logo' src={Logo} alt='Dine and Dash Cart Logo'/></Button>
+        <Button className="nav-link" to="/cart"><img id='navbar-logo' src={Logo} alt='Dine and Dash Cart Logo'/></Button>
         { fbUser !== null
           && <>
           {

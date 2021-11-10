@@ -1,30 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
-import {
-  Card,
-  // CardImg,
-  CardBody,
-  CardTitle,
-  Button
-} from 'reactstrap';
-import { getUserOrders } from '../helpers/data/UserData';
+import { useParams } from 'react-router-dom';
+import getUserPayments from '../helpers/data/PaymentData';
+// import {
+//   Card,
+//   // CardImg,
+//   CardBody,
+//   CardTitle,
+//   Button
+// } from 'reactstrap';
+// import { getUserOrders } from '../helpers/data/UserData';
 
 function UserPaymentsView() {
-  const [userOrders, setUserOrders] = useState([]);
+  const [userPayments, setUserPayments] = useState([]);
   const { id } = useParams();
-  const history = useHistory();
-  const totalNumberOfOrders = userOrders.length;
+  // const history = useHistory();
 
   useEffect(() => {
     const isMounted = true;
     if (isMounted) {
-      getUserOrders(id).then((response) => setUserOrders(response));
+      getUserPayments(id).then((response) => setUserPayments(response.data));
     }
   }, []);
 
+  console.warn(userPayments);
   return (
     <div>
-      <h1>Order History</h1>
+      <h1>Hello!</h1>
+      {/* <h1>Order History</h1>
       <br />
       <h4>Past Orders: {totalNumberOfOrders}</h4>
       <br />
@@ -40,7 +42,7 @@ function UserPaymentsView() {
           <br />
           <br />
       </Card>
-      ))}
+      ))} */}
     </div>
   );
 }
