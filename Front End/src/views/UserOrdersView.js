@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-
+import { useParams, useHistory } from 'react-router-dom';
 import {
   Card,
-  CardText,
   // CardImg,
   CardBody,
   CardTitle,
@@ -14,7 +12,9 @@ import { getUserOrders } from '../helpers/data/UserData';
 function UserOrdersView() {
   const [userOrders, setUserOrders] = useState([]);
   const { id } = useParams();
-
+  const history = useHistory();
+  const totalNumberOfOrders = userOrders.length;
+  const noOrders = <h1>You Have No Orders!</h1>;
   useEffect(() => {
     const isMounted = true;
     if (isMounted) {
@@ -22,21 +22,32 @@ function UserOrdersView() {
     }
   }, []);
 
+  if (totalNumberOfOrders <= 0) {
+    return noOrders
+    && <Button onClick={() => history.push(`/user/${id}`)}>Back To User Profile</Button>;
+  }
+
   return (
     <div>
-      <h1>Your Orders</h1>
+      <h1>Order History</h1>
+      <br />
+      <h4>Past Orders: {totalNumberOfOrders}</h4>
       <br />
       {userOrders.filter((orderInfo) => orderInfo.completed).map((orderInfo) => (
         <Card key={orderInfo.id}>
           <br />
-        <CardTitle tag='h3'> Total: {orderInfo.totalCost}</CardTitle>
+        <CardTitle tag='h3'> Total Price: {orderInfo.totalCost}</CardTitle>
           <CardBody>
-          <CardText>{orderInfo.completed ? 'Completed' : ''}</CardText>
           </CardBody>
-          <Button> Order Details </Button>
+          <Button onClick={() => history.push(`/productOrder/order/${orderInfo.id}`)}>Order Details</Button >
+          <br />
+          <Button onClick={() => history.push(`/user/${id}`)}>Back To User Profile</Button>
+          <br />
+          <br />
       </Card>
       ))}
     </div>
   );
 }
+
 export default UserOrdersView;

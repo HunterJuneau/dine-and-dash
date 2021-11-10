@@ -66,7 +66,7 @@ namespace DineNDash.DataAccess
         {
             using var db = new SqlConnection(_connectionString);
 
-            var productOrderSql = @"select pr.productName, pr.image, po.id as ProductOrderId, po.productQuantity, po.totalCost as TotalCost, pr.price as                                             IndividualProductPrice,pr.productDescription,pr.type as ProductType, p.type PaymentType, p.accountNumber
+            var productOrderSql = @"select pr.productName, pr.image, po.id as productOrderId, po.productQuantity, po.totalCost as TotalCost, pr.price as                                             IndividualProductPrice,pr.productDescription,pr.type as ProductType, p.type PaymentType, p.accountNumber
                         from ProductOrders po
 							join Orders o
 		                        on o.id = po.orderId
@@ -74,7 +74,8 @@ namespace DineNDash.DataAccess
 								on p.id = o.paymentId
 	                        join Products pr
 		                        on pr.id = po.productId
-								where po.orderId = @id";
+								where po.orderId = @id
+                                order by productName";
 
             var results = db.Query<DetailedOrderView>(productOrderSql, new { id = orderId });
 
@@ -87,7 +88,7 @@ namespace DineNDash.DataAccess
             using var db = new SqlConnection(_connectionString);
             var sql = @"Delete 
                         From productOrders 
-                        Where orderId = @id";
+                        Where id = @id";
 
             db.Execute(sql, new { id });
         }

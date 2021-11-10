@@ -46,7 +46,7 @@ export default function Routes({ products, users, setProducts }) {
 
         <Route
           exact
-          path='/user/order/:id'
+          path='/productOrder/order/:orderId'
           component={() => <UserSingleOrderDetailsView />}
         />
 

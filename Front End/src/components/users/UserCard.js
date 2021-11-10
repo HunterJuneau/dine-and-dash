@@ -22,16 +22,17 @@ function UserCard({ ...userInfo }) {
   return (
     <div>
       <Card>
+      <br />
         <CardTitle tag='h3'>{userInfo.firstName}</CardTitle>
         <CardTitle tag='h3'>{userInfo.lastName}</CardTitle>
           <CardBody>
-            <CardTitle tag='h6'> Current Email Address {userInfo.contactEmail}</CardTitle>
-            <CardText>Member Since {userInfo.customerCreated}</CardText>
-            <CardText>status {userInfo.status}</CardText>
+          <br />
+          <CardText>Status: {userInfo.status ? 'Active' : 'Inactive'}</CardText>
           </CardBody>
-          <Button onClick={() => handleClick()}>See Details</Button>
-
+          <Button onClick={() => handleClick()}>View Your Profile</Button>
+          <br />
       </Card>
+      <div></div>
     </div>
   );
 }

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import {
   Card,
   CardText,
@@ -9,46 +8,47 @@ import {
   CardTitle,
   Button
 } from 'reactstrap';
-import { getSingleUser } from '../helpers/data/UserData';
+import getUserOrderDetails from '../helpers/data/ProductOrderData';
 
-function UserProfileView() {
-  const [oneSingleUser, setOneSingleUser] = useState({});
-  const { id } = useParams();
+function UserSingleOrderDetailsView() {
+  const [productOrders, setProductOrders] = useState([]);
+  const { orderId } = useParams();
   const history = useHistory();
 
   useEffect(() => {
     const isMounted = true;
     if (isMounted) {
-      getSingleUser(id).then((response) => setOneSingleUser(response.data));
+      getUserOrderDetails(orderId).then((response) => setProductOrders(response));
     }
   }, []);
 
-  const handleClickUserOrders = () => {
-    history.push(`/user/order/${id}`);
-  };
-
-  // console.warn(id);
   return (
     <div>
-      <Card>
-        <CardTitle tag='h3'>{oneSingleUser.firstName}</CardTitle>
-        <CardTitle tag='h3'>{oneSingleUser.lastName}</CardTitle>
+      <Button onClick={() => history.goBack()}>Back To Orders</Button>
+      { productOrders.map((productOrderInfo) => (
+        <Card key={productOrderInfo.productOrderId}>
+          <br />
+        <CardTitle tag='h3'>{productOrderInfo.productName}</CardTitle>
           <CardBody>
             <div>
-            <CardText> Member Since: {oneSingleUser.customerCreated}</CardText>
+            <CardText> Propduct Description: {productOrderInfo.productDescription}</CardText>
+            <br />
             </div>
-            <CardText>Email: {oneSingleUser.contactEmail}</CardText>
-            <CardText>Status: {oneSingleUser.status}</CardText>
+            <div>
+            <img src={productOrderInfo.image} />
+            </div>
+            <br />
+            <CardText>Product Type: {productOrderInfo.productType}</CardText>
+            <CardText>Product Quantity: {productOrderInfo.productQuantity}</CardText>
+            <CardText>Individual Product Price: {productOrderInfo.individualProductPrice}</CardText>
+            <CardText>Total Cost of Product: {productOrderInfo.totalCost}</CardText>
+            <CardText>Payment Type: {productOrderInfo.paymentType}</CardText>
+            <CardText>Account Number: {productOrderInfo.accountNumber}</CardText>
+            <br />
           </CardBody>
-          <Button onClick={() => handleClickUserOrders()}>See Orders</Button>
-          <Button onClick={() => history.push('/user')}>Back</Button>
-      </Card>
+      </Card>))}
     </div>
   );
 }
 
-UserProfileView.propTypes = {
-  userInfo: PropTypes.any
-};
-
-export default UserProfileView;
+export default UserSingleOrderDetailsView;
