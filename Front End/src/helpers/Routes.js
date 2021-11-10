@@ -11,7 +11,7 @@ import UserOrdersView from '../views/UserOrdersView';
 import UserSingleOrderDetailsView from '../views/UserSingleOrderDetailsView';
 import UserPaymentsView from '../views/UserPaymentsView';
 
-export default function Routes({ products, users, fbUsers }) {
+export default function Routes({ products, users, setProducts }) {
   return (
     <div>
       <Switch>
@@ -19,7 +19,7 @@ export default function Routes({ products, users, fbUsers }) {
         <Route
           exact
           path='/products'
-          component={() => <ProductsView products={products} />}
+          component={() => <ProductsView products={products} setProducts={setProducts}/>}
         />
         <Route
           exact
@@ -30,7 +30,7 @@ export default function Routes({ products, users, fbUsers }) {
         <Route
           exact
           path='/user'
-          component={() => <AllUsersView users={users} fbUsers={fbUsers} />}
+          component={() => <AllUsersView users={users} />}
         />
 
         <Route
@@ -75,5 +75,5 @@ export default function Routes({ products, users, fbUsers }) {
 Routes.propTypes = {
   products: PropTypes.array,
   users: PropTypes.any,
-  fbUsers: PropTypes.any
+  setProducts: PropTypes.func
 };
