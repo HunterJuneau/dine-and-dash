@@ -15,4 +15,21 @@ const getSingleProduct = (id) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-export { getAllProducts, getSingleProduct };
+const getProductByType = (type) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/api/products/types/${type}`)
+    .then((response) => resolve(response))
+    .catch((error) => reject(error));
+});
+
+const getProductByForSaleOrRent = (value) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/api/products/forSale?sale=${value}`)
+    .then((response) => resolve(response))
+    .catch((error) => reject(error));
+});
+
+export {
+  getAllProducts,
+  getSingleProduct,
+  getProductByType,
+  getProductByForSaleOrRent
+};

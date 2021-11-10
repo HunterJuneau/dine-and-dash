@@ -36,14 +36,8 @@ function App() {
     <>
       <Router>
         <div className='App'>
-          <NavBar
-            fbUser={fbUser}
-          />
-          <Routes
-            fbUser={fbUser}
-            products={products}
-            users={users}
-          />
+          <NavBar fbUser={fbUser}/>
+          <Routes products={products} setProducts={setProducts} users={users}/>
         </div>
       </Router>
     </>
