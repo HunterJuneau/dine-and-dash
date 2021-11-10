@@ -43,9 +43,10 @@ function UserProfileView() {
             </div>
             <CardText>Email: {oneSingleUser.contactEmail}</CardText>
           </CardBody>
-          <Button onClick={() => handleClickUserPayments()}>View Your Payments</Button>
           <br />
           <Button onClick={() => handleClickUserOrders()}>View Your Orders</Button>
+          <br />
+          <Button onClick={() => handleClickUserPayments()}>View Your Payments</Button>
           <br />
           <Button onClick={() => history.push('/user')}>Back to Users</Button>
       </Card>
