@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Productcard from '../components/products/Productcard';
-import { getProductByType, getProductByForSaleOrRent } from '../helpers/data/ProductData';
+import Productcard from '../../components/products/Productcard';
+import { getProductByType, getProductByForSaleOrRent } from '../../helpers/data/ProductData';
 
 function ProductsView({ products, setProducts }) {
   const [selectValue, setSelectValue] = useState('');
@@ -22,7 +22,7 @@ function ProductsView({ products, setProducts }) {
           onSubmit={handleSubmit}
         >
           <select
-            type='text'
+            type='select'
             value={selectValue}
             onChange={(e) => setSelectValue(e.target.value)}
           >

@@ -9,7 +9,7 @@ import {
   CardTitle,
   Button
 } from 'reactstrap';
-import { getSingleProduct } from '../helpers/data/ProductData';
+import { getSingleProduct } from '../../helpers/data/ProductData';
 
 function SingleProduct({ admin = false }) {
   const [singleProduct, setSingleProduct] = useState({});

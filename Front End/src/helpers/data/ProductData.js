@@ -27,11 +27,13 @@ const getProductByForSaleOrRent = (value) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-const createProduct = (newProduct) => new Promise((resolve, reject) => {
+const addProduct = (newProduct) => new Promise((resolve, reject) => {
+  console.log(newProduct);
   axios.post(`${dbUrl}/api/products`, newProduct)
-    .then(() => {
-      getAllProducts().then((response) => resolve(response));
-    })
+    .then((response) => resolve(response.data))
+    // .then(() => {
+    //   getAllProducts().then((response) => resolve(response));
+    // })
     .catch((error) => reject(error));
 });
 
@@ -40,5 +42,5 @@ export {
   getSingleProduct,
   getProductByType,
   getProductByForSaleOrRent,
-  createProduct
+  addProduct
 };
