@@ -61,6 +61,9 @@ const NavBar = ({ fbUser }) => {
                 <DropdownItem>
                   <Link className='nav-link' to='/admin/inventory'>Inventory</Link>
                 </DropdownItem>
+                <DropdownItem>
+                  <Link className='nav-link' to='/admin/addProduct'>Add Product</Link>
+                </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>

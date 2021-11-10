@@ -10,6 +10,7 @@ import AllUsersView from '../views/AllUsersView';
 import UserProfileView from '../views/UserProfileView';
 import UserOrdersView from '../views/UserOrdersView';
 import UserSingleOrderDetailsView from '../views/UserSingleOrderDetailsView';
+import ProductForm from '../components/products/ProductForm';
 
 export default function Routes({ products, users, setProducts }) {
   return (
@@ -65,6 +66,10 @@ export default function Routes({ products, users, setProducts }) {
          <Route
           exact path='/cart'
           component={() => <CartView/>}
+        />
+        <Route
+          exact path='/admin/addProduct'
+          component={() => <ProductForm />}
         />
       </Switch>
     </div>

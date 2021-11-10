@@ -27,9 +27,18 @@ const getProductByForSaleOrRent = (value) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
+const createProduct = (newProduct) => new Promise((resolve, reject) => {
+  axios.post(`${dbUrl}/api/products`, newProduct)
+    .then(() => {
+      getAllProducts().then((response) => resolve(response));
+    })
+    .catch((error) => reject(error));
+});
+
 export {
   getAllProducts,
   getSingleProduct,
   getProductByType,
-  getProductByForSaleOrRent
+  getProductByForSaleOrRent,
+  createProduct
 };
