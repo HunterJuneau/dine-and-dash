@@ -11,6 +11,7 @@ import UserProfileView from '../views/UserProfileView';
 import UserOrdersView from '../views/UserOrdersView';
 import UserSingleOrderDetailsView from '../views/UserSingleOrderDetailsView';
 import ProductFormView from '../views/ProductViews/ProductFormView';
+import UserPaymentsView from '../views/UserPaymentsView';
 import PrivateRoute from './PrivateRoute';
 
 export default function Routes({
@@ -59,6 +60,11 @@ export default function Routes({
           exact
           path='/productOrder/order/:orderId'
           component={() => <UserSingleOrderDetailsView />}
+        />
+        <Route
+          exact
+          path='/payment/users/:id'
+          component={() => <UserPaymentsView />}
         />
 
         <PrivateRoute
