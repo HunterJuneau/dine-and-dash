@@ -10,7 +10,7 @@ const PrivateRoute = ({
   ...rest
 }) => {
   const routeChecker = (attributes) => {
-    if (fbUser.uid && admin) {
+    if (fbUser && admin) {
       return <Component {...attributes} fbUser={fbUser} />;
     }
     return (

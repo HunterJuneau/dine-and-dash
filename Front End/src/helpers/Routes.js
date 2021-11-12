@@ -76,9 +76,12 @@ export default function Routes({
           exact
           path='/admin/inventory/:productId'
         />
-        <Route
+        <PrivateRoute
+          fbUser={fbUser}
+          admin={admin}
           exact path='/admin/addProduct'
-          component={() => <ProductFormView setProducts={setProducts}/>}
+          component={() => <ProductFormView
+            admin={admin} fbUser={fbUser} setProducts={setProducts}/>}
         />
 
         <Route exact path='/cart' component={() => <CartView />} />
