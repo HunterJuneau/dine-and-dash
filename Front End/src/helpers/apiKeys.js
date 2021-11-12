@@ -10,7 +10,13 @@ const firebaseConfig = {
 };
 
 const sqlConfig = {
-  sqlDatabaseURL: process.env.REACT_APP_SQL_DATABASE_URL
+  sqlDatabaseURL: process.env.REACT_APP_SQL_DATABASE_URL,
 };
 
-export { firebaseConfig, sqlConfig };
+const adminConfig = [
+  process.env.REACT_APP_ADMIN_UID_BEN,
+  process.env.REACT_APP_ADMIN_UID_HUNTER,
+  process.env.REACT_APP_ADMIN_UID_CHRIS,
+];
+
+export { firebaseConfig, sqlConfig, adminConfig };

@@ -16,11 +16,11 @@ const getSingleOrderById = (id) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-const createOrder = (order) => new Promise((resolve, reject) => {
-  axios.post(`${dbUrl}/api/order`, order)
-    .then((response) => resolve(response.data))
-    .catch((error) => reject(error));
-});
+// const createOrder = (order) => new Promise((resolve, reject) => {
+//   axios.post(`${dbUrl}/api/order`, order)
+//     .then((response) => resolve(response.data))
+//     .catch((error) => reject(error));
+// });
 
 const getSingleUserOrder = (userId) => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/user/${userId}`)
@@ -50,7 +50,7 @@ const createProductOrder = (productOrder) => new Promise((resolve, reject) => {
 export {
   getAllProductOrderById,
   getAllProductOrders,
-  createOrder,
+  // createOrder,
   getAllOrders,
   getSingleOrderById,
   getSingleUserOrder,
