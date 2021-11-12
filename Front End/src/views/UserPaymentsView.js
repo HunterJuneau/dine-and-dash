@@ -18,7 +18,7 @@ function UserPaymentsView() {
   useEffect(() => {
     const isMounted = true;
     if (isMounted) {
-      getUserPayments(id).then((response) => setUserPayments(response.data));
+      getUserPayments(id).then((response) => setUserPayments(response));
     }
   }, []);
 
@@ -26,6 +26,7 @@ function UserPaymentsView() {
   return (
     <div>
       <h1>Hello!</h1>
+      <h2>Please Work!</h2>
       {/* <h1>Order History</h1>
       <br />
       <h4>Past Orders: {totalNumberOfOrders}</h4>

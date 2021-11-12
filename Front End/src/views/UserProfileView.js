@@ -28,7 +28,7 @@ function UserProfileView() {
   };
 
   const handleClickUserPayments = () => {
-    history.push(`/payments/users/${id}`);
+    history.push(`/payment/users/${id}`);
   };
 
   return (

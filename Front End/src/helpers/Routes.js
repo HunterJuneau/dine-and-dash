@@ -53,7 +53,7 @@ export default function Routes({ products, users, setProducts }) {
         />
         <Route
           exact
-          path='/payment/users/:userId'
+          path='/payment/users/:id'
           component={() => <UserPaymentsView />}
         />
 

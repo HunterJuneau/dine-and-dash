@@ -3,9 +3,9 @@ import { sqlConfig } from '../apiKeys';
 
 const dbUrl = sqlConfig.sqlDatabaseURL;
 
-const getUserPayments = () => new Promise((resolve, reject) => {
-  axios.get(`${dbUrl}/api/payment/users/}`)
-    .then((response) => resolve(response))
+const getUserPayments = (userId) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/api/payment/users/${userId}`)
+    .then((response) => resolve(response.data))
     .catch((error) => reject(error));
 });
 
