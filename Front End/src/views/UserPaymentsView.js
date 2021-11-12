@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
+import {
+  Card,
+  // CardImg,
+  CardBody,
+  CardTitle,
+  Button
+} from 'reactstrap';
 import getUserPayments from '../helpers/data/PaymentData';
-// import {
-//   Card,
-//   // CardImg,
-//   CardBody,
-//   CardTitle,
-//   Button
-// } from 'reactstrap';
-// import { getUserOrders } from '../helpers/data/UserData';
 
 function UserPaymentsView() {
   const [userPayments, setUserPayments] = useState([]);
   const { id } = useParams();
-  // const history = useHistory();
+  const history = useHistory();
+  const amountOfPayments = userPayments.length;
+  const noPayments = <div><h1>You Have No Payment Methods!</h1><Button onClick={() => history.push(`/user/${id}`)}>Add Payment Method</Button>
+  </div>;
 
   useEffect(() => {
     const isMounted = true;
@@ -22,28 +24,34 @@ function UserPaymentsView() {
     }
   }, []);
 
-  console.warn(userPayments);
+  if (amountOfPayments <= 0) {
+    return noPayments;
+  }
+
   return (
     <div>
-      <h1>Hello!</h1>
-      <h2>Please Work!</h2>
-      {/* <h1>Order History</h1>
+      <h1>Payment Methods</h1>
       <br />
-      <h4>Past Orders: {totalNumberOfOrders}</h4>
+      <h4>Payment Methods: {amountOfPayments}</h4>
       <br />
-      {userOrders.filter((orderInfo) => orderInfo.completed).map((orderInfo) => (
-        <Card key={orderInfo.id}>
+      {userPayments.filter((paymentInfo) => paymentInfo.active).map((paymentInfo) => (
+        <Card key={paymentInfo.id}>
           <br />
-        <CardTitle tag='h3'> Total Price: {orderInfo.totalCost}</CardTitle>
+        <CardTitle tag='h3'> Type: {paymentInfo.type}</CardTitle>
+        <CardTitle tag='h5'> Account Number: {paymentInfo.accountNumber}</CardTitle>
+        <CardTitle tag='h6'> Payment Id: {paymentInfo.id}</CardTitle>
           <CardBody>
           </CardBody>
-          <Button onClick={() => history.push(`/productOrder/order/${orderInfo.id}`)}>Order Details</Button >
+          <Button onClick>Delete Payment Method</Button >
           <br />
+          <Button onClick>Edit Payment Method</Button >
+
+          {/* <br />
           <Button onClick={() => history.push(`/user/${id}`)}>Back To User Profile</Button>
-          <br />
+          <br /> */}
           <br />
       </Card>
-      ))} */}
+      ))}
     </div>
   );
 }
