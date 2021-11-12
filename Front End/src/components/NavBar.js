@@ -19,7 +19,7 @@ import Logo from '../assets/DNDCARTRED.jpg';
 // import { createOrder } from '../helpers/data/OrderData';
 import { signInUser, signOutUser } from '../helpers/auth';
 
-const NavBar = ({ fbUser }) => {
+const NavBar = ({ fbUser, admin }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   // const [orders, setOrders] = useState({
@@ -53,27 +53,40 @@ const NavBar = ({ fbUser }) => {
               </Link>
             </NavItem>
 
-            <UncontrolledDropdown inNavbar nav>
-              <DropdownToggle caret nav>
-                Admin Menu
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>
-                  <Link className='nav-link' to='/admin/inventory'>Inventory</Link>
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
+            {admin ? (
+              <UncontrolledDropdown inNavbar nav>
+                <DropdownToggle caret nav>
+                  Admin Menu
+                </DropdownToggle>
+                <DropdownMenu right>
+                  <DropdownItem>
+                    <Link className='nav-link' to='/admin/inventory'>
+                      Inventory
+                    </Link>
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+            ) : (
+              ''
+            )}
           </Nav>
         </Collapse>
-        <Button className="nav-link" to="/cart"><img id='navbar-logo' src={Logo} alt='Dine and Dash Cart Logo'/></Button>
-        { fbUser !== null
-          && <>
-          {
-            fbUser ? <Button color='warning' onClick={signOutUser}>Sign Out</Button>
-              : <Button color='primary' onClick={signInUser}>Sign In</Button>
-          }
-            </>
-        }
+        <Button className='nav-link' to='/cart'>
+          <img id='navbar-logo' src={Logo} alt='Dine and Dash Cart Logo' />
+        </Button>
+        {fbUser !== null && (
+          <>
+            {fbUser ? (
+              <Button color='warning' onClick={signOutUser}>
+                Sign Out
+              </Button>
+            ) : (
+              <Button color='primary' onClick={signInUser}>
+                Sign In
+              </Button>
+            )}
+          </>
+        )}
         <img id='navbar-logo' src={redLogo} alt='Dine and Dash Red Logo' />
       </Navbar>
     </div>
@@ -81,7 +94,8 @@ const NavBar = ({ fbUser }) => {
 };
 
 NavBar.propTypes = {
-  fbUser: PropTypes.any
+  fbUser: PropTypes.any,
+  admin: PropTypes.bool,
 };
 
 export default NavBar;
