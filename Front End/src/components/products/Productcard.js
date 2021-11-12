@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import {
@@ -9,9 +9,21 @@ import {
   CardTitle,
   Button
 } from 'reactstrap';
+import ProductForm from './ProductForm';
 
 function Productcard({ admin, ...productInfo }) {
+  const [editProduct, setEditProduct] = useState(false);
   const history = useHistory();
+
+  const handleClick = (type) => {
+    switch (type) {
+      case 'edit':
+        setEditProduct((prevState) => !prevState);
+        break;
+      default:
+        console.warn('Hello World!');
+    }
+  };
 
   return (
     <div>
@@ -25,6 +37,13 @@ function Productcard({ admin, ...productInfo }) {
             <CardText>{productInfo.forSale ? 'For Sale or Rent' : 'For Rent Only'}</CardText>
           </CardBody>
           <Button onClick={() => history.push(admin ? `/admin/inventory/${productInfo.id}` : `/products/${productInfo.id}`)}>See Details</Button>
+          <Button onClick={() => handleClick('edit')}> { editProduct ? 'Close' : 'Edit' }</Button>
+        {
+          editProduct && <ProductForm
+            formTitle='Edit Product'
+            {...productInfo}
+            />
+        }
       </Card>
     </div>
   );

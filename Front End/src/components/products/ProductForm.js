@@ -6,10 +6,19 @@ import {
   Label,
   Input,
 } from 'reactstrap';
-import { addProduct } from '../../helpers/data/ProductData';
+import { addProduct, updateProduct } from '../../helpers/data/ProductData';
 
-function ProductForm({ formTitle, setProducts }) {
+function ProductForm({ formTitle, setProducts, ...productInfo }) {
   const [createProduct, setCreateProduct] = useState({
+    productName: productInfo?.productName || '',
+    productDescription: productInfo?.productDescription || '',
+    type: productInfo?.type || '',
+    price: productInfo?.price || '',
+    quantity: productInfo?.quantity || '',
+    Image: productInfo?.Image || '',
+    forSale: productInfo?.forSale || false,
+    status: productInfo?.status || false,
+    // id: productInfo?.id || ''
   });
 
   const handleInputChange = (e) => {
@@ -17,13 +26,15 @@ function ProductForm({ formTitle, setProducts }) {
       ...prevState,
       [e.target.name]: e.target.value,
     }));
-    console.log(createProduct.forSale);
   };
 
   const handleSubmit = (e) => {
-    console.warn(createProduct);
     e.preventDefault();
-    addProduct(createProduct).then((response) => setProducts(response));
+    if (createProduct.id) {
+      updateProduct(createProduct).then((response) => setProducts(response));
+    } else {
+      addProduct(createProduct).then((response) => setProducts(response));
+    }
   };
   return (
     <div>
@@ -81,20 +92,20 @@ function ProductForm({ formTitle, setProducts }) {
         <Input
           name='forSale'
           type='checkbox'
-          value={true}
-          checked={createProduct.forSale}
+          value={createProduct.forSale}
+          checked={true}
           onChange={handleInputChange}
         />
           <Label check>For Sale or Rent</Label>
           <br/>
           <Input
-          name='forSale'
+          name='status'
           type='checkbox'
-          value={false}
-          checked={createProduct.forSale}
+          value={createProduct.status}
+          checked={true}
           onChange={handleInputChange}
         />
-          <Label check>For Rent Only</Label>
+          <Label check>Click if Available</Label>
         <br />
         <Button type='submit'>Submit</Button>
       </Form>
@@ -104,7 +115,8 @@ function ProductForm({ formTitle, setProducts }) {
 
 ProductForm.propTypes = {
   formTitle: PropTypes.string,
-  setProducts: PropTypes.func
+  setProducts: PropTypes.func,
+  productInfo: PropTypes.object
 };
 
 export default ProductForm;

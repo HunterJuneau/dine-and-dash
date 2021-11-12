@@ -36,10 +36,17 @@ const addProduct = (newProduct) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
+const updateProduct = (id, updatedProduct) => new Promise((resolve, reject) => {
+  axios.put(`${dbUrl}/api/products/${id}`, updatedProduct)
+    .then((response) => resolve(response))
+    .catch((error) => reject(error));
+});
+
 export {
   getAllProducts,
   getSingleProduct,
   getProductByType,
   getProductByForSaleOrRent,
-  addProduct
+  addProduct,
+  updateProduct
 };
