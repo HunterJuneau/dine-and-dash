@@ -6,22 +6,26 @@ import NavBar from '../components/NavBar';
 import Routes from '../helpers/Routes';
 import { getAllProducts } from '../helpers/data/ProductData';
 import { getAllUsers } from '../helpers/data/UserData';
+import { adminConfig } from '../helpers/apiKeys';
 
 function App() {
   const [fbUser, setFbUser] = useState(null);
   const [products, setProducts] = useState([]);
   const [users, setUsers] = useState([]);
+  const [admin, setAdmin] = useState(false);
   // const [userOrders, setUserOrders] = useState([]);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((authed) => {
       if (authed) {
-        authed.getIdToken().then((token) => window.sessionStorage.setItem('token', token));
-        setFbUser(true);
-        // getAllProducts().then(setProducts);
-        // getAllUsers().then(setUsers);
+        authed
+          .getIdToken()
+          .then((token) => window.sessionStorage.setItem('token', token));
+        setFbUser(authed);
+        setAdmin(adminConfig.includes(authed.uid));
       } else if (fbUser || fbUser === null) {
         setFbUser(false);
+        setAdmin(false);
       }
     });
   }, []);
@@ -36,8 +40,14 @@ function App() {
     <>
       <Router>
         <div className='App'>
-          <NavBar fbUser={fbUser}/>
-          <Routes products={products} setProducts={setProducts} users={users}/>
+          <NavBar fbUser={fbUser} admin={admin} />
+          <Routes
+            fbUser={fbUser}
+            products={products}
+            setProducts={setProducts}
+            users={users}
+            admin={admin}
+          />
         </div>
       </Router>
     </>

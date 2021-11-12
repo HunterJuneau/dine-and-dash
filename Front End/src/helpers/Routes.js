@@ -10,8 +10,15 @@ import AllUsersView from '../views/AllUsersView';
 import UserProfileView from '../views/UserProfileView';
 import UserOrdersView from '../views/UserOrdersView';
 import UserSingleOrderDetailsView from '../views/UserSingleOrderDetailsView';
+import PrivateRoute from './PrivateRoute';
 
-export default function Routes({ products, users, setProducts }) {
+export default function Routes({
+  fbUser,
+  products,
+  users,
+  setProducts,
+  admin,
+}) {
   return (
     <div>
       <Switch>
@@ -19,7 +26,9 @@ export default function Routes({ products, users, setProducts }) {
         <Route
           exact
           path='/products'
-          component={() => <ProductsView products={products} setProducts={setProducts}/>}
+          component={() => (
+            <ProductsView products={products} setProducts={setProducts} />
+          )}
         />
         <Route
           exact
@@ -51,28 +60,32 @@ export default function Routes({ products, users, setProducts }) {
           component={() => <UserSingleOrderDetailsView />}
         />
 
-        <Route
-        exact
-          path='/admin/inventory'
+        <PrivateRoute
           component={() => <InventoryView products={products} />}
+          fbUser={fbUser}
+          admin={admin}
+          exact
+          path='/admin/inventory'
         />
 
-        <Route
+        <PrivateRoute
+          component={() => <SingleProduct admin={true} />}
+          fbUser={fbUser}
+          admin={admin}
           exact
           path='/admin/inventory/:productId'
-          component={() => <SingleProduct admin={true} />}
         />
-         <Route
-          exact path='/cart'
-          component={() => <CartView/>}
-        />
+
+        <Route exact path='/cart' component={() => <CartView />} />
       </Switch>
     </div>
   );
 }
 
 Routes.propTypes = {
+  fbUser: PropTypes.any,
   products: PropTypes.array,
   users: PropTypes.any,
-  setProducts: PropTypes.func
+  setProducts: PropTypes.func,
+  admin: PropTypes.bool,
 };
