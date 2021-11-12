@@ -28,7 +28,6 @@ const getProductByForSaleOrRent = (value) => new Promise((resolve, reject) => {
 });
 
 const addProduct = (newProduct) => new Promise((resolve, reject) => {
-  console.log(newProduct);
   axios.post(`${dbUrl}/api/products`, newProduct)
     .then((response) => resolve(response.data))
     // .then(() => {

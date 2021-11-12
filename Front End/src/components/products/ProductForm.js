@@ -15,8 +15,9 @@ function ProductForm({ formTitle, setProducts }) {
   const handleInputChange = (e) => {
     setCreateProduct((prevState) => ({
       ...prevState,
-      [e.target.name]: (e.target.name === 'forSale') && (e.target.value === ('true' || false)) ? (true || false) : e.target.value,
+      [e.target.name]: e.target.value,
     }));
+    console.log(createProduct.forSale);
   };
 
   const handleSubmit = (e) => {
@@ -77,17 +78,23 @@ function ProductForm({ formTitle, setProducts }) {
           value={createProduct.Image}
           onChange={handleInputChange}
         />
-        <Label>For Sale?</Label>
         <Input
           name='forSale'
-          type='select'
-          value={createProduct.forSale}
+          type='checkbox'
+          value={true}
+          checked={createProduct.forSale}
           onChange={handleInputChange}
-        >
-            <option></option>
-            <option value='true'>For Sale or Rent</option>
-            <option value='false'>For Rent Only</option>
-        </Input>
+        />
+          <Label check>For Sale or Rent</Label>
+          <br/>
+          <Input
+          name='forSale'
+          type='checkbox'
+          value={false}
+          checked={createProduct.forSale}
+          onChange={handleInputChange}
+        />
+          <Label check>For Rent Only</Label>
         <br />
         <Button type='submit'>Submit</Button>
       </Form>
