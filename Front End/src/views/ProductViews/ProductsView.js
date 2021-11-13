@@ -38,6 +38,8 @@ function ProductsView({ products, setProducts }) {
         <Productcard
           key={productInfo.id}
           {...productInfo}
+          products={products}
+          setProducts={setProducts}
         />
       ))}
     </div>

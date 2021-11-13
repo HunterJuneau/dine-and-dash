@@ -17,20 +17,23 @@ function ProductForm({ formTitle, setProducts, ...productInfo }) {
     quantity: productInfo?.quantity || '',
     Image: productInfo?.Image || '',
     forSale: productInfo?.forSale || false,
-    status: productInfo?.status || false,
+    forRent: productInfo?.forRent || false,
+    // status: productInfo?.status || false,
     // id: productInfo?.id || ''
   });
-
+  // const [isChecked, setIsChecked] = useState({
+  // });
+  // console.log(setIsChecked);
   const handleInputChange = (e) => {
     setCreateProduct((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.type === 'checkbox' ? e.target.checked : e.target.value,
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (createProduct.id) {
+    if (productInfo.id) {
       updateProduct(createProduct).then((response) => setProducts(response));
     } else {
       addProduct(createProduct).then((response) => setProducts(response));
@@ -89,23 +92,34 @@ function ProductForm({ formTitle, setProducts, ...productInfo }) {
           value={createProduct.Image}
           onChange={handleInputChange}
         />
+      <div>
         <Input
           name='forSale'
           type='checkbox'
-          value={createProduct.forSale}
-          checked={true}
+          checked={createProduct.forSale}
+          // checked={true}
           onChange={handleInputChange}
         />
-          <Label check>For Sale or Rent</Label>
-          <br/>
-          <Input
+        <Label check>For Sale</Label>
+        <br/>
+        <Input
+          name='forRent'
+          type='checkbox'
+          checked={createProduct.forRent}
+          // checked={true}
+          onChange={handleInputChange}
+        />
+        <Label check>For Rent</Label>
+        {/* <Input
           name='status'
           type='checkbox'
-          value={createProduct.status}
-          checked={true}
+          checked={createProduct.status}
+          // checked={createProduct}
           onChange={handleInputChange}
         />
-          <Label check>Click if Available</Label>
+          <Label check>Click if Available</Label> */}
+      </div>
+        <br />
         <br />
         <Button type='submit'>Submit</Button>
       </Form>

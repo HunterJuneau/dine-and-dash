@@ -86,7 +86,7 @@ export default function Routes({
           fbUser={fbUser}
           admin={admin}
           exact path='/admin/addProduct'
-          component={() => <ProductFormView
+          component={() => <ProductFormView products={products}
             admin={admin} fbUser={fbUser} setProducts={setProducts}/>}
         />
 

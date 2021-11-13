@@ -11,7 +11,12 @@ import {
 } from 'reactstrap';
 import ProductForm from './ProductForm';
 
-function Productcard({ admin, ...productInfo }) {
+function Productcard({
+  admin,
+  setProducts,
+  products,
+  ...productInfo
+}) {
   const [editProduct, setEditProduct] = useState(false);
   const history = useHistory();
 
@@ -19,6 +24,7 @@ function Productcard({ admin, ...productInfo }) {
     switch (type) {
       case 'edit':
         setEditProduct((prevState) => !prevState);
+        console.warn(productInfo.id);
         break;
       default:
         console.warn('Hello World!');
@@ -42,6 +48,8 @@ function Productcard({ admin, ...productInfo }) {
           editProduct && <ProductForm
             formTitle='Edit Product'
             {...productInfo}
+            products={products}
+            setProducts={setProducts}
             />
         }
       </Card>
@@ -51,7 +59,9 @@ function Productcard({ admin, ...productInfo }) {
 
 Productcard.propTypes = {
   admin: PropTypes.bool,
-  productInfo: PropTypes.object
+  productInfo: PropTypes.object,
+  setProducts: PropTypes.func,
+  products: PropTypes.array
 };
 
 export default Productcard;

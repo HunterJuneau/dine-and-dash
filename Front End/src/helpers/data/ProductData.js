@@ -29,16 +29,17 @@ const getProductByForSaleOrRent = (value) => new Promise((resolve, reject) => {
 
 const addProduct = (newProduct) => new Promise((resolve, reject) => {
   axios.post(`${dbUrl}/api/products`, newProduct)
-    .then((response) => resolve(response.data))
-    // .then(() => {
-    //   getAllProducts().then((response) => resolve(response));
-    // })
+    .then(() => {
+      getAllProducts().then((response) => resolve(response));
+    })
     .catch((error) => reject(error));
 });
 
 const updateProduct = (id, updatedProduct) => new Promise((resolve, reject) => {
   axios.put(`${dbUrl}/api/products/${id}`, updatedProduct)
-    .then((response) => resolve(response))
+    .then(() => {
+      getAllProducts().then((response) => resolve(response));
+    })
     .catch((error) => reject(error));
 });
 
