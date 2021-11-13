@@ -8,7 +8,12 @@ import {
 } from 'reactstrap';
 import { addProduct, updateProduct } from '../../helpers/data/ProductData';
 
-function ProductForm({ formTitle, setProducts, ...productInfo }) {
+function ProductForm({
+  formTitle,
+  setProducts,
+  editProduct,
+  ...productInfo
+}) {
   const [createProduct, setCreateProduct] = useState({
     productName: productInfo?.productName || '',
     productDescription: productInfo?.productDescription || '',
@@ -18,12 +23,9 @@ function ProductForm({ formTitle, setProducts, ...productInfo }) {
     Image: productInfo?.Image || '',
     forSale: productInfo?.forSale || false,
     forRent: productInfo?.forRent || false,
-    // status: productInfo?.status || false,
+    status: productInfo?.status || false,
     // id: productInfo?.id || ''
   });
-  // const [isChecked, setIsChecked] = useState({
-  // });
-  // console.log(setIsChecked);
   const handleInputChange = (e) => {
     setCreateProduct((prevState) => ({
       ...prevState,
@@ -34,7 +36,7 @@ function ProductForm({ formTitle, setProducts, ...productInfo }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (productInfo.id) {
-      updateProduct(createProduct).then((response) => setProducts(response));
+      updateProduct(productInfo.id, createProduct).then((response) => setProducts(response));
     } else {
       addProduct(createProduct).then((response) => setProducts(response));
     }
@@ -97,7 +99,6 @@ function ProductForm({ formTitle, setProducts, ...productInfo }) {
           name='forSale'
           type='checkbox'
           checked={createProduct.forSale}
-          // checked={true}
           onChange={handleInputChange}
         />
         <Label check>For Sale</Label>
@@ -106,18 +107,22 @@ function ProductForm({ formTitle, setProducts, ...productInfo }) {
           name='forRent'
           type='checkbox'
           checked={createProduct.forRent}
-          // checked={true}
           onChange={handleInputChange}
         />
         <Label check>For Rent</Label>
-        {/* <Input
+        <br />
+      { editProduct
+        ? <React.Fragment>
+        <Input
           name='status'
           type='checkbox'
           checked={createProduct.status}
-          // checked={createProduct}
           onChange={handleInputChange}
         />
-          <Label check>Click if Available</Label> */}
+        <Label check>Click if In Stock</Label>
+        </React.Fragment>
+        : ''
+      }
       </div>
         <br />
         <br />
@@ -130,7 +135,8 @@ function ProductForm({ formTitle, setProducts, ...productInfo }) {
 ProductForm.propTypes = {
   formTitle: PropTypes.string,
   setProducts: PropTypes.func,
-  productInfo: PropTypes.object
+  productInfo: PropTypes.object,
+  editProduct: PropTypes.any
 };
 
 export default ProductForm;

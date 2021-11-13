@@ -50,6 +50,7 @@ function Productcard({
             {...productInfo}
             products={products}
             setProducts={setProducts}
+            editProduct={editProduct}
             />
         }
       </Card>
