@@ -21,7 +21,7 @@ function UserCard({ ...userInfo }) {
   // console.warn(userOrders);
   return (
     <div>
-      <Card>
+      <Card className='userCard'>
       <br />
         <CardTitle tag='h3'>{userInfo.firstName}</CardTitle>
         <CardTitle tag='h3'>{userInfo.lastName}</CardTitle>

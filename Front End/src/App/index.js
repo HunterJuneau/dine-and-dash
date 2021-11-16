@@ -4,7 +4,7 @@ import firebase from 'firebase';
 import './App.scss';
 import NavBar from '../components/NavBar';
 import Routes from '../helpers/Routes';
-import { getAllProducts } from '../helpers/data/ProductData';
+import { getAllProducts, getOnlyAvailableProducts } from '../helpers/data/ProductData';
 import { getAllUsers } from '../helpers/data/UserData';
 import { adminConfig } from '../helpers/apiKeys';
 
@@ -12,7 +12,7 @@ function App() {
   const [fbUser, setFbUser] = useState(null);
   const [products, setProducts] = useState([]);
   const [users, setUsers] = useState([]);
-  const [admin, setAdmin] = useState(false);
+  const [admin, setAdmin] = useState(null);
   // const [userOrders, setUserOrders] = useState([]);
 
   useEffect(() => {
@@ -21,8 +21,9 @@ function App() {
         authed
           .getIdToken()
           .then((token) => window.sessionStorage.setItem('token', token));
-        setFbUser(authed);
         setAdmin(adminConfig.includes(authed.uid));
+        setFbUser(authed);
+        console.warn(admin);
       } else if (fbUser || fbUser === null) {
         setFbUser(false);
         setAdmin(false);
@@ -31,9 +32,13 @@ function App() {
   }, []);
 
   useEffect(() => {
-    getAllProducts().then(setProducts);
+    if (admin === true) {
+      getAllProducts().then(setProducts);
+    } else {
+      getOnlyAvailableProducts(true).then(setProducts);
+    }
     getAllUsers().then(setUsers);
-  }, []);
+  }, [admin]);
 
   // console.warn(users);
   return (

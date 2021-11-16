@@ -12,6 +12,8 @@ function ProductForm({
   formTitle,
   setProducts,
   editProduct,
+  softDelete,
+  admin,
   ...productInfo
 }) {
   const [createProduct, setCreateProduct] = useState({
@@ -48,6 +50,9 @@ function ProductForm({
         autoComplete='off'
         onSubmit={handleSubmit}
       >
+      { softDelete && admin
+        ? ''
+        : <React.Fragment>
         <Label>Product Name</Label>
         <Input
           name='productName'
@@ -55,6 +60,11 @@ function ProductForm({
           value={createProduct.productName}
           onChange={handleInputChange}
         />
+        </React.Fragment>
+      }
+      { softDelete && admin
+        ? ''
+        : <React.Fragment>
         <Label>Product Description</Label>
         <Input
           name='productDescription'
@@ -62,6 +72,11 @@ function ProductForm({
           value={createProduct.productDescription}
           onChange={handleInputChange}
         />
+        </React.Fragment>
+      }
+      { softDelete && admin
+        ? ''
+        : <React.Fragment>
         <Label>Type of Product</Label>
         <Input
           name='type'
@@ -73,6 +88,11 @@ function ProductForm({
             <option value='Truck'>Truck</option>
             <option value='Accessory'>Accessory</option>
         </Input>
+        </React.Fragment>
+      }
+      { softDelete && admin
+        ? ''
+        : <React.Fragment>
         <Label>Price</Label>
         <Input
           name='price'
@@ -80,6 +100,11 @@ function ProductForm({
           value={createProduct.price}
           onChange={handleInputChange}
         />
+        </React.Fragment>
+      }
+      { softDelete && admin
+        ? ''
+        : <React.Fragment>
         <Label>Quantity</Label>
         <Input
           name='quantity'
@@ -87,6 +112,11 @@ function ProductForm({
           value={createProduct.quantity}
           onChange={handleInputChange}
         />
+        </React.Fragment>
+      }
+      { softDelete && admin
+        ? ''
+        : <React.Fragment>
         <Label>Image</Label>
         <Input
           name='Image'
@@ -94,7 +124,11 @@ function ProductForm({
           value={createProduct.Image}
           onChange={handleInputChange}
         />
-      <div>
+        </React.Fragment>
+      }
+      { softDelete && admin
+        ? ''
+        : <React.Fragment>
         <Input
           name='forSale'
           type='checkbox'
@@ -102,7 +136,12 @@ function ProductForm({
           onChange={handleInputChange}
         />
         <Label check>For Sale</Label>
+        </React.Fragment>
+      }
         <br/>
+      { softDelete && admin
+        ? ''
+        : <React.Fragment>
         <Input
           name='forRent'
           type='checkbox'
@@ -110,8 +149,10 @@ function ProductForm({
           onChange={handleInputChange}
         />
         <Label check>For Rent</Label>
+        </React.Fragment>
+      }
         <br />
-      { editProduct
+      { softDelete && admin
         ? <React.Fragment>
         <Input
           name='status'
@@ -123,7 +164,6 @@ function ProductForm({
         </React.Fragment>
         : ''
       }
-      </div>
         <br />
         <br />
         <Button type='submit'>Submit</Button>
@@ -136,7 +176,9 @@ ProductForm.propTypes = {
   formTitle: PropTypes.string,
   setProducts: PropTypes.func,
   productInfo: PropTypes.object,
-  editProduct: PropTypes.any
+  editProduct: PropTypes.bool,
+  softDelete: PropTypes.bool,
+  admin: PropTypes.bool,
 };
 
 export default ProductForm;

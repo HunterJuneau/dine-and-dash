@@ -4,7 +4,7 @@ import Productcard from '../components/products/Productcard';
 
 function InventoryView({ products }) {
   return (
-    <div>
+    <div className='productsContainer'>
       {products.map((productInfo) => (
         <Productcard key={productInfo.id} admin={true} {...productInfo} />
       ))}

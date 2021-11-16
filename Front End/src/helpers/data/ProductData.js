@@ -43,11 +43,18 @@ const updateProduct = (id, updatedProduct) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
+const getOnlyAvailableProducts = (status) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/api/products/available?status=${status}`)
+    .then((response) => resolve(response.data))
+    .catch((error) => reject(error));
+});
+
 export {
   getAllProducts,
   getSingleProduct,
   getProductByType,
   getProductByForSaleOrRent,
   addProduct,
-  updateProduct
+  updateProduct,
+  getOnlyAvailableProducts
 };

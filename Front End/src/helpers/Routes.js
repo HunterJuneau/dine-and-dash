@@ -29,7 +29,9 @@ export default function Routes({
           exact
           path='/products'
           component={() => (
-            <ProductsView products={products} setProducts={setProducts} />
+            <ProductsView products={products}
+            setProducts={setProducts}
+            />
           )}
         />
         <Route

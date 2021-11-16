@@ -34,6 +34,7 @@ function ProductsView({ products, setProducts }) {
           </select>
           <button type='submit'>Find Products</button>
         </form>
+      <div className='productsContainer'>
       {products.map((productInfo) => (
         <Productcard
           key={productInfo.id}
@@ -42,13 +43,14 @@ function ProductsView({ products, setProducts }) {
           setProducts={setProducts}
         />
       ))}
+      </div>
     </div>
   );
 }
 
 ProductsView.propTypes = {
   products: PropTypes.array,
-  setProducts: PropTypes.func
+  setProducts: PropTypes.func,
 };
 
 export default ProductsView;
