@@ -69,12 +69,8 @@ CREATE TABLE dbo.ProductOrders
  Alter Table Users
 Alter column customerCreated datetime NULL
 
-UPDATE Users
-SET fbUid = ''
-WHERE fbUid = NULL
-
 ALTER TABLE Users
-ADD fbUid varchar(100) NOT NULL
+ADD fbUid varchar(100) NULL
 
  USE [DineAndDash]
 GO
