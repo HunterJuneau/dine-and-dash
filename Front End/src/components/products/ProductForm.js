@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
   Button,
@@ -26,8 +27,10 @@ function ProductForm({
     forSale: productInfo?.forSale || false,
     forRent: productInfo?.forRent || false,
     status: productInfo?.status || false,
-    // id: productInfo?.id || ''
+    id: productInfo?.id
   });
+  const history = useHistory();
+
   const handleInputChange = (e) => {
     setCreateProduct((prevState) => ({
       ...prevState,
@@ -38,9 +41,10 @@ function ProductForm({
   const handleSubmit = (e) => {
     e.preventDefault();
     if (productInfo.id) {
-      updateProduct(productInfo.id, createProduct).then((response) => setProducts(response));
+      updateProduct(createProduct.id, createProduct).then((response) => setProducts(response));
     } else {
       addProduct(createProduct).then((response) => setProducts(response));
+      history.push('/admin/inventory');
     }
   };
   return (

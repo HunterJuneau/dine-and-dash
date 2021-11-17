@@ -23,7 +23,6 @@ function App() {
           .then((token) => window.sessionStorage.setItem('token', token));
         setAdmin(adminConfig.includes(authed.uid));
         setFbUser(authed);
-        console.warn(admin);
       } else if (fbUser || fbUser === null) {
         setFbUser(false);
         setAdmin(false);

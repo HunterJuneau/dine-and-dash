@@ -44,6 +44,7 @@ function Productcard({
             <CardText>{productInfo.productDescription}</CardText>
             <CardText>{productInfo.forSale ? 'For Sale' : ''}</CardText>
             <CardText>{productInfo.forRent ? 'For Rent' : ''} </CardText>
+            { admin ? <CardText>{productInfo.status ? 'Available' : 'Out of Stock'}</CardText> : '' }
           </CardBody>
           <ButtonGroup>
             <Button color='primary' onClick={() => history.push(admin ? `/admin/inventory/${productInfo.id}` : `/products/${productInfo.id}`)}>See Details</Button>

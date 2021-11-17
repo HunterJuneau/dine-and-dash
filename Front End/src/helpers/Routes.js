@@ -70,7 +70,7 @@ export default function Routes({
         />
 
         <PrivateRoute
-          component={() => <InventoryView products={products} />}
+          component={() => <InventoryView products={products} setProducts={setProducts} />}
           fbUser={fbUser}
           admin={admin}
           exact
