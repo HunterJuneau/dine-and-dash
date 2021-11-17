@@ -64,11 +64,11 @@ namespace DineNDash.DataAccess
             var sql = @"INSERT INTO [dbo].[Payments]
                                        (
                                         [type]
-                                       ,[userId]
-                                       ,[accountNumber])
+                                       ,[accountNumber]
+                                       ,[userId])
 	                            output inserted.Id
                                  VALUES
-		                            (@type, @userId, @accountNumber)";
+		                            (@type, @accountNumber, @userId)";
 
             var id = db.ExecuteScalar<Guid>(sql, payment);
             payment.Id = id;

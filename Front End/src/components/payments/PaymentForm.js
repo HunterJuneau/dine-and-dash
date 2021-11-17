@@ -14,7 +14,7 @@ function PaymentForm({ userPayments, setUserPayments, ...paymentInfo }) {
     accountNumber: paymentInfo?.accountNumber || '',
     userId: paymentInfo?.userId
   });
-  console.warn(setUserPayments);
+  // console.warn(setUserPayments);
   const handleInputChange = (e) => {
     setAddNewPayment((prevState) => ({
       ...prevState,
@@ -23,15 +23,20 @@ function PaymentForm({ userPayments, setUserPayments, ...paymentInfo }) {
   };
 
   const handleSubmit = (e) => {
+    const isMounted = true;
     e.preventDefault();
-    addPayment(addNewPayment).then(setUserPayments);
+    if (isMounted) {
+      addPayment(paymentInfo.id, addNewPayment).then(setUserPayments);
+    }
+    // console.warn(addNewPayment);
   };
 
   return (
     <div>
       <Form
         autoComplete='off'
-        onSubmit={handleSubmit}>
+        onSubmit={handleSubmit}
+      >
         <Label>Payment Type</Label>
           <Input
             name='type'

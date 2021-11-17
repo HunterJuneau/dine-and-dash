@@ -12,6 +12,7 @@ import { getUserPayments } from '../helpers/data/PaymentData';
 
 function UserPaymentsView() {
   const [userPayments, setUserPayments] = useState([]);
+  const [createPayment, setCreatePayment] = useState(false);
   const { id } = useParams();
   const history = useHistory();
   const amountOfPayments = userPayments.length;
@@ -23,7 +24,17 @@ function UserPaymentsView() {
     if (isMounted) {
       getUserPayments(id).then((response) => setUserPayments(response));
     }
-  }, []);
+  }, [userPayments]);
+
+  const handleClick = (type) => {
+    switch (type) {
+      case 'add':
+        setCreatePayment(!createPayment);
+        break;
+      default:
+        console.warn('You got this!');
+    }
+  };
 
   if (amountOfPayments <= 0) {
     return noPayments;
@@ -42,13 +53,17 @@ function UserPaymentsView() {
         <CardTitle tag='h5'> Account Number: {paymentInfo.accountNumber}</CardTitle>
         <CardTitle tag='h6'> Payment Id: {paymentInfo.id}</CardTitle>
           <CardBody>
-          <Button>Add A Payment</Button>
-        <PaymentForm
+
+          </CardBody>
+          <Button onClick={() => handleClick('add')}>Add A Payment</Button>
+        {
+        createPayment && <PaymentForm
           userPayments={userPayments}
           setUserPayments={setUserPayments}
           {...paymentInfo}
         />
-          </CardBody>
+        }
+        <br />
           <Button onClick>Delete Payment Method</Button >
           <br />
           <Button onClick>Edit Payment Method</Button >

@@ -9,9 +9,11 @@ const getUserPayments = (userId) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-const addPayment = (newPayment) => new Promise((resolve, reject) => {
+const addPayment = (id, newPayment) => new Promise((resolve, reject) => {
   axios.post(`${dbUrl}/api/payment`, newPayment)
-    .then((response) => resolve(response))
+    .then(() => {
+      getUserPayments(id).then((response) => resolve(response));
+    })
     .catch((error) => reject(error));
 });
 
