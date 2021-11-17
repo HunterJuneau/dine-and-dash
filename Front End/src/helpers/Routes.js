@@ -36,6 +36,13 @@ export default function Routes({
           component={() => <SingleProduct />}
         />
 
+        <PrivateRoute
+          exact
+          path='/profile'
+          component={() => <UserProfileView fbUser={fbUser} />}
+          fbUser={fbUser}
+        />
+
         <Route
           exact
           path='/user'

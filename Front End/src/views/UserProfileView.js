@@ -11,7 +11,7 @@ import {
 } from 'reactstrap';
 import { getSingleUser } from '../helpers/data/UserData';
 
-function UserProfileView() {
+function UserProfileView({ fbUser }) {
   const [oneSingleUser, setOneSingleUser] = useState({});
   const { id } = useParams();
   const history = useHistory();
@@ -19,12 +19,12 @@ function UserProfileView() {
   useEffect(() => {
     const isMounted = true;
     if (isMounted) {
-      getSingleUser(id).then((response) => setOneSingleUser(response.data));
+      getSingleUser(fbUser ? fbUser.uid : id).then((response) => setOneSingleUser(response.data));
     }
   }, []);
 
   const handleClickUserOrders = () => {
-    history.push(`/user/order/${id}`);
+    history.push(`/user/order/${fbUser ? fbUser.uid : id}`);
   };
 
   return (
@@ -48,7 +48,7 @@ function UserProfileView() {
 }
 
 UserProfileView.propTypes = {
-  userInfo: PropTypes.any
+  fbUser: PropTypes.any
 };
 
 export default UserProfileView;

@@ -22,12 +22,13 @@ const signInUser = () => {
         firstName: user?.given_name,
         lastName: user?.family_name,
         imageUrl: user?.picture,
-        id: user?.uid,
+        fbUid: fbUser?.user.uid,
         contactEmail: user?.email,
         status: true
       };
       createUser(userInfo);
     }
+    console.warn(fbUser);
   });
 };
 

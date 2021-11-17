@@ -37,7 +37,9 @@ const NavBar = ({ fbUser, admin }) => {
   return (
     <div>
       <Navbar color='light' light expand='md'>
-        <NavbarBrand href='/'>Home</NavbarBrand>
+        <NavbarBrand href='/'>
+          <img id='navbar-logo' src={redLogo} alt='Dine and Dash Red Logo' />
+        </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className='mr-auto' navbar>
@@ -87,7 +89,12 @@ const NavBar = ({ fbUser, admin }) => {
             )}
           </>
         )}
-        <img id='navbar-logo' src={redLogo} alt='Dine and Dash Red Logo' />
+
+        <NavItem>
+          <Link className='nav-link' to='/profile'>
+            Profile
+          </Link>
+        </NavItem>
       </Navbar>
     </div>
   );
