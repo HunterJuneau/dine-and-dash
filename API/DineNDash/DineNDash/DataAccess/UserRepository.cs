@@ -47,9 +47,9 @@ namespace DineNDash.DataAccess
 
             using var db = new SqlConnection(_connectionString);
 
-            var sql = @"insert into users(FirstName, LastName, ContactEmail, Status)
+            var sql = @"insert into users(FirstName, LastName, ContactEmail, Status, fbUid)
                         output inserted.Id
-                        values (@FirstName, @LastName, @ContactEmail, @Status)";
+                        values (@FirstName, @LastName, @ContactEmail, @Status, @fbUid)";
 
             var id = db.ExecuteScalar<Guid>(sql, newUser);
 
@@ -104,6 +104,20 @@ namespace DineNDash.DataAccess
             var updatedUser = db.QuerySingleOrDefault<User>(sql, user);
 
             return updatedUser;
+        }
+
+        // Get User by Firebase UID //
+        internal User GetUserByFbUid(string id)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            var sql = @"Select *
+                From Users
+                where fbUid = @id";
+
+            var user = db.QueryFirstOrDefault<User>(sql, new { id });
+
+            return user;
         }
     }
 }
