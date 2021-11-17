@@ -34,7 +34,7 @@ function SingleProduct({ admin = false }) {
             <CardText>Quantity: {singleProduct.quantity}</CardText>
             <CardText>{singleProduct.forSale ? 'For Sale' : ''}</CardText>
             <CardText>{singleProduct.forRent ? 'For Rent' : ''} </CardText>
-            <img id='productImage'src={singleProduct.Image}/>
+            <img id='productImage'src={singleProduct.image}/>
           </CardBody>
           <Button color='info' onClick={() => history.push(admin ? '/admin/inventory' : '/products')}>Back</Button>
       </Card>

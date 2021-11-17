@@ -20,7 +20,6 @@ function Productcard({
 }) {
   const [editProduct, setEditProduct] = useState(false);
   const [softDelete, setSoftDelete] = useState(false);
-  console.warn(setSoftDelete);
   const history = useHistory();
 
   const handleClick = (type) => {
@@ -43,8 +42,6 @@ function Productcard({
           <CardBody>
             <CardTitle tag='h6'>{productInfo.type}</CardTitle>
             <CardText>{productInfo.productDescription}</CardText>
-            <CardText>Price: {productInfo.price}</CardText>
-            <CardText>Quantity: {productInfo.quantity}</CardText>
             <CardText>{productInfo.forSale ? 'For Sale' : ''}</CardText>
             <CardText>{productInfo.forRent ? 'For Rent' : ''} </CardText>
           </CardBody>
