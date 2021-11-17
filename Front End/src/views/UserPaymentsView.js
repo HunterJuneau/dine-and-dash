@@ -7,7 +7,8 @@ import {
   CardTitle,
   Button
 } from 'reactstrap';
-import getUserPayments from '../helpers/data/PaymentData';
+import PaymentForm from '../components/payments/PaymentForm';
+import { getUserPayments } from '../helpers/data/PaymentData';
 
 function UserPaymentsView() {
   const [userPayments, setUserPayments] = useState([]);
@@ -41,6 +42,12 @@ function UserPaymentsView() {
         <CardTitle tag='h5'> Account Number: {paymentInfo.accountNumber}</CardTitle>
         <CardTitle tag='h6'> Payment Id: {paymentInfo.id}</CardTitle>
           <CardBody>
+          <Button>Add A Payment</Button>
+        <PaymentForm
+          userPayments={userPayments}
+          setUserPayments={setUserPayments}
+          {...paymentInfo}
+        />
           </CardBody>
           <Button onClick>Delete Payment Method</Button >
           <br />
