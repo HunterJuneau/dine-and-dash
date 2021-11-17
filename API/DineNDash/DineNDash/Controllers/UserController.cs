@@ -46,6 +46,20 @@ namespace DineNDash.Controllers
             return Ok(user);
         }
 
+        // Get User by fbUid //
+        [HttpGet("auth/{fbUid}")]
+        public IActionResult GetAuthUser(string fbUid)
+        {
+            var user = _repo.GetUserByFbUid(fbUid);
+
+            if (user == null)
+            {
+                return NotFound($"No User with the UID of {fbUid} was found.");
+            }
+
+            return Ok(user);
+        }
+
 
         // Add User //
         [HttpPost]
