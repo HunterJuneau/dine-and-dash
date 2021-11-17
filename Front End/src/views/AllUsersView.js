@@ -5,7 +5,7 @@ import UserCard from '../components/users/UserCard';
 
 function AllUsersView({ users }) {
   return (
-    <div>
+    <div className='userContainer'>
       {users.map((userInfo) => (
         <UserCard
           key={userInfo.id}

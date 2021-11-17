@@ -35,7 +35,7 @@ function UserSingleOrderDetailsView() {
             <br />
             </div>
             <div>
-            <img src={productOrderInfo.image} />
+            <img id='productImage' src={productOrderInfo.image} />
             </div>
             <br />
             <CardText>Product Type: {productOrderInfo.productType}</CardText>

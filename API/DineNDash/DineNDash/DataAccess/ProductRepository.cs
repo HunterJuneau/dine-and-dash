@@ -83,10 +83,10 @@ namespace DineNDash.DataAccess
                                        ,[quantity]
                                        ,[forSale]
                                        ,[image]
-                                       ,[status])
+                                       ,[forRent])
 	                            output inserted.Id
                                  VALUES
-		                            (@type, @productName, @productDescription, @price, @quantity, @forSale, @image, @status)";
+		                            (@type, @productName, @productDescription, @price, @quantity, @forSale, @image, @forRent)";
 
             var id = db.ExecuteScalar<Guid>(sql, product);
             product.Id = id;
@@ -103,6 +103,7 @@ namespace DineNDash.DataAccess
                                Price = @price,
                                Quantity = @quantity,
                                ForSale = @forSale,
+                               ForRent = @forRent,
                                Image = @image,
                                Status = @status
                            Output inserted.*

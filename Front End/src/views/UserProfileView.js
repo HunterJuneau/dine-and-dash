@@ -33,7 +33,7 @@ function UserProfileView() {
 
   return (
     <div>
-      <Card>
+      <Card className='userCard'>
         <br />
         <CardTitle tag='h3'>{oneSingleUser.firstName}</CardTitle>
         <CardTitle tag='h3'>{oneSingleUser.lastName}</CardTitle>
