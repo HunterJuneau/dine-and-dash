@@ -22,7 +22,6 @@ const signInUser = () => {
         firstName: user?.given_name,
         lastName: user?.family_name,
         imageUrl: user?.picture,
-        id: fbUser.user.uid,
         contactEmail: user?.email,
         status: true
       };

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Productcard from '../../components/products/Productcard';
 import { getProductByType, getProductByForSaleOrRent } from '../../helpers/data/ProductData';
 
-function ProductsView({ products, setProducts }) {
+function ProductsView({ products, setProducts, users }) {
   const [selectValue, setSelectValue] = useState('');
 
   const handleSubmit = (e) => {
@@ -41,6 +41,7 @@ function ProductsView({ products, setProducts }) {
           {...productInfo}
           products={products}
           setProducts={setProducts}
+          users={users}
         />
       ))}
       </div>
@@ -51,6 +52,7 @@ function ProductsView({ products, setProducts }) {
 ProductsView.propTypes = {
   products: PropTypes.array,
   setProducts: PropTypes.func,
+  users: PropTypes.any
 };
 
 export default ProductsView;
