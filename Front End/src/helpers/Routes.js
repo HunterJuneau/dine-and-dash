@@ -2,14 +2,15 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import LandingPage from '../views/LandingPages';
-import ProductsView from '../views/ProductsView';
+import ProductsView from '../views/ProductViews/ProductsView';
 import CartView from '../views/CartView';
 import InventoryView from '../views/InventoryView';
-import SingleProduct from '../views/SingleProduct';
+import SingleProduct from '../views/ProductViews/SingleProduct';
 import AllUsersView from '../views/AllUsersView';
 import UserProfileView from '../views/UserProfileView';
 import UserOrdersView from '../views/UserOrdersView';
 import UserSingleOrderDetailsView from '../views/UserSingleOrderDetailsView';
+import ProductFormView from '../views/ProductViews/ProductFormView';
 import UserPaymentsView from '../views/UserPaymentsView';
 import PrivateRoute from './PrivateRoute';
 
@@ -28,7 +29,9 @@ export default function Routes({
           exact
           path='/products'
           component={() => (
-            <ProductsView products={products} setProducts={setProducts} />
+            <ProductsView products={products}
+            setProducts={setProducts}
+            />
           )}
         />
         <Route
@@ -67,7 +70,7 @@ export default function Routes({
         />
 
         <PrivateRoute
-          component={() => <InventoryView products={products} />}
+          component={() => <InventoryView products={products} setProducts={setProducts} />}
           fbUser={fbUser}
           admin={admin}
           exact
@@ -80,6 +83,13 @@ export default function Routes({
           admin={admin}
           exact
           path='/admin/inventory/:productId'
+        />
+        <PrivateRoute
+          fbUser={fbUser}
+          admin={admin}
+          exact path='/admin/addProduct'
+          component={() => <ProductFormView products={products}
+            admin={admin} fbUser={fbUser} setProducts={setProducts}/>}
         />
 
         <Route exact path='/cart' component={() => <CartView />} />
