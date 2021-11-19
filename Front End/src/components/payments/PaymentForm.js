@@ -6,15 +6,25 @@ import {
   Label,
   Input,
 } from 'reactstrap';
-import { addPayment } from '../../helpers/data/PaymentData';
+import { addPayment, getUpdatedPayment } from '../../helpers/data/PaymentData';
 
-function PaymentForm({ userPayments, setUserPayments, ...paymentInfo }) {
+function PaymentForm({
+  // userPayments,
+  setUserPayments,
+  isSubmitted,
+  setIsSubmitted,
+  personId,
+  createPayment,
+  setCreatePayment,
+  ...paymentInfo
+}) {
   const [addNewPayment, setAddNewPayment] = useState({
     type: paymentInfo?.type || '',
     accountNumber: paymentInfo?.accountNumber || '',
-    userId: paymentInfo?.userId
+    userId: paymentInfo?.userId || personId,
+    id: paymentInfo?.id
   });
-  // console.warn(setUserPayments);
+
   const handleInputChange = (e) => {
     setAddNewPayment((prevState) => ({
       ...prevState,
@@ -26,9 +36,14 @@ function PaymentForm({ userPayments, setUserPayments, ...paymentInfo }) {
     const isMounted = true;
     e.preventDefault();
     if (isMounted) {
-      addPayment(paymentInfo.id, addNewPayment).then(setUserPayments);
+      if (paymentInfo.id) {
+        getUpdatedPayment(addNewPayment.id, addNewPayment).then(setUserPayments);
+      } else {
+        addPayment(personId, addNewPayment).then(setUserPayments);
+        setCreatePayment(!createPayment);
+      }
+      setIsSubmitted(!isSubmitted);
     }
-    // console.warn(addNewPayment);
   };
 
   return (
@@ -57,7 +72,6 @@ function PaymentForm({ userPayments, setUserPayments, ...paymentInfo }) {
             type='string'
             value={addNewPayment.userId}
             readOnly
-            // onChange={handleInputChange}
           />
         <Button type='submit'>Submit</Button>
       </Form>
@@ -66,9 +80,14 @@ function PaymentForm({ userPayments, setUserPayments, ...paymentInfo }) {
 }
 
 PaymentForm.propTypes = {
-  userPayments: PropTypes.array,
+  // userPayments: PropTypes.array,
   setUserPayments: PropTypes.func,
-  paymentInfo: PropTypes.object
+  paymentInfo: PropTypes.object,
+  isSubmitted: PropTypes.bool,
+  setIsSubmitted: PropTypes.func,
+  personId: PropTypes.string,
+  createPayment: PropTypes.bool,
+  setCreatePayment: PropTypes.func
 };
 
 export default PaymentForm;

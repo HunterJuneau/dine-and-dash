@@ -13,6 +13,8 @@ import { getUserPayments } from '../helpers/data/PaymentData';
 function UserPaymentsView() {
   const [userPayments, setUserPayments] = useState([]);
   const [createPayment, setCreatePayment] = useState(false);
+  const [editPayment, setEditPayment] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const { id } = useParams();
   const history = useHistory();
   const amountOfPayments = userPayments.length;
@@ -24,12 +26,15 @@ function UserPaymentsView() {
     if (isMounted) {
       getUserPayments(id).then((response) => setUserPayments(response));
     }
-  }, [userPayments]);
+  }, [isSubmitted]);
 
   const handleClick = (type) => {
     switch (type) {
       case 'add':
         setCreatePayment(!createPayment);
+        break;
+      case 'edit':
+        setEditPayment((prevState) => !prevState);
         break;
       default:
         console.warn('You got this!');
@@ -39,13 +44,25 @@ function UserPaymentsView() {
   if (amountOfPayments <= 0) {
     return noPayments;
   }
-
   return (
     <div>
       <h1>Payment Methods</h1>
       <br />
       <h4>Payment Methods: {amountOfPayments}</h4>
       <br />
+      <Button onClick={() => handleClick('add')}>Add A Payment</Button>
+      <>
+      {
+          createPayment && <PaymentForm
+            personId={id}
+            setUserPayments={setUserPayments}
+            isSubmitted={isSubmitted}
+            setIsSubmitted={setIsSubmitted}
+            createPayment={createPayment}
+            setCreatePayment={setCreatePayment}
+          />
+        }
+      </>
       {userPayments.filter((paymentInfo) => paymentInfo.active).map((paymentInfo) => (
         <Card key={paymentInfo.id}>
           <br />
@@ -55,19 +72,18 @@ function UserPaymentsView() {
           <CardBody>
 
           </CardBody>
-          <Button onClick={() => handleClick('add')}>Add A Payment</Button>
-        {
-        createPayment && <PaymentForm
-          userPayments={userPayments}
-          setUserPayments={setUserPayments}
-          {...paymentInfo}
-        />
-        }
         <br />
           <Button onClick>Delete Payment Method</Button >
           <br />
-          <Button onClick>Edit Payment Method</Button >
-
+          <Button onClick={() => handleClick('edit')}>Edit Payment Method</Button >
+          {
+          editPayment && <PaymentForm
+            {...paymentInfo}
+            setUserPayments={setUserPayments}
+            isSubmitted={isSubmitted}
+            setIsSubmitted={setIsSubmitted}
+          />
+        }
           {/* <br />
           <Button onClick={() => history.push(`/user/${id}`)}>Back To User Profile</Button>
           <br /> */}
