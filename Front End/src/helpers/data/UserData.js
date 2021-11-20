@@ -27,9 +27,16 @@ const getUserOrders = (userId) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
+const getAuthUser = (fbUid) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/api/user/auth/${fbUid}`)
+    .then((response) => resolve(response))
+    .catch((error) => reject(error));
+});
+
 export {
   getAllUsers,
   getSingleUser,
   createUser,
-  getUserOrders
+  getUserOrders,
+  getAuthUser,
 };
