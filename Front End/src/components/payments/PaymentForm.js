@@ -6,12 +6,14 @@ import {
   Label,
   Input,
 } from 'reactstrap';
-import { addPayment, getUpdatedPayment, getUserPayments } from '../../helpers/data/PaymentData';
+import { addPayment, getUpdatedPayment } from '../../helpers/data/PaymentData';
 
 function PaymentForm({
-  // userPayments,
+  userPayments,
   formTitle,
   setUserPayments,
+  editPayment,
+  setEditPayment,
   isSubmitted,
   setIsSubmitted,
   personId,
@@ -23,6 +25,7 @@ function PaymentForm({
     type: paymentInfo?.type || '',
     accountNumber: paymentInfo?.accountNumber || '',
     userId: paymentInfo?.userId || personId,
+    status: paymentInfo?.status || true,
     id: paymentInfo?.id
   });
 
@@ -38,7 +41,8 @@ function PaymentForm({
     const isMounted = true;
     if (isMounted) {
       if (paymentInfo.id) {
-        getUpdatedPayment(addNewPayment.id, addNewPayment).then(setUserPayments).then(getUserPayments(personId));
+        getUpdatedPayment(addNewPayment.id, addNewPayment, addNewPayment.userId).then(setUserPayments);
+        setEditPayment(!editPayment);
       } else {
         addPayment(personId, addNewPayment).then(setUserPayments);
         setCreatePayment(!createPayment);
@@ -75,6 +79,16 @@ function PaymentForm({
             value={addNewPayment.userId}
             readOnly
           />
+          <React.Fragment>
+        <Input
+          name='status'
+          type='checkbox'
+          checked={addNewPayment.status}
+          onChange={handleInputChange}
+        />
+        <Label check>Click if you want to disable this payment</Label>
+        </React.Fragment>
+        <br />
         <Button type='submit'>Submit</Button>
       </Form>
     </div>
@@ -82,9 +96,11 @@ function PaymentForm({
 }
 
 PaymentForm.propTypes = {
-  // userPayments: PropTypes.array,
+  userPayments: PropTypes.array,
   formTitle: PropTypes.string,
   setUserPayments: PropTypes.func,
+  editPayment: PropTypes.bool,
+  setEditPayment: PropTypes.func,
   paymentInfo: PropTypes.object,
   isSubmitted: PropTypes.bool,
   setIsSubmitted: PropTypes.func,

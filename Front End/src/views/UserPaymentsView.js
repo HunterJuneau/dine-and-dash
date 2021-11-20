@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Button } from 'reactstrap';
 import PaymentCard from '../components/payments/PaymentCard';
 import PaymentForm from '../components/payments/PaymentForm';
@@ -10,10 +10,10 @@ function UserPaymentsView() {
   const [createPayment, setCreatePayment] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { id } = useParams();
-  const history = useHistory();
-  const amountOfPayments = userPayments.length;
-  const noPayments = <div><h1>You Have No Payment Methods!</h1><Button onClick={() => history.push(`/user/${id}`)}>Add Payment Method</Button>
-  </div>;
+  // const history = useHistory();
+  // const amountOfPayments = userPayments.length;
+  // const noPayments = <div><h1>You Have No Payment Methods!</h1><Button onClick={() => history.push(`/user/${id}`)}>Add Payment Method</Button>
+  // </div>;
 
   useEffect(() => {
     const isMounted = true;
@@ -26,15 +26,15 @@ function UserPaymentsView() {
     setCreatePayment(!createPayment);
   };
 
-  if (userPayments?.length <= 0) {
-    return noPayments;
-  }
+  // if (userPayments?.length <= 0) {
+  //   return noPayments;
+  // }
 
   return (
     <div>
       <h1>Payment Methods</h1>
       <br />
-      <h4>Payment Methods: {amountOfPayments}</h4>
+      <h4>Payment Methods: {userPayments.length}</h4>
       <br />
       <Button onClick={openAddClick}>Add A Payment</Button>
       <>
@@ -50,7 +50,8 @@ function UserPaymentsView() {
           />
         }
       </>
-      {userPayments.filter((paymentInfo) => paymentInfo.active).map((paymentInfo) => (
+      <br />
+      {userPayments.length <= 0 ? 'You Have No Payment Methods!' : userPayments.filter((paymentInfo) => paymentInfo.active).map((paymentInfo) => (
         <PaymentCard
           key={paymentInfo.id}
           {...paymentInfo}

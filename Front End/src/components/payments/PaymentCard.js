@@ -16,14 +16,15 @@ function PaymentCard({
   ...paymentInfo
 }) {
   const [editPayment, setEditPayment] = useState(false);
+  const [payActive, setPayActive] = useState(false);
   const handleClick = (type) => {
     switch (type) {
       case 'edit':
         setEditPayment((prevState) => !prevState);
         break;
-      // case 'deleteSoft':
-      //   setSoftDelete((prevState) => !prevState);
-      //   break;
+      case 'active':
+        setPayActive((prevState) => !prevState);
+        break;
       default:
         console.warn('Hello World!');
     }
@@ -39,15 +40,29 @@ function PaymentCard({
         <Button onClick>Delete Payment Method</Button >
         <br />
         <Button onClick={() => handleClick('edit')}>{ editPayment ? 'Close' : 'Edit Payment Method' }</Button>
+        <Button color='primary' onClick={() => handleClick('active')}> { payActive ? 'Close' : 'Disable Payment' }</Button>
         <CardBody>
         {
           editPayment && <PaymentForm
             formTitle='Edit Payment'
             {...paymentInfo}
+            editPayment={editPayment}
+            setEditPayment={setEditPayment}
             setUserPayments={setUserPayments}
             isSubmitted={isSubmitted}
             setIsSubmitted={setIsSubmitted}
           />
+        }
+        {
+          payActive && <PaymentForm
+          formTitle='Disable Payment'
+          {...paymentInfo}
+          payActive={payActive}
+          setPayActive={setPayActive}
+          setUserPayments={setUserPayments}
+          isSubmitted={isSubmitted}
+          setIsSubmitted={setIsSubmitted}
+        />
         }
         </CardBody>
           {/* <br />
