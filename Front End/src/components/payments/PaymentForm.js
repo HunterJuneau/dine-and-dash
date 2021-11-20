@@ -6,10 +6,11 @@ import {
   Label,
   Input,
 } from 'reactstrap';
-import { addPayment, getUpdatedPayment } from '../../helpers/data/PaymentData';
+import { addPayment, getUpdatedPayment, getUserPayments } from '../../helpers/data/PaymentData';
 
 function PaymentForm({
   // userPayments,
+  formTitle,
   setUserPayments,
   isSubmitted,
   setIsSubmitted,
@@ -33,11 +34,11 @@ function PaymentForm({
   };
 
   const handleSubmit = (e) => {
-    const isMounted = true;
     e.preventDefault();
+    const isMounted = true;
     if (isMounted) {
       if (paymentInfo.id) {
-        getUpdatedPayment(addNewPayment.id, addNewPayment).then(setUserPayments);
+        getUpdatedPayment(addNewPayment.id, addNewPayment).then(setUserPayments).then(getUserPayments(personId));
       } else {
         addPayment(personId, addNewPayment).then(setUserPayments);
         setCreatePayment(!createPayment);
@@ -48,6 +49,7 @@ function PaymentForm({
 
   return (
     <div>
+      <h4>{formTitle}</h4>
       <Form
         autoComplete='off'
         onSubmit={handleSubmit}
@@ -81,6 +83,7 @@ function PaymentForm({
 
 PaymentForm.propTypes = {
   // userPayments: PropTypes.array,
+  formTitle: PropTypes.string,
   setUserPayments: PropTypes.func,
   paymentInfo: PropTypes.object,
   isSubmitted: PropTypes.bool,

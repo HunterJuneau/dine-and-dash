@@ -19,9 +19,10 @@ const addPayment = (id, newPayment) => new Promise((resolve, reject) => {
 
 const getUpdatedPayment = (id, updatedPayment) => new Promise((resolve, reject) => {
   axios.put(`${dbUrl}/api/payment/${id}`, updatedPayment)
-    .then(() => {
-      getUserPayments(id).then((response) => resolve(response));
-    })
+    .then((response) => resolve(response))
+    // .then(() => {
+    //   getUserPayments(id).then((response) => resolve(response));
+    // })
     .catch((error) => reject(error));
 });
 
