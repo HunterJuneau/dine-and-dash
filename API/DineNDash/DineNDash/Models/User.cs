@@ -13,6 +13,6 @@ namespace DineNDash.Models
         public DateTime CustomerCreated { get; set; }
         public string ContactEmail { get; set; }
         public bool Status { get; set; } = true;
-        public string FbUid { get; set; }
+        public string FbUid { get; set; } = "";
     }
 }

@@ -66,7 +66,7 @@ namespace DineNDash.DataAccess
         {
             using var db = new SqlConnection(_connectionString);
 
-            var productOrderSql = @"select pr.productName, pr.image, po.id as productOrderId, po.productQuantity, po.totalCost as TotalCost, pr.price as                                             IndividualProductPrice,pr.productDescription,pr.type as ProductType, p.type PaymentType, p.accountNumber
+            var productOrderSql = @"select pr.productName, pr.image, po.id as productOrderId, po.productQuantity, po.totalCost as TotalCost, pr.price as IndividualProductPrice,pr.productDescription,pr.type as ProductType, p.type PaymentType, p.accountNumber
                         from ProductOrders po
 							join Orders o
 		                        on o.id = po.orderId

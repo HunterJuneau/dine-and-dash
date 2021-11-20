@@ -13,6 +13,8 @@ namespace DineNDash.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
+        public string FirebaseUid => User.FindFirst(claim => claim.Type == "user_id").Value;
+
         OrderRepository _orderRepository;
         PaymentRepository _paymentRepository;
         UserRepository _userRepository;
@@ -46,18 +48,25 @@ namespace DineNDash.Controllers
             return Ok(_orderRepository.GetUserOrders(userId));
         }
 
+        // Get User's compelted orders //
+        [HttpGet("user/completed/{userId}")]
+        public IActionResult GetAllCompletedOrders(Guid userId)
+        {
+            return Ok(_orderRepository.GetCompletedUserOrders(userId));
+        }
+
         [HttpPost]
         public IActionResult CreateOrder(CreateOrderCommand command)
         {
-            var user = _userRepository.GetById(command.UserId);
+            var user = _userRepository.GetUserByFbUid(FirebaseUid);
             var payment = _paymentRepository.GetById(command.PaymentId);
 
 
             if (user == null)
                 return NotFound("There was no matching user in the database.");
 
-            if (payment == null)
-                return NotFound("There was no matching payment in the database");
+            //if (payment == null)
+            //    return NotFound("There was no matching payment in the database");
 
             var order = new Order
             {
