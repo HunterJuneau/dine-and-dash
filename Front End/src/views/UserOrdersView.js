@@ -13,6 +13,7 @@ function UserOrdersView() {
   const [userOrders, setUserOrders] = useState([]);
   const { id } = useParams();
   const history = useHistory();
+  const orderNotcompleted = userOrders.completed;
   const totalNumberOfOrders = userOrders.length;
   const noUserOrdersMessage = <div><h1>You Have No Orders!</h1><Button onClick={() => history.push(`/user/${id}`)}>Back To User Profile</Button>
   </div>;
@@ -26,6 +27,9 @@ function UserOrdersView() {
 
   if (totalNumberOfOrders <= 0) {
     return noUserOrdersMessage;
+  }
+  if (totalNumberOfOrders.completed === false) {
+    return orderNotcompleted;
   }
 
   return (

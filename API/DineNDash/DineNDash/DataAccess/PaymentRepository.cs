@@ -34,8 +34,8 @@ namespace DineNDash.DataAccess
         {
             using var db = new SqlConnection(_connectionString);
 
-            var sql = @"Select * 
-                From Payments 
+            var sql = @"Select *
+                From Payments
                 WHERE userId = @id";
 
             var payments = db.Query<Payment>(sql, new { id = userId });
