@@ -9,7 +9,7 @@ import {
   CardTitle,
   Button
 } from 'reactstrap';
-import { getSingleProduct } from '../helpers/data/ProductData';
+import { getSingleProduct } from '../../helpers/data/ProductData';
 
 function SingleProduct({ admin = false }) {
   const [singleProduct, setSingleProduct] = useState({});
@@ -25,16 +25,18 @@ function SingleProduct({ admin = false }) {
 
   return (
     <div>
-      <Card>
+      <Card className='productCard'>
         <CardTitle tag='h3'>{singleProduct.productName}</CardTitle>
           <CardBody>
             <CardTitle tag='h6'>{singleProduct.type}</CardTitle>
             <CardText>{singleProduct.productDescription}</CardText>
             <CardText>Price: ${singleProduct.price}</CardText>
             <CardText>Quantity: {singleProduct.quantity}</CardText>
-            <CardText>{singleProduct.forSale ? 'For Sale or Rent' : 'For Rent Only'}</CardText>
+            <CardText>{singleProduct.forSale ? 'For Sale' : ''}</CardText>
+            <CardText>{singleProduct.forRent ? 'For Rent' : ''} </CardText>
+            <img id='productImage'src={singleProduct.image}/>
           </CardBody>
-          <Button onClick={() => history.push(admin ? '/admin/inventory' : '/products')}>Back</Button>
+          <Button color='info' onClick={() => history.push(admin ? '/admin/inventory' : '/products')}>Back</Button>
       </Card>
     </div>
   );

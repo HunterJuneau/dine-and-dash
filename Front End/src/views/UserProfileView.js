@@ -27,9 +27,13 @@ function UserProfileView({ fbUser }) {
     history.push(`/user/order/${fbUser ? fbUser.uid : id}`);
   };
 
+  const handleClickUserPayments = () => {
+    history.push(`/payment/users/${id}`);
+  };
+
   return (
     <div>
-      <Card>
+      <Card className='userCard'>
         <br />
         <CardTitle tag='h3'>{oneSingleUser.firstName}</CardTitle>
         <CardTitle tag='h3'>{oneSingleUser.lastName}</CardTitle>
@@ -39,7 +43,10 @@ function UserProfileView({ fbUser }) {
             </div>
             <CardText>Email: {oneSingleUser.contactEmail}</CardText>
           </CardBody>
+          <br />
           <Button onClick={() => handleClickUserOrders()}>View Your Orders</Button>
+          <br />
+          <Button onClick={() => handleClickUserPayments()}>View Your Payments</Button>
           <br />
           <Button onClick={() => history.push('/user')}>Back to Users</Button>
       </Card>

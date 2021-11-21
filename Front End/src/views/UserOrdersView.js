@@ -13,8 +13,11 @@ function UserOrdersView() {
   const [userOrders, setUserOrders] = useState([]);
   const { id } = useParams();
   const history = useHistory();
+  const orderNotcompleted = userOrders.completed;
   const totalNumberOfOrders = userOrders.length;
-  const noOrders = <h1>You Have No Orders!</h1>;
+  const noUserOrdersMessage = <div><h1>You Have No Orders!</h1><Button onClick={() => history.push(`/user/${id}`)}>Back To User Profile</Button>
+  </div>;
+
   useEffect(() => {
     const isMounted = true;
     if (isMounted) {
@@ -23,8 +26,10 @@ function UserOrdersView() {
   }, []);
 
   if (totalNumberOfOrders <= 0) {
-    return noOrders
-    && <Button onClick={() => history.push(`/user/${id}`)}>Back To User Profile</Button>;
+    return noUserOrdersMessage;
+  }
+  if (totalNumberOfOrders.completed === false) {
+    return orderNotcompleted;
   }
 
   return (

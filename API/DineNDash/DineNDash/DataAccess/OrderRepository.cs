@@ -41,7 +41,7 @@ namespace DineNDash.DataAccess
 
             var orderSql = @"select *
                         from Orders o
-	                        join Users u 
+	                        join Users u
 		                        on u.Id = o.UserId
                             join Payments p
                                 on p.Id = o.PaymentId
@@ -55,12 +55,26 @@ namespace DineNDash.DataAccess
             return order.FirstOrDefault();
         }
 
+        internal IEnumerable<Order> GetCompletedUserOrders(Guid userId)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            var sql = @"Select *
+                From Orders
+                WHERE userId = @id
+                AND completed = 1";
+
+            var orders = db.Query<Order>(sql, new { id = userId });
+
+            return orders;
+        }
+
         internal IEnumerable<Order> GetUserOrders(Guid userId)
         {
             using var db = new SqlConnection(_connectionString);
 
-            var sql = @"Select * 
-                From Orders 
+            var sql = @"Select *
+                From Orders
                 WHERE userId = @id";
 
             var orders = db.Query<Order>(sql, new { id = userId });
@@ -76,19 +90,16 @@ namespace DineNDash.DataAccess
                                        (
                                          [UserId]
                                         ,[TotalCost]
-                                        ,[PaymentId]
                                         ,[Completed])
 	                            output inserted.Id
                                  VALUES
-		                            (@UserId, @TotalCost, @PaymentId, @Completed)";
+		                            (@UserId, @TotalCost, @Completed)";
 
             var parameters = new
             {
                 TotalCost = newOrder.TotalCost,
                 Completed = newOrder.Completed,
                 UserId = newOrder.User.Id,
-                PaymentId = newOrder.Payment.Id
-
             };
 
             var id = db.ExecuteScalar<Guid>(sql, parameters);

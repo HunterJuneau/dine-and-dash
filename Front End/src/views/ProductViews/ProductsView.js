@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Productcard from '../components/products/Productcard';
-import { getProductByType, getProductByForSaleOrRent } from '../helpers/data/ProductData';
+import Productcard from '../../components/products/Productcard';
+import { getProductByType, getProductByForSaleOrRent } from '../../helpers/data/ProductData';
 
-function ProductsView({ products, setProducts }) {
+function ProductsView({ products, setProducts, users }) {
   const [selectValue, setSelectValue] = useState('');
 
   const handleSubmit = (e) => {
@@ -22,7 +22,7 @@ function ProductsView({ products, setProducts }) {
           onSubmit={handleSubmit}
         >
           <select
-            type='text'
+            type='select'
             value={selectValue}
             onChange={(e) => setSelectValue(e.target.value)}
           >
@@ -34,19 +34,25 @@ function ProductsView({ products, setProducts }) {
           </select>
           <button type='submit'>Find Products</button>
         </form>
+      <div className='productsContainer'>
       {products.map((productInfo) => (
         <Productcard
           key={productInfo.id}
           {...productInfo}
+          products={products}
+          setProducts={setProducts}
+          users={users}
         />
       ))}
+      </div>
     </div>
   );
 }
 
 ProductsView.propTypes = {
   products: PropTypes.array,
-  setProducts: PropTypes.func
+  setProducts: PropTypes.func,
+  users: PropTypes.any
 };
 
 export default ProductsView;

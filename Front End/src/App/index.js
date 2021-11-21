@@ -4,8 +4,8 @@ import firebase from 'firebase';
 import './App.scss';
 import NavBar from '../components/NavBar';
 import Routes from '../helpers/Routes';
-import { getAllProducts } from '../helpers/data/ProductData';
 import { getAllUsers, getAuthUser, createUser } from '../helpers/data/UserData';
+import { getAllProducts, getOnlyAvailableProducts } from '../helpers/data/ProductData';
 import { adminConfig } from '../helpers/apiKeys';
 
 function App() {
@@ -13,8 +13,7 @@ function App() {
   const [dbUser, setDbUser] = useState(null);
   const [products, setProducts] = useState([]);
   const [users, setUsers] = useState([]);
-  const [admin, setAdmin] = useState(false);
-  // const [userOrders, setUserOrders] = useState([]);
+  const [admin, setAdmin] = useState(null);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((authed) => {
@@ -22,8 +21,8 @@ function App() {
         authed
           .getIdToken()
           .then((token) => window.sessionStorage.setItem('token', token));
-        setFbUser(authed);
         setAdmin(adminConfig.includes(authed.uid));
+        setFbUser(authed);
       } else if (fbUser || fbUser === null) {
         setFbUser(false);
         setDbUser(false);
@@ -53,9 +52,13 @@ function App() {
   }, [fbUser]);
 
   useEffect(() => {
-    getAllProducts().then(setProducts);
+    if (admin === true) {
+      getAllProducts().then(setProducts);
+    } else {
+      getOnlyAvailableProducts(true).then(setProducts);
+    }
     getAllUsers().then(setUsers);
-  }, []);
+  }, [admin]);
 
   return (
     <>
