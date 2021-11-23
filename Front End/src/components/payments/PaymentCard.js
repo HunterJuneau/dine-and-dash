@@ -16,15 +16,16 @@ function PaymentCard({
   ...paymentInfo
 }) {
   const [editPayment, setEditPayment] = useState(false);
-  const [payActive, setPayActive] = useState(false);
+  // const [payActive, setPayActive] = useState(false);
+
   const handleClick = (type) => {
     switch (type) {
       case 'edit':
         setEditPayment((prevState) => !prevState);
         break;
-      case 'active':
-        setPayActive((prevState) => !prevState);
-        break;
+      // case 'active':
+      //   setPayActive((prevState) => !prevState);
+      //   break;
       default:
         console.warn('Hello World!');
     }
@@ -40,7 +41,7 @@ function PaymentCard({
         <Button onClick>Delete Payment Method</Button >
         <br />
         <Button onClick={() => handleClick('edit')}>{ editPayment ? 'Close' : 'Edit Payment Method' }</Button>
-        <Button color='primary' onClick={() => handleClick('active')}> { payActive ? 'Close' : 'Disable Payment' }</Button>
+        {/* <Button color='primary' onClick={() => handleClick('active')}> { payActive ? 'Close' : 'Disable Payment' }</Button> */}
         <CardBody>
         {
           editPayment && <PaymentForm
@@ -53,17 +54,19 @@ function PaymentCard({
             setIsSubmitted={setIsSubmitted}
           />
         }
-        {
+        {/* {
           payActive && <PaymentForm
           formTitle='Disable Payment'
           {...paymentInfo}
           payActive={payActive}
           setPayActive={setPayActive}
+          // editPayment={editPayment}
+          setEditPayment={setEditPayment}
           setUserPayments={setUserPayments}
           isSubmitted={isSubmitted}
           setIsSubmitted={setIsSubmitted}
         />
-        }
+        } */}
         </CardBody>
           {/* <br />
           <Button onClick={() => history.push(`/user/${id}`)}>Back To User Profile</Button>

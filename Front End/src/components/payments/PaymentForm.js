@@ -12,6 +12,7 @@ function PaymentForm({
   userPayments,
   formTitle,
   setUserPayments,
+  payActive,
   editPayment,
   setEditPayment,
   isSubmitted,
@@ -32,21 +33,25 @@ function PaymentForm({
   const handleInputChange = (e) => {
     setAddNewPayment((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
+    console.warn(addNewPayment.status, 'hello');
+    console.warn(addNewPayment, 'hello');
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const isMounted = true;
-    if (isMounted) {
-      if (paymentInfo.id) {
-        getUpdatedPayment(addNewPayment.id, addNewPayment, addNewPayment.userId).then(setUserPayments);
-        setEditPayment(!editPayment);
-      } else {
-        addPayment(personId, addNewPayment).then(setUserPayments);
-        setCreatePayment(!createPayment);
-      }
+    // const isMounted = true;
+    // if (isMounted) {
+    if (paymentInfo.id) {
+      getUpdatedPayment(addNewPayment.id, addNewPayment, addNewPayment.userId).then(setUserPayments);
+      // setEditPayment(false);
+      console.warn(addNewPayment.status, 'submit');
+      console.warn(addNewPayment, 'submit');
+    } else {
+      addPayment(personId, addNewPayment).then(setUserPayments);
+      setCreatePayment(!createPayment);
+      // }
       setIsSubmitted(!isSubmitted);
     }
   };
@@ -58,6 +63,7 @@ function PaymentForm({
         autoComplete='off'
         onSubmit={handleSubmit}
       >
+ <React.Fragment>
         <Label>Payment Type</Label>
           <Input
             name='type'
@@ -65,6 +71,8 @@ function PaymentForm({
             value={addNewPayment.type}
             onChange={handleInputChange}
           />
+          </React.Fragment>
+ <React.Fragment>
         <Label>Account Number</Label>
           <Input
             name='accountNumber'
@@ -72,6 +80,9 @@ function PaymentForm({
             value={addNewPayment.accountNumber}
             onChange={handleInputChange}
           />
+        </React.Fragment>
+
+ <React.Fragment>
         <Label>User Id</Label>
           <Input
             name='userId'
@@ -79,15 +90,17 @@ function PaymentForm({
             value={addNewPayment.userId}
             readOnly
           />
-          <React.Fragment>
-        <Input
-          name='status'
-          type='checkbox'
-          checked={addNewPayment.status}
+          </React.Fragment>
+        <select
+          type='select'
+          value={addNewPayment.status}
           onChange={handleInputChange}
-        />
-        <Label check>Click if you want to disable this payment</Label>
-        </React.Fragment>
+        >
+         <option hidden value=''>Payment Activity</option>
+            <option value='true'>Active</option>
+            <option value='false'>Disable Payment</option>
+        </select>
+        <br />
         <br />
         <Button type='submit'>Submit</Button>
       </Form>
@@ -99,6 +112,7 @@ PaymentForm.propTypes = {
   userPayments: PropTypes.array,
   formTitle: PropTypes.string,
   setUserPayments: PropTypes.func,
+  payActive: PropTypes.bool,
   editPayment: PropTypes.bool,
   setEditPayment: PropTypes.func,
   paymentInfo: PropTypes.object,
