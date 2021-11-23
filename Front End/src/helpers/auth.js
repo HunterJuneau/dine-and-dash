@@ -1,6 +1,5 @@
 import firebase from 'firebase';
 import axios from 'axios';
-import { createUser } from './data/UserData';
 
 axios.interceptors.request.use((request) => {
   const token = window.sessionStorage.getItem('token');
@@ -14,29 +13,8 @@ axios.interceptors.request.use((request) => {
 
 const signInUser = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
-
-  firebase.auth().signInWithPopup(provider).then((fbUser) => {
-    const user = fbUser.additionalUserInfo.profile;
-    if (fbUser.additionalUserInfo?.isNewUser) {
-      const userInfo = {
-        FbUid: fbUser.user.uid,
-        firstName: user?.given_name,
-        lastName: user?.family_name,
-        imageUrl: user?.picture,
-        contactEmail: user?.email,
-        status: true
-      };
-      createUser(userInfo);
-      console.warn(userInfo);
-      console.warn(fbUser);
-    }
-  });
+  firebase.auth().signInWithPopup(provider);
 };
-
-// const signInUser = () => {
-//   const provider = new firebase.auth.GoogleAuthProvider();
-//   firebase.auth().signInWithPopup(provider);
-// };
 
 const signOutUser = () => new Promise((resolve, reject) => {
   firebase.auth().signOut().then(resolve).catch(reject);

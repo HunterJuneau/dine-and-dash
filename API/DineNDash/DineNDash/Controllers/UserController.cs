@@ -11,7 +11,7 @@ namespace DineNDash.Controllers
     public class UserController : ControllerBase
     {
         UserRepository _repo;
-        public string FirebaseUid => User.FindFirst(claim => claim.Type == "user_id").Value;
+
         public UserController(UserRepository repo)
         {
             _repo = repo;
@@ -42,19 +42,18 @@ namespace DineNDash.Controllers
                 return NotFound($"No User with the Id of {id} was found.");
             }
 
-
             return Ok(user);
         }
 
         // Get User by fbUid //
-        [HttpGet("auth/currentuser")]
-        public IActionResult GetAuthUser()
+        [HttpGet("auth/{fbUid}")]
+        public IActionResult GetAuthUser(string fbUid)
         {
-            var user = _repo.GetUserByFbUid(FirebaseUid);
+            var user = _repo.GetUserByFbUid(fbUid);
 
             if (user == null)
             {
-                return NotFound($"No User with the UID of {FirebaseUid} was found.");
+                return Ok(false);
             }
 
             return Ok(user);
