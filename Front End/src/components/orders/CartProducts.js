@@ -11,7 +11,6 @@
 // } from 'reactstrap';
 // import { getAllProductOrderById } from '../../helpers/data/OrderData';
 
-
 // function CartCard({}) {
 //   const [products, setProducts] = useState([]);
 
@@ -38,7 +37,5 @@
 //     </div>
 //   );
 // }
-
-
 
 // export default CartCard;
