@@ -8,6 +8,6 @@ namespace DineNDash.Models
         public string Type { get; set; }
         public Guid UserId { get; set; }
         public string AccountNumber { get; set; }
-        public bool Active { get; set; } = true;
+        public bool Active { get; set; }
     }
 }
