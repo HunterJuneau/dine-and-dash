@@ -11,24 +11,28 @@ import {
 } from 'reactstrap';
 import { getSingleUser } from '../helpers/data/UserData';
 
-function UserProfileView({ fbUser }) {
+function UserProfileView({ user }) {
   const [oneSingleUser, setOneSingleUser] = useState({});
   const { id } = useParams();
   const history = useHistory();
 
   useEffect(() => {
-    const isMounted = true;
-    if (isMounted) {
-      getSingleUser(fbUser ? fbUser.uid : id).then((response) => setOneSingleUser(response.data));
+    if (user) {
+      setOneSingleUser(user);
+    } else {
+      const isMounted = true;
+      if (isMounted) {
+        getSingleUser(id).then((response) => setOneSingleUser(response.data));
+      }
     }
   }, []);
 
   const handleClickUserOrders = () => {
-    history.push(`/user/order/${fbUser ? fbUser.uid : id}`);
+    history.push(`/user/order/${user ? user.id : id}`);
   };
 
   const handleClickUserPayments = () => {
-    history.push(`/payment/users/${id}`);
+    history.push(`/payment/users/${user ? user.id : id}`);
   };
 
   return (
@@ -48,14 +52,14 @@ function UserProfileView({ fbUser }) {
           <br />
           <Button onClick={() => handleClickUserPayments()}>View Your Payments</Button>
           <br />
-          <Button onClick={() => history.push('/user')}>Back to Users</Button>
+          {user ? <Button onClick={() => history.push('/')}>Home</Button> : <Button onClick={() => history.push('/user')}>Back to Users</Button>}
       </Card>
     </div>
   );
 }
 
 UserProfileView.propTypes = {
-  fbUser: PropTypes.any
+  user: PropTypes.any
 };
 
 export default UserProfileView;

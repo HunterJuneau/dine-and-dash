@@ -10,10 +10,6 @@ function UserPaymentsView() {
   const [createPayment, setCreatePayment] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { id } = useParams();
-  // const history = useHistory();
-  // const amountOfPayments = userPayments.length;
-  // const noPayments = <div><h1>You Have No Payment Methods!</h1><Button onClick={() => history.push(`/user/${id}`)}>Add Payment Method</Button>
-  // </div>;
 
   useEffect(() => {
     const isMounted = true;
@@ -25,10 +21,6 @@ function UserPaymentsView() {
   const openAddClick = () => {
     setCreatePayment(!createPayment);
   };
-
-  // if (userPayments?.length <= 0) {
-  //   return noPayments;
-  // }
 
   return (
     <div>
@@ -60,6 +52,7 @@ function UserPaymentsView() {
           isSubmitted={isSubmitted}
           setIsSubmitted={setIsSubmitted}
         />
+      </Card>
       ))}
     </div>
   );

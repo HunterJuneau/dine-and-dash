@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
   Collapse,
@@ -21,6 +21,7 @@ import { signInUser, signOutUser } from '../helpers/auth';
 
 const NavBar = ({ fbUser, admin }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const history = useHistory();
 
   // const [orders, setOrders] = useState({
   //   totalCost: '',
@@ -84,9 +85,14 @@ const NavBar = ({ fbUser, admin }) => {
         {fbUser !== null && (
           <>
             {fbUser ? (
-              <Button color='warning' onClick={signOutUser}>
-                Sign Out
-              </Button>
+              <>
+                <Button color='primary' onClick={() => history.push('/profile')}>
+                  Profile
+                </Button>
+                <Button color='warning' onClick={signOutUser}>
+                  Sign Out
+                </Button>
+              </>
             ) : (
               <Button color='primary' onClick={signInUser}>
                 Sign In
@@ -94,12 +100,6 @@ const NavBar = ({ fbUser, admin }) => {
             )}
           </>
         )}
-
-        <NavItem>
-          <Link className='nav-link' to='/profile'>
-            Profile
-          </Link>
-        </NavItem>
       </Navbar>
     </div>
   );
