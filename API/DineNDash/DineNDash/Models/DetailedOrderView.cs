@@ -19,4 +19,9 @@ namespace DineNDash.Models
         public string AccountNumber { get; set; }
 
     }
+
+    public class OrderDetail : Order
+    {
+        public IEnumerable<DetailedOrderView> ProductOrders { get; set; }
+    }
 }

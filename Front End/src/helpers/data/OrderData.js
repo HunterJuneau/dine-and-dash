@@ -23,11 +23,17 @@ const createOrder = (order) => new Promise((resolve, reject) => {
 });
 
 const getSingleUserOrder = (userId) => new Promise((resolve, reject) => {
-  axios.get(`${dbUrl}/user/${userId}`)
+  axios.get(`${dbUrl}/api/user/${userId}`)
     .then((response) => resolve(response.data))
     .catch((error) => reject(error));
 });
 
+// Get user's incomplete/current order
+const getUsersCart = (userId) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/api/order/user/incomplete/${userId}`)
+    .then((response) => resolve(response.data))
+    .catch((error) => reject(error));
+});
 // product order data
 const getAllProductOrderById = (id) => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/api/productOrder/${id}`)
@@ -54,5 +60,6 @@ export {
   getAllOrders,
   getSingleOrderById,
   getSingleUserOrder,
-  createProductOrder
+  createProductOrder,
+  getUsersCart
 };

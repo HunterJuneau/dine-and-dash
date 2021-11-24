@@ -11,9 +11,11 @@ import {
   ButtonGroup
 } from 'reactstrap';
 import ProductForm from './ProductForm';
-import { createOrder } from '../../helpers/data/OrderData';
+import { createOrder, getUsersCart } from '../../helpers/data/OrderData';
 
 function Productcard({
+  dbUser,
+  fbUser,
   admin,
   setProducts,
   products,
@@ -22,9 +24,12 @@ function Productcard({
 }) {
   const [editProduct, setEditProduct] = useState(false);
   const [softDelete, setSoftDelete] = useState(false);
-  const [addToCart, setAddToCart] = useState({
+  const [createCart, setCreateCart] = useState({
     userId: users.id,
   });
+  // const [getCart, setGetCart] = useState({
+  //   userId: users.id
+  // });
 
   const history = useHistory();
 
@@ -41,10 +46,17 @@ function Productcard({
   };
 
   const AddToCartHandleClick = () => {
-    createOrder(addToCart).then((response) => console.warn(response));
+    getUsersCart(dbUser.id).then((data) => {
+      if (!data) {
+        createOrder(createCart).then((r) => setCreateCart(r));
+      } else {
+        console.warn('bitchass');
+        // add the item to the cart
+      }
+    });
   };
 
-  console.warn(users);
+  // console.warn(users);
   // useEffect(() => {
   //   const isMounted = true;
   //   if (isMounted) {
@@ -52,7 +64,7 @@ function Productcard({
   //   }
   // }, []);
 
-  console.warn(setAddToCart);
+  console.warn(setCreateCart);
   return (
     <div>
       <Card className='productCard'>
@@ -96,11 +108,13 @@ function Productcard({
 }
 
 Productcard.propTypes = {
+  fbUser: PropTypes.any,
   admin: PropTypes.bool,
   productInfo: PropTypes.object,
   setProducts: PropTypes.func,
   products: PropTypes.array,
-  users: PropTypes.any
+  users: PropTypes.any,
+  dbUser: PropTypes.any
 
 };
 

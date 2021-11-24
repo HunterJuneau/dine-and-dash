@@ -52,7 +52,39 @@ namespace DineNDash.Controllers
         [HttpGet("user/completed/{userId}")]
         public IActionResult GetAllCompletedOrders(Guid userId)
         {
-            return Ok(_orderRepository.GetCompletedUserOrders(userId));
+            return Ok(_orderRepository.GetCompletedUserOrders(userId, true));
+        }
+
+        [HttpGet("user/incomplete/{userId}")]
+        public IActionResult GetAllIncompleteOrders(Guid userId)
+        {
+            var cart = _orderRepository.GetUserCart(userId); // get the current cart
+
+            if (cart == null) //if the user doesn't have a cart create one
+            {
+                var user = _userRepository.GetUserByFbUid(FirebaseUid);
+
+                if (user == null)
+                    return NotFound("There was no matching user in the database.");
+
+                //if (payment == null)
+                //    return NotFound("There was no matching payment in the database");
+
+                var order = new Order
+                {
+                    Id = Guid.NewGuid(),
+                    User = user,
+                    Completed = false,
+                    TotalCost = 0,
+                };
+
+                _orderRepository.Add(order);
+                cart = _orderRepository.GetUserCart(userId);
+            }
+
+            cart.ProductOrders = _productOrderRepository.GetAssociatedProductOrders(cart.Id); //get the cart/order with all the parts i care about
+
+            return Ok(cart); 
         }
 
         [HttpPost]

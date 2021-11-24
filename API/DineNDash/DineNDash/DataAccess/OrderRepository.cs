@@ -55,16 +55,29 @@ namespace DineNDash.DataAccess
             return order.FirstOrDefault();
         }
 
-        internal IEnumerable<Order> GetCompletedUserOrders(Guid userId)
+        internal IEnumerable<Order> GetCompletedUserOrders(Guid userId, bool completed)
         {
             using var db = new SqlConnection(_connectionString);
 
             var sql = @"Select *
                 From Orders
                 WHERE userId = @id
-                AND completed = 1";
+                AND completed = @completedOrder";
 
-            var orders = db.Query<Order>(sql, new { id = userId });
+            var orders = db.Query<Order>(sql, new { id = userId, completedOrder = completed });
+
+            return orders;
+        }
+        internal OrderDetail GetUserCart(Guid userId)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            var sql = @"Select *
+                From Orders
+                WHERE userId = @id
+                AND completed = 0";
+
+            var orders = db.QueryFirstOrDefault<OrderDetail>(sql, new { id = userId });
 
             return orders;
         }

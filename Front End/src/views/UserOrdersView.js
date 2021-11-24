@@ -28,6 +28,7 @@ function UserOrdersView() {
   if (totalNumberOfOrders <= 0) {
     return noUserOrdersMessage;
   }
+
   if (totalNumberOfOrders.completed === false) {
     return orderNotcompleted;
   }

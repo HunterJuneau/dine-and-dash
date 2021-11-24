@@ -20,6 +20,7 @@ export default function Routes({
   users,
   setProducts,
   admin,
+  dbUser
 }) {
   return (
     <div>
@@ -30,7 +31,7 @@ export default function Routes({
           path='/products'
           component={() => (
             <ProductsView products={products} users={users}
-            setProducts={setProducts}
+            setProducts={setProducts} fbUser={fbUser} dbUser={dbUser}
             />
           )}
         />
@@ -44,7 +45,6 @@ export default function Routes({
           exact
           path='/profile'
           component={() => <UserProfileView fbUser={fbUser} />}
-          fbUser={fbUser}
         />
 
         <Route
@@ -107,6 +107,7 @@ export default function Routes({
 
 Routes.propTypes = {
   fbUser: PropTypes.any,
+  dbUser: PropTypes.any,
   products: PropTypes.array,
   users: PropTypes.any,
   setProducts: PropTypes.func,
