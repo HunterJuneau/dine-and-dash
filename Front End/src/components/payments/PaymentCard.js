@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import {
   Card,
   // CardImg,
@@ -13,23 +14,16 @@ function PaymentCard({
   isSubmitted,
   setIsSubmitted,
   setUserPayments,
+  personId,
   ...paymentInfo
 }) {
   const [editPayment, setEditPayment] = useState(false);
-  // const [payActive, setPayActive] = useState(false);
+  const history = useHistory();
 
-  const handleClick = (type) => {
-    switch (type) {
-      case 'edit':
-        setEditPayment((prevState) => !prevState);
-        break;
-      // case 'active':
-      //   setPayActive((prevState) => !prevState);
-      //   break;
-      default:
-        console.warn('Hello World!');
-    }
+  const editClick = () => {
+    setEditPayment((prevState) => !prevState);
   };
+
   return (
     <div>
       <Card>
@@ -38,10 +32,9 @@ function PaymentCard({
         <CardTitle tag='h5'> Account Number: {paymentInfo.accountNumber}</CardTitle>
         <CardTitle tag='h6'> Payment Id: {paymentInfo.id}</CardTitle>
         <br />
-        <Button onClick>Delete Payment Method</Button >
+        {/* <Button onClick>Delete Payment Method</Button > */}
         <br />
-        <Button onClick={() => handleClick('edit')}>{ editPayment ? 'Close' : 'Edit Payment Method' }</Button>
-        {/* <Button color='primary' onClick={() => handleClick('active')}> { payActive ? 'Close' : 'Disable Payment' }</Button> */}
+        <Button onClick={editClick}>{ editPayment ? 'Close' : 'Edit Payment Method' }</Button>
         <CardBody>
         {
           editPayment && <PaymentForm
@@ -54,23 +47,10 @@ function PaymentCard({
             setIsSubmitted={setIsSubmitted}
           />
         }
-        {/* {
-          payActive && <PaymentForm
-          formTitle='Disable Payment'
-          {...paymentInfo}
-          payActive={payActive}
-          setPayActive={setPayActive}
-          // editPayment={editPayment}
-          setEditPayment={setEditPayment}
-          setUserPayments={setUserPayments}
-          isSubmitted={isSubmitted}
-          setIsSubmitted={setIsSubmitted}
-        />
-        } */}
         </CardBody>
-          {/* <br />
-          <Button onClick={() => history.push(`/user/${id}`)}>Back To User Profile</Button>
-          <br /> */}
+          <br />
+          <Button onClick={() => history.goBack()}>Back To User Profile</Button>
+          <br />
           <br />
       </Card>
     </div>
@@ -81,7 +61,8 @@ PaymentCard.propTypes = {
   isSubmitted: PropTypes.bool,
   setIsSubmitted: PropTypes.func,
   setUserPayments: PropTypes.func,
-  paymentInfo: PropTypes.object
+  paymentInfo: PropTypes.object,
+  personId: PropTypes.string,
 };
 
 export default PaymentCard;

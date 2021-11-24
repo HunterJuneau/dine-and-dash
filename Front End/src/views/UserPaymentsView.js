@@ -51,10 +51,11 @@ function UserPaymentsView() {
         }
       </>
       <br />
-      {userPayments.length <= 0 ? 'You Have No Payment Methods!' : userPayments.filter((paymentInfo) => paymentInfo.active).map((paymentInfo) => (
+      {userPayments.length <= 0 ? 'You Have No Payment Methods!' : userPayments.map((paymentInfo) => (
         <PaymentCard
           key={paymentInfo.id}
           {...paymentInfo}
+          personId={id}
           setUserPayments={setUserPayments}
           isSubmitted={isSubmitted}
           setIsSubmitted={setIsSubmitted}
