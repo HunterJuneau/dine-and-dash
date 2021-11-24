@@ -16,6 +16,7 @@ import PrivateRoute from './PrivateRoute';
 
 export default function Routes({
   fbUser,
+  dbUser,
   products,
   users,
   setProducts,
@@ -43,7 +44,7 @@ export default function Routes({
         <PrivateRoute
           exact
           path='/profile'
-          component={() => <UserProfileView fbUser={fbUser} />}
+          component={() => <UserProfileView user={dbUser} />}
           fbUser={fbUser}
         />
 
@@ -107,6 +108,7 @@ export default function Routes({
 
 Routes.propTypes = {
   fbUser: PropTypes.any,
+  dbUser: PropTypes.any,
   products: PropTypes.array,
   users: PropTypes.any,
   setProducts: PropTypes.func,
