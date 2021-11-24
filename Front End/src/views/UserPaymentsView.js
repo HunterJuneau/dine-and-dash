@@ -14,7 +14,7 @@ function UserPaymentsView() {
   const { id } = useParams();
   const history = useHistory();
   const amountOfPayments = userPayments.length;
-  const noPayments = <div><h1>You Have No Payment Methods!</h1><Button onClick={() => history.push(`/user/${id}`)}>Add Payment Method</Button>
+  const noPayments = <div><h1>You Have No Payment Methods!</h1><Button onClick={() => history.goBack()}>Back</Button>
   </div>;
 
   useEffect(() => {
@@ -47,7 +47,7 @@ function UserPaymentsView() {
           <Button onClick>Edit Payment Method</Button >
 
           {/* <br />
-          <Button onClick={() => history.push(`/user/${id}`)}>Back To User Profile</Button>
+          <Button onClick={() => history.goBack()}>Back</Button>
           <br /> */}
           <br />
       </Card>
