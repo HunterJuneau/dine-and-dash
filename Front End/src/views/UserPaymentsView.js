@@ -28,7 +28,7 @@ function UserPaymentsView() {
       <br />
       <h4>Payment Methods: {userPayments.length}</h4>
       <br />
-      <Button onClick={openAddClick}>Add A Payment</Button>
+      <Button color='primary' onClick={openAddClick}>Add A Payment</Button>
       <>
       {
           createPayment && <PaymentForm
@@ -43,6 +43,7 @@ function UserPaymentsView() {
         }
       </>
       <br />
+      <div className='paymentsContainer'>
       {userPayments.length <= 0 ? 'You Have No Payment Methods!' : userPayments.map((paymentInfo) => (
         <PaymentCard
           key={paymentInfo.id}
@@ -53,6 +54,7 @@ function UserPaymentsView() {
           setIsSubmitted={setIsSubmitted}
         />
       ))}
+      </div>
     </div>
   );
 }

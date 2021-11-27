@@ -60,6 +60,7 @@ function PaymentForm({
       <h4>{formTitle}</h4>
       <h5>Press Submit for Changes to be Recorded</h5>
       <Form
+        className='paymentForm'
         autoComplete='off'
         onSubmit={handleSubmit}
       >
@@ -96,7 +97,7 @@ function PaymentForm({
           </React.Fragment>
         }
         <br />
-        <Button type='submit'>Submit</Button>
+        <Button color='secondary' type='submit'>Submit</Button>
       </Form>
     </div>
   );

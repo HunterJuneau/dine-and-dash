@@ -26,13 +26,11 @@ function PaymentCard({
 
   return (
     <div>
-      <Card>
+      <Card className='paymentCard'>
         <br />
         <CardTitle tag='h3'> Type: {paymentInfo.type}</CardTitle>
         <CardTitle tag='h5'> Account Number: {paymentInfo.accountNumber}</CardTitle>
         <CardTitle tag='h6'> Payment Id: {paymentInfo.id}</CardTitle>
-        <br />
-        {/* <Button onClick>Delete Payment Method</Button > */}
         <br />
         <Button onClick={editClick}>{ editPayment ? 'Close' : 'Edit Payment Method' }</Button>
         <CardBody>
@@ -48,10 +46,7 @@ function PaymentCard({
           />
         }
         </CardBody>
-          <br />
           <Button onClick={() => history.goBack()}>Back To User Profile</Button>
-          <br />
-          <br />
       </Card>
     </div>
   );
