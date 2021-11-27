@@ -89,7 +89,7 @@ const NavBar = ({ fbUser, admin }) => {
                 <Button color='primary' onClick={() => history.push('/profile')}>
                   Profile
                 </Button>
-                <Button color='warning' onClick={signOutUser}>
+                <Button color='warning' outline onClick={signOutUser}>
                   Sign Out
                 </Button>
               </>

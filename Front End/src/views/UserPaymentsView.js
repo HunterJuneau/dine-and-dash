@@ -24,9 +24,9 @@ function UserPaymentsView() {
 
   return (
     <div>
-      <h1>Payment Methods</h1>
+      <h1 style={{ color: '#fff' }}>Payment Methods</h1>
       <br />
-      <h4>Payment Methods: {userPayments.length}</h4>
+      <h4 style={{ color: '#fff' }}>Payment Methods: {userPayments.length}</h4>
       <br />
       <Button color='primary' onClick={openAddClick}>Add A Payment</Button>
       <>

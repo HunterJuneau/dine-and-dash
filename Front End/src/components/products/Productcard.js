@@ -66,7 +66,6 @@ function Productcard({
             { admin ? '' : <Button color='success' className='float-right' onClick>Add To Cart</Button>}
           </CardBody>
           <ButtonGroup>
-            <br />
             { admin ? <Button color='info' onClick={() => handleClick('edit')}> { editProduct ? 'Close' : 'Edit' }</Button> : '' }
             { admin ? <Button color='primary' onClick={() => handleClick('deleteSoft')}> { softDelete && admin ? 'Close' : 'Change Availability' }</Button> : '' }
           </ButtonGroup>
