@@ -4,7 +4,7 @@ import ProductForm from '../../components/products/ProductForm';
 
 function ProductFormView({ setProducts }) {
   return (
-    <div>
+    <div className='addProductContainer'>
       <ProductForm
         formTitle='Create New Product'
         setProducts={setProducts}

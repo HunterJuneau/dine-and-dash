@@ -52,7 +52,6 @@ function UserPaymentsView() {
           isSubmitted={isSubmitted}
           setIsSubmitted={setIsSubmitted}
         />
-      </Card>
       ))}
     </div>
   );

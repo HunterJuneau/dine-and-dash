@@ -74,7 +74,7 @@ export default function Routes({
         <Route
           exact
           path='/payment/users/:id'
-          component={() => <UserPaymentsView />}
+          component={() => <UserPaymentsView users={users}/>}
         />
 
         <PrivateRoute
