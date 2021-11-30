@@ -28,6 +28,7 @@ function UserPaymentsView() {
       <br />
       <h4 style={{ color: '#fff' }}>Payment Methods: {userPayments.length}</h4>
       <br />
+
       <Button color='primary' onClick={openAddClick}>Add A Payment</Button>
       <>
       {
@@ -58,5 +59,4 @@ function UserPaymentsView() {
     </div>
   );
 }
-
 export default UserPaymentsView;

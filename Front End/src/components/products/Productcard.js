@@ -11,9 +11,11 @@ import {
   ButtonGroup
 } from 'reactstrap';
 import ProductForm from './ProductForm';
-// import { createOrder } from '../../helpers/data/OrderData';
+import { createOrder, getUsersCart } from '../../helpers/data/OrderData';
 
 function Productcard({
+  dbUser,
+  fbUser,
   admin,
   setProducts,
   products,
@@ -22,8 +24,11 @@ function Productcard({
 }) {
   const [editProduct, setEditProduct] = useState(false);
   const [softDelete, setSoftDelete] = useState(false);
-  // const [addToCart, setAddToCart] = useState({
-  //   userId: users.id,
+  const [createCart, setCreateCart] = useState({
+    userId: users.id,
+  });
+  // const [getCart, setGetCart] = useState({
+  //   userId: users.id
   // });
 
   const history = useHistory();
@@ -40,11 +45,18 @@ function Productcard({
     }
   };
 
-  // const AddToCartHandleClick = () => {
-  //   createOrder(addToCart).then((response) => console.warn(response));
-  // };
+  const AddToCartHandleClick = () => {
+    getUsersCart(dbUser.id).then((data) => {
+      if (!data) {
+        createOrder(createCart).then((r) => setCreateCart(r));
+      } else {
+        console.warn('You have an active cart, please add products to it');
+        // add the item to the cart
+      }
+    });
+  };
 
-  // console.warn(setAddToCart);
+  // console.warn(users);
   // useEffect(() => {
   //   const isMounted = true;
   //   if (isMounted) {
@@ -52,6 +64,7 @@ function Productcard({
   //   }
   // }, []);
 
+  console.warn(setCreateCart);
   return (
     <div>
       <Card className='productCard'>
@@ -63,7 +76,7 @@ function Productcard({
             <CardText>{productInfo.forRent ? 'For Rent' : ''} </CardText>
             { admin ? <CardText>{productInfo.status ? 'Available' : 'Out of Stock'}</CardText> : '' }
             <Button color='primary' className='float-left' onClick={() => history.push(admin ? `/admin/inventory/${productInfo.id}` : `/products/${productInfo.id}`)}>See Details</Button>
-            { admin ? '' : <Button color='success' className='float-right' onClick>Add To Cart</Button>}
+            { admin ? '' : <Button color='success' className='float-right' onClick={AddToCartHandleClick}>Add To Cart</Button>}
           </CardBody>
           <ButtonGroup>
             { admin ? <Button color='info' onClick={() => handleClick('edit')}> { editProduct ? 'Close' : 'Edit' }</Button> : '' }
@@ -94,11 +107,13 @@ function Productcard({
 }
 
 Productcard.propTypes = {
+  fbUser: PropTypes.any,
   admin: PropTypes.bool,
   productInfo: PropTypes.object,
   setProducts: PropTypes.func,
   products: PropTypes.array,
-  users: PropTypes.any
+  users: PropTypes.any,
+  dbUser: PropTypes.any
 
 };
 

@@ -70,7 +70,7 @@ namespace DineNDash.DataAccess
                         from ProductOrders po
 							join Orders o
 		                        on o.id = po.orderId
-							join Payments p
+							left join Payments p
 								on p.id = o.paymentId
 	                        join Products pr
 		                        on pr.id = po.productId

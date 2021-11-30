@@ -20,7 +20,7 @@ export default function Routes({
   products,
   users,
   setProducts,
-  admin,
+  admin
 }) {
   return (
     <div>
@@ -31,7 +31,7 @@ export default function Routes({
           path='/products'
           component={() => (
             <ProductsView products={products} users={users}
-            setProducts={setProducts}
+            setProducts={setProducts} fbUser={fbUser} dbUser={dbUser}
             />
           )}
         />
