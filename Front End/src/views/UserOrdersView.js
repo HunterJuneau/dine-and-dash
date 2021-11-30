@@ -15,7 +15,7 @@ function UserOrdersView() {
   const history = useHistory();
   const orderNotcompleted = userOrders.completed;
   const totalNumberOfOrders = userOrders.length;
-  const noUserOrdersMessage = <div><h1>You Have No Orders!</h1><Button onClick={() => history.push(`/user/${id}`)}>Back To User Profile</Button>
+  const noUserOrdersMessage = <div><h1>You Have No Orders!</h1><Button onClick={() => history.goBack()}>Back</Button>
   </div>;
 
   useEffect(() => {
@@ -47,7 +47,7 @@ function UserOrdersView() {
           </CardBody>
           <Button onClick={() => history.push(`/productOrder/order/${orderInfo.id}`)}>Order Details</Button >
           <br />
-          <Button onClick={() => history.push(`/user/${id}`)}>Back To User Profile</Button>
+          <Button onClick={() => history.goBack()}>Back</Button>
           <br />
           <br />
       </Card>

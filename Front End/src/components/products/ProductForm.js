@@ -48,9 +48,10 @@ function ProductForm({
     }
   };
   return (
-    <div>
-      <h1>{formTitle}</h1>
+    <div className='productFormContainer'>
+      <h1 style={{ color: '#fff' }}>{formTitle}</h1>
       <Form
+        className='productForm'
         autoComplete='off'
         onSubmit={handleSubmit}
       >

@@ -23,7 +23,7 @@ function ProductsView({
 
   return (
     <div>
-      <h1>Products</h1>
+      <h1 style={{ color: '#fff' }}>Products</h1>
         <form
           onSubmit={handleSubmit}
         >

@@ -9,4 +9,20 @@ const getUserPayments = (userId) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-export default getUserPayments;
+const addPayment = (id, newPayment) => new Promise((resolve, reject) => {
+  axios.post(`${dbUrl}/api/payment`, newPayment)
+    .then(() => {
+      getUserPayments(id).then((response) => resolve(response));
+    })
+    .catch((error) => reject(error));
+});
+
+const getUpdatedPayment = (id, updatedPayment, userId) => new Promise((resolve, reject) => {
+  axios.put(`${dbUrl}/api/payment/${id}`, updatedPayment)
+    .then(() => {
+      getUserPayments(userId).then((response) => resolve(response));
+    })
+    .catch((error) => reject(error));
+});
+
+export { getUserPayments, addPayment, getUpdatedPayment };

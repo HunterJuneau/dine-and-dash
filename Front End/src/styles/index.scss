@@ -2,25 +2,59 @@
 @import 'variables';
 
 body {
-  background-color: $favColor;
+  background-color: black !important;
+}
+
+.landing {
+  background-image: url('../assets/foodtruckbg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+#landingButtonToProducts {
+  color: white;
+  background-color: black;
+  height: 60px;
+  width: 155px;
+}
+
+.landingText {
+  color: white;
+  font-weight: 700;
+}
+
+.navigation {
+  background-color: lightslategray;
 }
 
 #navbar-logo {
   height: auto;
   width: auto;
-  max-height: 45px;
-  max-width: 250px;
+  max-height: 50px;
+  max-width: 125px;
+}
+
+#cart-logo {
+  height: auto;
+  width: auto;
+  max-height: 35px;
+  max-width: 125px;
 }
 
 #mainlogo {
   margin: auto;
+  height: 40%;
   width: 50%;
 }
 
-.productCard, .userCard {
-  width: 40rem;
-  height: auto;
+.productCard, .userCard, .paymentCard {
+  background-color:black !important;
+  width: 30rem;
+  height: 20rem ;
   margin: 10px;
+  color: white;
+  border: white solid 2px !important;
 }
 
 #productImage {
@@ -28,8 +62,35 @@ body {
   width: 300px;
 }
 
-.productsContainer, .userContainer {
+.productsContainer, .userContainer, .singleProductContainer, .paymentsContainer, .singleUserContainer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
+  // align-items: center;
+  justify-content: center;
+}
+
+.addProductContainer {
+  display: flex;
   align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+.productFormContainer {
+  width: 50%;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.productForm {
+  border: solid white 1px;
+}
+
+.paymentForm {
+  border: solid white 1px;
+  margin: auto;
+  width: 45%;
+  text-align: center;
+  color: white;
 }

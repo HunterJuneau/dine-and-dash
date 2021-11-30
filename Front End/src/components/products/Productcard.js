@@ -75,11 +75,10 @@ function Productcard({
             <CardText>{productInfo.forSale ? 'For Sale' : ''}</CardText>
             <CardText>{productInfo.forRent ? 'For Rent' : ''} </CardText>
             { admin ? <CardText>{productInfo.status ? 'Available' : 'Out of Stock'}</CardText> : '' }
+            <Button color='primary' className='float-left' onClick={() => history.push(admin ? `/admin/inventory/${productInfo.id}` : `/products/${productInfo.id}`)}>See Details</Button>
+            { admin ? '' : <Button color='success' className='float-right' onClick={AddToCartHandleClick}>Add To Cart</Button>}
           </CardBody>
           <ButtonGroup>
-            <Button color='primary' onClick={(AddToCartHandleClick)}>Add To Cart</Button>
-            <br />
-            <Button color='primary' onClick={() => history.push(admin ? `/admin/inventory/${productInfo.id}` : `/products/${productInfo.id}`)}>See Details</Button>
             { admin ? <Button color='info' onClick={() => handleClick('edit')}> { editProduct ? 'Close' : 'Edit' }</Button> : '' }
             { admin ? <Button color='primary' onClick={() => handleClick('deleteSoft')}> { softDelete && admin ? 'Close' : 'Change Availability' }</Button> : '' }
           </ButtonGroup>

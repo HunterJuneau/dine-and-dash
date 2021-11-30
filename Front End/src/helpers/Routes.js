@@ -16,11 +16,11 @@ import PrivateRoute from './PrivateRoute';
 
 export default function Routes({
   fbUser,
+  dbUser,
   products,
   users,
   setProducts,
-  admin,
-  dbUser
+  admin
 }) {
   return (
     <div>
@@ -44,7 +44,8 @@ export default function Routes({
         <PrivateRoute
           exact
           path='/profile'
-          component={() => <UserProfileView fbUser={fbUser} />}
+          component={() => <UserProfileView user={dbUser} />}
+          fbUser={fbUser}
         />
 
         <Route
@@ -73,7 +74,7 @@ export default function Routes({
         <Route
           exact
           path='/payment/users/:id'
-          component={() => <UserPaymentsView />}
+          component={() => <UserPaymentsView users={users}/>}
         />
 
         <PrivateRoute
