@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Button, ButtonGroup } from 'reactstrap';
 import Productcard from '../../components/products/Productcard';
-import { getProductByType, getProductByForSaleOrRent } from '../../helpers/data/ProductData';
+import {
+  getProductByType,
+  getProductsForSale,
+  getProductsForRent,
+  getAllProducts
+} from '../../helpers/data/ProductData';
 
 function ProductsView({
   products,
@@ -10,36 +16,40 @@ function ProductsView({
   fbUser,
   dbUser
 }) {
-  const [selectValue, setSelectValue] = useState('');
+  const [buttonColor, setButtonColor] = useState(true);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (selectValue === 'Truck' || selectValue === 'Accessory') {
-      getProductByType(selectValue).then((response) => setProducts((response.data)));
-    } else if (selectValue === 'true' || selectValue === 'false') {
-      getProductByForSaleOrRent(selectValue).then((response) => setProducts((response.data)));
-    }
+  const seeAllClick = () => {
+    getAllProducts().then(setProducts);
+  };
+  const truckClick = (e) => {
+    getProductByType(e.target.value).then((response) => setProducts((response.data)));
+    setButtonColor(!buttonColor);
+    console.warn(e);
+  };
+  const accessoryClick = (e) => {
+    setButtonColor(!buttonColor);
+    getProductByType(e.target.value).then((response) => setProducts((response.data)));
+    console.warn(buttonColor);
+  };
+  const forSaleClick = (e) => {
+    getProductsForSale(e.target.value).then((response) => setProducts((response.data)));
+  };
+  const forRentClick = (e) => {
+    getProductsForRent(e.target.value).then((response) => setProducts((response.data)));
   };
 
   return (
     <div>
       <h1 style={{ color: '#fff' }}>Products</h1>
-        <form
-          onSubmit={handleSubmit}
-        >
-          <select
-            type='select'
-            value={selectValue}
-            onChange={(e) => setSelectValue(e.target.value)}
-          >
-            <option hidden value=''>Find Products By:</option>
-            <option value='Truck'>Truck</option>
-            <option value='Accessory'>Accessory</option>
-            <option value='true'>For Sale or Rent</option>
-            <option value='false'>For Rent Only</option>
-          </select>
-          <button type='submit'>Find Products</button>
-        </form>
+        <p style={{ color: '#fff' }}>Sort By:</p>
+        <Button onClick={seeAllClick}>See All</Button><br />
+      <ButtonGroup>
+        <Button color='danger' value='Truck' onClick={truckClick}>Truck</Button>
+        <Button color={buttonColor ? 'danger' : 'info'} value='Accessory' onClick={accessoryClick}>Accessory</Button>
+        <Button value='true' onClick={forSaleClick}>For Sale</Button>
+        <Button value='true' onClick={forRentClick}>For Rent</Button>
+      </ButtonGroup>
+
       <div className='productsContainer'>
       {products.map((productInfo) => (
         <Productcard

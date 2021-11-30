@@ -49,6 +49,12 @@ namespace DineNDash.Controllers
         
         }
 
+        [HttpGet("forRent")]
+        public IActionResult GetForRentPRoducts(string rent)
+        {
+            return Ok(_repo.GetForRent(rent));
+        }
+
         [HttpGet("available")]
         public IActionResult GetAllAvailableProducts(string status)
         {
