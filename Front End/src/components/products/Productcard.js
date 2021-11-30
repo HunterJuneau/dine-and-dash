@@ -50,7 +50,7 @@ function Productcard({
       if (!data) {
         createOrder(createCart).then((r) => setCreateCart(r));
       } else {
-        console.warn('bitchass');
+        console.warn('You have an active cart, please add products to it');
         // add the item to the cart
       }
     });
