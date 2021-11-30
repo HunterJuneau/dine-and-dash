@@ -51,7 +51,7 @@ body {
 .productCard, .userCard, .paymentCard {
   background-color:black !important;
   width: 30rem;
-  height: auto;
+  height: 20rem ;
   margin: 10px;
   color: white;
   border: white solid 2px !important;
@@ -64,8 +64,10 @@ body {
 
 .productsContainer, .userContainer, .singleProductContainer, .paymentsContainer, .singleUserContainer {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  // align-items: center;
+  justify-content: center;
 }
 
 .addProductContainer {
