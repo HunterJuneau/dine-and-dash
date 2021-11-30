@@ -24,11 +24,11 @@ function UserPaymentsView() {
 
   return (
     <div>
-      <h1>Payment Methods</h1>
+      <h1 style={{ color: '#fff' }}>Payment Methods</h1>
       <br />
-      <h4>Payment Methods: {userPayments.length}</h4>
+      <h4 style={{ color: '#fff' }}>Payment Methods: {userPayments.length}</h4>
       <br />
-      <Button onClick={openAddClick}>Add A Payment</Button>
+      <Button color='primary' onClick={openAddClick}>Add A Payment</Button>
       <>
       {
           createPayment && <PaymentForm
@@ -43,6 +43,7 @@ function UserPaymentsView() {
         }
       </>
       <br />
+      <div className='paymentsContainer'>
       {userPayments.length <= 0 ? 'You Have No Payment Methods!' : userPayments.map((paymentInfo) => (
         <PaymentCard
           key={paymentInfo.id}
@@ -52,8 +53,8 @@ function UserPaymentsView() {
           isSubmitted={isSubmitted}
           setIsSubmitted={setIsSubmitted}
         />
-      </Card>
       ))}
+      </div>
     </div>
   );
 }
