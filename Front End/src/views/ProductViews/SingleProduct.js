@@ -24,7 +24,7 @@ function SingleProduct({ admin = false }) {
   }, []);
 
   return (
-    <div>
+    <div className='singleProductContainer'>
       <Card className='productCard'>
         <CardTitle tag='h3'>{singleProduct.productName}</CardTitle>
           <CardBody>
