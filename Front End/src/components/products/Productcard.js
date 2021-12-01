@@ -25,6 +25,7 @@ function Productcard({
   const [editProduct, setEditProduct] = useState(false);
   const [softDelete, setSoftDelete] = useState(false);
   const [createCart, setCreateCart] = useState({
+    userId: users.id,
   });
   // const [getCart, setGetCart] = useState({
   //   userId: users.id
@@ -47,7 +48,7 @@ function Productcard({
   const AddToCartHandleClick = () => {
     getUsersCart(dbUser.id).then((data) => {
       if (!data) {
-        createOrder(createCart).then((response) => console.warn(response.data));
+        createOrder(createCart).then((r) => setCreateCart(r));
       } else {
         console.warn('You have an active cart, please add products to it');
         // add the item to the cart
@@ -63,7 +64,6 @@ function Productcard({
   //   }
   // }, []);
 
-  console.warn(setCreateCart);
   return (
     <div>
       <Card className='productCard'>
