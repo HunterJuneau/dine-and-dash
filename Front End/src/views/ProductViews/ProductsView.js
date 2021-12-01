@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, ButtonGroup } from 'reactstrap';
 import Productcard from '../../components/products/Productcard';
@@ -16,20 +16,14 @@ function ProductsView({
   fbUser,
   dbUser
 }) {
-  const [buttonColor, setButtonColor] = useState(true);
-
   const seeAllClick = () => {
     getAllProducts().then(setProducts);
   };
   const truckClick = (e) => {
     getProductByType(e.target.value).then((response) => setProducts((response.data)));
-    setButtonColor(!buttonColor);
-    console.warn(e);
   };
   const accessoryClick = (e) => {
-    setButtonColor(!buttonColor);
     getProductByType(e.target.value).then((response) => setProducts((response.data)));
-    console.warn(buttonColor);
   };
   const forSaleClick = (e) => {
     getProductsForSale(e.target.value).then((response) => setProducts((response.data)));
@@ -44,12 +38,11 @@ function ProductsView({
         <p style={{ color: '#fff' }}>Sort By:</p>
         <Button onClick={seeAllClick}>See All</Button><br />
       <ButtonGroup>
-        <Button color='danger' value='Truck' onClick={truckClick}>Truck</Button>
-        <Button color={buttonColor ? 'danger' : 'info'} value='Accessory' onClick={accessoryClick}>Accessory</Button>
+        <Button value='Truck' onClick={truckClick}>Truck</Button>
+        <Button value='Accessory' onClick={accessoryClick}>Accessory</Button>
         <Button value='true' onClick={forSaleClick}>For Sale</Button>
         <Button value='true' onClick={forRentClick}>For Rent</Button>
       </ButtonGroup>
-
       <div className='productsContainer'>
       {products.map((productInfo) => (
         <Productcard

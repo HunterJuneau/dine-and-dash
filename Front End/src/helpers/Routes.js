@@ -13,6 +13,7 @@ import UserSingleOrderDetailsView from '../views/UserSingleOrderDetailsView';
 import ProductFormView from '../views/ProductViews/ProductFormView';
 import UserPaymentsView from '../views/UserPaymentsView';
 import PrivateRoute from './PrivateRoute';
+import CheckoutView from '../views/CheckoutView';
 
 export default function Routes({
   fbUser,
@@ -101,6 +102,13 @@ export default function Routes({
         />
 
         <Route exact path='/cart' component={() => <CartView />} />
+
+        <Route
+          exact path='/checkout'
+          component={() => <CheckoutView fbUser={fbUser}
+          users={users}
+          products={products}
+          dbUser={dbUser} />}/>
       </Switch>
     </div>
   );
