@@ -137,5 +137,19 @@ namespace DineNDash.Controllers
 
             return Ok();
         }
+
+        [HttpPut("{id}/completed")]
+        public IActionResult ChangeToComplete(Guid id, Order order)
+        {
+            var orderToUpdate = _orderRepository.GetById(id);
+
+            if (orderToUpdate == null)
+            {
+                return NotFound($"Could not find an order with id {id} for updating");
+            }
+
+            var updatedOrder = _orderRepository.UpdateCompleted(id, order);
+            return Ok(updatedOrder);
+        }
     }
 }
