@@ -21,7 +21,7 @@ const getProductByType = (type) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-const getProductByForSaleOrRent = (value) => new Promise((resolve, reject) => {
+const getProductsForSale = (value) => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/api/products/forSale?sale=${value}`)
     .then((response) => resolve(response))
     .catch((error) => reject(error));
@@ -49,12 +49,19 @@ const getOnlyAvailableProducts = (status) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
+const getProductsForRent = (value) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/api/products/forRent?rent=${value}`)
+    .then((response) => resolve(response))
+    .catch((error) => reject(error));
+});
+
 export {
   getAllProducts,
   getSingleProduct,
   getProductByType,
-  getProductByForSaleOrRent,
+  getProductsForSale,
   addProduct,
   updateProduct,
-  getOnlyAvailableProducts
+  getOnlyAvailableProducts,
+  getProductsForRent
 };
