@@ -11,7 +11,7 @@ import {
   ButtonGroup
 } from 'reactstrap';
 import ProductForm from './ProductForm';
-import { createOrder, getUsersCart } from '../../helpers/data/OrderData';
+// import { createOrder, getUsersCart, createProductOrder } from '../../helpers/data/OrderData';
 
 function Productcard({
   dbUser,
@@ -24,9 +24,10 @@ function Productcard({
 }) {
   const [editProduct, setEditProduct] = useState(false);
   const [softDelete, setSoftDelete] = useState(false);
-  const [createCart, setCreateCart] = useState({
-    userId: users.id,
-  });
+
+  console.warn(products);
+
+  // const [cartItem, setcartItem] = useState({});
   // const [getCart, setGetCart] = useState({
   //   userId: users.id
   // });
@@ -45,16 +46,20 @@ function Productcard({
     }
   };
 
-  const AddToCartHandleClick = () => {
-    getUsersCart(dbUser.id).then((data) => {
-      if (!data) {
-        createOrder(createCart).then((r) => setCreateCart(r));
-      } else {
-        console.warn('You have an active cart, please add products to it');
-        // add the item to the cart
-      }
-    });
-  };
+  // const AddToCartHandleClick = () => {
+  //   getUsersCart(dbUser.id).then((data) => {
+  //     if (!data) {
+  //       createOrder(createCart).then((r) => console.warn(r));
+  //       console.warn(createCart);
+  //       console.warn(setCreateCart);
+  //     } else {
+  //       console.warn('You have an active cart, please add products to it');
+  //       console.warn(createCart);
+  //       // add the item to the cart
+  //       createProductOrder(addProductOrder).then((r) => setAddProductOrder(r));
+  //     }
+  //   });
+  // };
 
   // console.warn(users);
   // useEffect(() => {
@@ -64,7 +69,6 @@ function Productcard({
   //   }
   // }, []);
 
-  console.warn(setCreateCart);
   return (
     <div>
       <Card className='productCard'>
@@ -76,7 +80,6 @@ function Productcard({
             <CardText>{productInfo.forRent ? 'For Rent' : ''} </CardText>
             { admin ? <CardText>{productInfo.status ? 'Available' : 'Out of Stock'}</CardText> : '' }
             <Button color='primary' className='float-left' onClick={() => history.push(admin ? `/admin/inventory/${productInfo.id}` : `/products/${productInfo.id}`)}>See Details</Button>
-            { admin ? '' : <Button color='success' className='float-right' onClick={AddToCartHandleClick}>Add To Cart</Button>}
           </CardBody>
           <ButtonGroup>
             { admin ? <Button color='info' onClick={() => handleClick('edit')}> { editProduct ? 'Close' : 'Edit' }</Button> : '' }

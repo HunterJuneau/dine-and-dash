@@ -38,7 +38,7 @@ export default function Routes({
         <Route
           exact
           path='/products/:productId'
-          component={() => <SingleProduct />}
+          component={() => <SingleProduct products={products} users={users} fbUser={fbUser} dbUser={dbUser} />}
         />
 
         <PrivateRoute
@@ -48,9 +48,9 @@ export default function Routes({
           fbUser={fbUser}
         />
 
-        <Route
+        <PrivateRoute admin={admin} fbUser={fbUser}
           exact
-          path='/user'
+          path='/admin/user'
           component={() => <AllUsersView users={users} />}
         />
 
