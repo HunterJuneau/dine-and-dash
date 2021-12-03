@@ -4,6 +4,7 @@ import UserCard from '../components/users/UserCard';
 // import { getUserOrders } from '../helpers/data/UserData';
 
 function AllUsersView({ users }) {
+  console.warn(users);
   return (
     <div className='userContainer'>
       {users.map((userInfo) => (
