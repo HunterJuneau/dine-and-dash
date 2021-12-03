@@ -50,12 +50,6 @@ const NavBar = ({ fbUser, admin }) => {
               </Link>
             </NavItem>
 
-            <NavItem>
-              <Link className='nav-link' to='/user'>
-                Users
-              </Link>
-            </NavItem>
-
             {admin ? (
               <UncontrolledDropdown inNavbar nav>
                 <DropdownToggle caret nav>
@@ -65,6 +59,11 @@ const NavBar = ({ fbUser, admin }) => {
                   <DropdownItem>
                     <Link className='nav-link' to='/admin/inventory'>
                       Inventory
+                    </Link>
+                  </DropdownItem>
+                  <DropdownItem>
+                  <Link className='nav-link' to='/admin/user'>
+                      All Users
                     </Link>
                   </DropdownItem>
                   <DropdownItem>
