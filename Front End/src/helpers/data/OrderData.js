@@ -61,5 +61,5 @@ export {
   getSingleOrderById,
   getSingleUserOrder,
   createProductOrder,
-  getUsersCart
+  getUsersCart,
 };

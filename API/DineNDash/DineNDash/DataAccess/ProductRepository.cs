@@ -58,6 +58,19 @@ namespace DineNDash.DataAccess
 
         }
 
+        internal IEnumerable<Product> GetForRent(string rent)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            var sql = @"Select *
+                        From Products
+                        Where forRent = @rent";
+
+            var productsForRent = db.Query<Product>(sql, new { rent });
+
+            return productsForRent;
+        }
+
         internal IEnumerable<Product> GetAvailable(string status)
         {
             using var db = new SqlConnection(_connectionString);
