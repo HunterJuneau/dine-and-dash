@@ -10,6 +10,9 @@ namespace DineNDash.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        public string FirebaseUid => User.FindFirst(claim => claim.Type == "user_id").Value;
+
+
         UserRepository _repo;
 
         public UserController(UserRepository repo)

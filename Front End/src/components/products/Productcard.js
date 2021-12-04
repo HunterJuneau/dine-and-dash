@@ -79,7 +79,7 @@ function Productcard({
             <CardText>{productInfo.forSale ? 'For Sale' : ''}</CardText>
             <CardText>{productInfo.forRent ? 'For Rent' : ''} </CardText>
             { admin ? <CardText>{productInfo.status ? 'Available' : 'Out of Stock'}</CardText> : '' }
-            <Button color='primary' className='float-left' onClick={() => history.push(admin ? `/admin/inventory/${productInfo.id}` : `/products/${productInfo.id}`)}>See Details</Button>
+            <Button color='primary' onClick={() => history.push(admin ? `/admin/inventory/${productInfo.id}` : `/products/${productInfo.id}`)}>See Details</Button>
           </CardBody>
           <ButtonGroup>
             { admin ? <Button color='info' onClick={() => handleClick('edit')}> { editProduct ? 'Close' : 'Edit' }</Button> : '' }
