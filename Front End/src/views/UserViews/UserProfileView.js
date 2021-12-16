@@ -9,7 +9,7 @@ import {
   CardTitle,
   Button
 } from 'reactstrap';
-import { getSingleUser } from '../helpers/data/UserData';
+import { getSingleUser } from '../../helpers/data/UserData';
 
 function UserProfileView({ user }) {
   const [oneSingleUser, setOneSingleUser] = useState({});

@@ -8,13 +8,13 @@ namespace DineNDash.Models
     public class Order
     {
         public Guid Id { get; set; }
-        public Guid UserId { get; set; }
         public User User { get; set; }
         public decimal TotalCost { get; set; }
-        public Guid PaymentId { get; set; }
         public Payment Payment { get; set; }
         public bool Completed { get; set; }
 
     }
+
+
 
 }

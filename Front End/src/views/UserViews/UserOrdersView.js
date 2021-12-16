@@ -7,8 +7,8 @@ import {
   CardTitle,
   Button
 } from 'reactstrap';
-import { getUserPayments } from '../helpers/data/PaymentData';
-import { getUserOrders } from '../helpers/data/UserData';
+import { getUserPayments } from '../../helpers/data/PaymentData';
+import { getUserOrders } from '../../helpers/data/UserData';
 
 function UserOrdersView() {
   const [userOrders, setUserOrders] = useState([]);

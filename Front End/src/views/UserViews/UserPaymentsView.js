@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button } from 'reactstrap';
-import PaymentCard from '../components/payments/PaymentCard';
-import PaymentForm from '../components/payments/PaymentForm';
-import { getUserPayments } from '../helpers/data/PaymentData';
+import PaymentCard from '../../components/payments/PaymentCard';
+import PaymentForm from '../../components/payments/PaymentForm';
+import { getUserPayments } from '../../helpers/data/PaymentData';
 
 function UserPaymentsView() {
   const [userPayments, setUserPayments] = useState([]);

@@ -37,7 +37,7 @@ function ProductsView({
       <h1 style={{ color: '#fff' }}>Products</h1>
         <p style={{ color: '#fff' }}>Sort By:</p>
         <Button onClick={seeAllClick}>See All</Button><br />
-      <ButtonGroup>
+      <ButtonGroup id='button-group'>
         <Button value='Truck' onClick={truckClick}>Truck</Button>
         <Button value='Accessory' onClick={accessoryClick}>Accessory</Button>
         <Button value='true' onClick={forSaleClick}>For Sale</Button>

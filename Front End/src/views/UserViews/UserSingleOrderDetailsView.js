@@ -8,7 +8,7 @@ import {
   CardTitle,
   Button
 } from 'reactstrap';
-import getUserOrderDetails from '../helpers/data/ProductOrderData';
+import getUserOrderDetails from '../../helpers/data/ProductOrderData';
 
 function UserSingleOrderDetailsView() {
   const [productOrders, setProductOrders] = useState([]);
