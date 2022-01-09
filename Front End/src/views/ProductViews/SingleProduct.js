@@ -19,7 +19,6 @@ function SingleProduct({
   const [singleProduct, setSingleProduct] = useState({});
   const { productId } = useParams();
   const [createCart, setCreateCart] = useState({
-    // userId: users.id,
   });
   const [addProductOrder, setAddProductOrder] = useState({
     productId

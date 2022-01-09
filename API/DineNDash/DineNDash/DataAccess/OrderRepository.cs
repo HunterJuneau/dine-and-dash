@@ -48,7 +48,7 @@ namespace DineNDash.DataAccess
                             WHERE o.id = @id
 	                       ";
 
-            var order = db.Query<Order, User, Payment, Order>(orderSql, Map, new { id = id }, splitOn: "id");
+            var order = db.Query<Order, User, Payment, Order>(orderSql, Map, new { id = id });
 
             //if (order == null) return null;
 
