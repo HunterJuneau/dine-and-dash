@@ -78,35 +78,53 @@ namespace DineNDash.Controllers
             return Ok(updatedProductOrder);
 
         }
+
+
         [HttpPost]
         //Create(Add) Product Order //
+        // A product or is the order of the indivual products that make up a full order //
+
         public IActionResult CreateProductOrder(CreateProductOrderCommand command)
         {
+            // Re-uses previously written method to grab the product by the Id of the ProductOrder Command Model property and sets it as the 'productToOrder' variable //
             var productToOrder = _productRepository.GetById(command.ProductId);
+
+            // Re-uses previously written method to grab the order by the Id of the ProductOrder Command Model property and sets it as the 'orderToCreate' variable //
             var orderToCreate = _orderRepository.GetById(command.OrderId);
 
             
+            // Checks to see if this product is in the database. If not it will return the string below //
             if (productToOrder == null) 
                 return NotFound("There was no matching Product in the database.");
 
+            // Checks to see if this order is already created in the database. If not it will return the string below //
             if (orderToCreate == null)
                 return NotFound("There was no matching Order in the database");
 
 
+            // Creating new variable that abstiantiates a new ProductOrder //
+            // Set's the properties of this new ProductOrder //
             var newProductOrder = new ProductOrder
             {
                 ProductId = productToOrder.Id,
                 OrderId = orderToCreate.Id,
                 ProductQuantity = command.ProductOrderQuantity,
+                // Multiplies the price of the product by the quantity of that product being ordered //
                 TotalCost = productToOrder.Price * command.ProductOrderQuantity
             };
 
+             // Re-uses previously written method to add the new Product Order to the product order repo //
             _productOrderRepository.Add(newProductOrder);
 
+            // Sets variable to grab the current quantity of the chosen product in the database //
             var currentProductQauntity = productToOrder.Quantity;
 
+            // Grabs the quantity of the chosen product in the database and sets it to a variable that subrtracts it by the product quantity of the product order //
+            // Thus, always updating the database product quantity when someone has items in their cart // 
+            // This makes sure that no two customers can have items in their cart, but then when it comes to checkout the product actually be out of stock if another customer checkouts before them //
             var difference = productToOrder.Quantity - command.ProductOrderQuantity;
 
+            // Creates a new instance of the updated product information and sets it to a variable with all the new values //
             var subtractProductOrder = new Product
             {
                 ProductName = productToOrder.ProductName,
@@ -129,11 +147,11 @@ namespace DineNDash.Controllers
                 return NotFound($"There are only {currentProductQauntity} {productToOrder.ProductName} in stock. You added {newProductOrder.ProductQuantity} to your cart. Please add {currentProductQauntity} or less to you order.");
             }
 
-
+            // Re-uses put method written to update the product repo with the new values //
             // Subtracts the quantity chosen for the productOrder from the product quantity //
             _productRepository.Update(command.ProductId, subtractProductOrder);
 
-
+            
             return Created($"/api/orders/{newProductOrder.Id}", newProductOrder);
 
         }

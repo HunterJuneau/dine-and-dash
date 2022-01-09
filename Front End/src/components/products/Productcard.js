@@ -27,11 +27,6 @@ function Productcard({
 
   console.warn(products);
 
-  // const [cartItem, setcartItem] = useState({});
-  // const [getCart, setGetCart] = useState({
-  //   userId: users.id
-  // });
-
   const history = useHistory();
 
   const handleClick = (type) => {
@@ -45,29 +40,6 @@ function Productcard({
       default:
     }
   };
-
-  // const AddToCartHandleClick = () => {
-  //   getUsersCart(dbUser.id).then((data) => {
-  //     if (!data) {
-  //       createOrder(createCart).then((r) => console.warn(r));
-  //       console.warn(createCart);
-  //       console.warn(setCreateCart);
-  //     } else {
-  //       console.warn('You have an active cart, please add products to it');
-  //       console.warn(createCart);
-  //       // add the item to the cart
-  //       createProductOrder(addProductOrder).then((r) => setAddProductOrder(r));
-  //     }
-  //   });
-  // };
-
-  // console.warn(users);
-  // useEffect(() => {
-  //   const isMounted = true;
-  //   if (isMounted) {
-  //     createOrder(addToCart).then((response) => console.warn(response));
-  //   }
-  // }, []);
 
   return (
     <div>
