@@ -149,6 +149,26 @@ namespace DineNDash.DataAccess
 
         }
 
+        internal object UpdateCompleted(Guid id, Order order)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            var sql = @"update Orders set
+                                     Completed = @completed
+                                        output inserted.Id
+                                     Where Id = @id";
+
+            order.Id = id;
+
+            var parameters = new
+            {
+                Completed = order.Completed
+            };
+
+            var updatedOrder = db.QueryFirstOrDefault<Order>(sql, parameters);
+            return updatedOrder;
+        }
+
         internal void Remove(Guid id)
         {
             using var db = new SqlConnection(_connectionString);
